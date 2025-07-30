@@ -6,8 +6,6 @@ extends CharacterBody3D
 # TODO: should be global
 @export_range(0.0, 1.0) var mouse_sensitivity = 0.01
 
-var look_at_position = Vector3.FORWARD * 1000
-
 @onready var camera_pivot = $Node3D/CameraPivot
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
@@ -15,19 +13,20 @@ var look_at_position = Vector3.FORWARD * 1000
 
 
 func _process(delta: float) -> void:
-	update_wheels_direction()
+	update_body_visual_rotation()
 
-func update_wheels_direction():
-	var velocity_xz = Vector3(self.velocity.x, 0.0, self.velocity.z)
-	
-	if velocity_xz.length() > 0.1:
-		look_at_position = self.global_position + velocity_xz
-	
+func update_body_visual_rotation():
 	upper_body.rotation.y = camera_pivot.rotation.y
-	lower_body.look_at(look_at_position)
+	
+	var velocity_2d = Vector2(self.velocity.x, self.velocity.z)
+	if velocity_2d.length() > 0.1:
+		var angle = Vector2.ZERO.angle_to_point(velocity_2d) + PI/2
+		lower_body.rotation.y = - angle
 
 func _physics_process(delta: float) -> void:
 	var vec = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
+	# correct the angle based on the look direction
 	vec = vec.rotated(-camera_pivot.rotation.y)
 	
 	var vec3 = Vector3(vec.x, 0.0, vec.y)
