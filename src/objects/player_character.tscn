@@ -45,10 +45,13 @@ shape = SubResource("SphereShape3D_h5vi8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CylinderShape3D_erfry")
 
-[node name="CameraContainer" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24288, 0)
 
-[node name="CameraPosition" type="Marker3D" parent="CameraContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4)
+[node name="CameraPivot" type="Node3D" parent="Node3D"]
 
-[node name="CameraTarget" type="Marker3D" parent="CameraContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="SpringArm3D" type="SpringArm3D" parent="Node3D/CameraPivot"]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/CameraPivot/SpringArm3D"]
+current = true

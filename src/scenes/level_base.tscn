@@ -15,6 +15,3 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="PlayerCharacter" parent="LevelObjectContainer" instance=ExtResource("3_bkdr1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-
-[node name="PlayerCharacter2" parent="LevelObjectContainer" instance=ExtResource("3_bkdr1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -2)
