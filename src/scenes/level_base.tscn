@@ -13,5 +13,14 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="ObjectWall" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]
 
+[node name="ObjectWall2" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="ObjectWall3" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="ObjectWall4" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
 [node name="PlayerCharacter" parent="LevelObjectContainer" instance=ExtResource("3_bkdr1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
