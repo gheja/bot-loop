@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dqfv168hkiq2f"]
+[gd_scene load_steps=2 format=3 uid="uid://dqfv168hkiq2f"]
+
+[ext_resource type="Script" uid="uid://ckte632k8mgqs" path="res://scenes/main_interface.gd" id="1_7qx7d"]
 
 [node name="MainInterface" type="CanvasLayer"]
+script = ExtResource("1_7qx7d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -37,3 +40,10 @@ text = "[Arrow keys] [W-A-S-D] Move
 [Mouse] Look around
 [color=#ff0][E] Use
 [Space] Jump[/color]"
+
+[node name="TimerLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "30.0"
+horizontal_alignment = 2

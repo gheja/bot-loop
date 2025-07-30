@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnnjjb6md5gvt"]
+
+[ext_resource type="Script" uid="uid://72t60npbvdng" path="res://objects/object_stop_button.gd" id="1_eegc6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eegc6"]
+albedo_color = Color(1, 0, 0.490196, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_041kv"]
+
+[node name="ObjectStopButton" type="Node3D"]
+script = ExtResource("1_eegc6")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Visuals"]
+material = SubResource("StandardMaterial3D_eegc6")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_041kv")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

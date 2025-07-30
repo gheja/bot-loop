@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://c85wkhccv5rxm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48xv6"]
+albedo_color = Color(1, 1, 0.462745, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_48xv6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_naf7p"]
+size = Vector3(1, 0.175293, 0.550293)
+
+[node name="ObjectSpawnPosition" type="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+size = Vector3(1.2, 0.2, 1.2)
+material = SubResource("StandardMaterial3D_48xv6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.298248, 0)
+shape = SubResource("BoxShape3D_48xv6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.045, -0.741)
+shape = SubResource("BoxShape3D_naf7p")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 0.045, 0.741)
+shape = SubResource("BoxShape3D_naf7p")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, 0, 0.965926, 0.258819, 1, 1.13133e-08, -4.2222e-08, 0.741324, 0.0447059, 0.000184)
+shape = SubResource("BoxShape3D_naf7p")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.258819, 0.965926, 0, 0.965926, 0.258819, -1, 1.13133e-08, -4.2222e-08, -0.741, 0.045, 0)
+shape = SubResource("BoxShape3D_naf7p")

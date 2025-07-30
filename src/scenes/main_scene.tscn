@@ -25,3 +25,6 @@ shadow_enabled = true
 [node name="MainInterface" parent="." instance=ExtResource("1_w2twt")]
 
 [node name="LevelBase" parent="." instance=ExtResource("2_pw63i")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
