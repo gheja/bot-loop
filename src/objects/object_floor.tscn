@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdv8qqvqawyeh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unga5"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_osu2p"]
+
+[node name="ObjectFloor" type="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+size = Vector3(1, 0.01, 1)
+material = SubResource("StandardMaterial3D_unga5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.499201, 0)
+shape = SubResource("BoxShape3D_osu2p")

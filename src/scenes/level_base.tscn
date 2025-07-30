@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpmkcymc6dshv"]
+
+[ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="1_548ah"]
+[ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="1_osu2p"]
+
+[node name="LevelBase" type="Node3D"]
+
+[node name="LevelObjectContainer" type="Node3D" parent="."]
+
+[node name="ObjectFloor" parent="LevelObjectContainer" instance=ExtResource("1_osu2p")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="ObjectWall" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyh8e8m3vwrml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2oa"]
+albedo_color = Color(0.728822, 0.728822, 0.728822, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm2oa"]
+
+[node name="ObjectWall" type="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material = SubResource("StandardMaterial3D_xm2oa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_xm2oa")
