@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpmkcymc6dshv"]
+[gd_scene load_steps=4 format=3 uid="uid://cpmkcymc6dshv"]
 
 [ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="1_548ah"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="1_osu2p"]
+[ext_resource type="PackedScene" uid="uid://c6y584uh7e663" path="res://objects/player_character.tscn" id="3_bkdr1"]
 
 [node name="LevelBase" type="Node3D"]
 
@@ -11,3 +12,9 @@
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="ObjectWall" parent="LevelObjectContainer" instance=ExtResource("1_548ah")]
+
+[node name="PlayerCharacter" parent="LevelObjectContainer" instance=ExtResource("3_bkdr1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="PlayerCharacter2" parent="LevelObjectContainer" instance=ExtResource("3_bkdr1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -2)

@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6y584uh7e663"]
+
+[ext_resource type="Script" uid="uid://c8ry4ey5mq5yc" path="res://objects/player_character.gd" id="1_jy05a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kd2n"]
+albedo_color = Color(1, 0.545098, 0.560784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jy05a"]
+albedo_color = Color(0.466667, 0.227451, 0.486275, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h5vi8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_erfry"]
+height = 0.5
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_jy05a")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="LowerBody" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Visuals/LowerBody"]
+size = Vector3(1, 0.3, 1)
+material = SubResource("StandardMaterial3D_5kd2n")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Visuals/LowerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+size = Vector3(1, 0.3, 1)
+material = SubResource("StandardMaterial3D_5kd2n")
+
+[node name="UpperBody" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Visuals/UpperBody"]
+size = Vector3(1, 0.7, 1)
+material = SubResource("StandardMaterial3D_jy05a")
+
+[node name="CollisionShapeLower" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_h5vi8")
+
+[node name="CollisionShapeUpper" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_erfry")
+
+[node name="CameraContainer" type="Node3D" parent="."]
+
+[node name="CameraPosition" type="Marker3D" parent="CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4)
+
+[node name="CameraTarget" type="Marker3D" parent="CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
