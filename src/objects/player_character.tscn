@@ -26,8 +26,8 @@ size = Vector3(1, 0.3, 1)
 material = SubResource("StandardMaterial3D_5kd2n")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Visuals/LowerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-size = Vector3(1, 0.3, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.385681)
+size = Vector3(1.41895, 0.3, 0.228638)
 material = SubResource("StandardMaterial3D_5kd2n")
 
 [node name="UpperBody" type="Node3D" parent="Visuals"]
