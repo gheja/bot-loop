@@ -12,6 +12,10 @@ extends CharacterBody3D
 @onready var upper_body = $Visuals/UpperBody
 
 
+func _ready() -> void:
+	if is_actively_controlled:
+		camera.make_current()
+
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
 
