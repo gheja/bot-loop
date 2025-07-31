@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyh8e8m3vwrml"]
+[gd_scene load_steps=4 format=3 uid="uid://2l7r5ndv1t6j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2oa"]
 albedo_color = Color(0.728822, 0.728822, 0.728822, 1)
@@ -10,10 +10,15 @@ disable_receive_shadows = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm2oa"]
 size = Vector3(2, 3, 2)
 
-[node name="ObjectWall" type="StaticBody3D"]
+[node name="ObjectWallCorner" type="StaticBody3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1)
+size = Vector3(2, 3, 0.1)
+material = SubResource("StandardMaterial3D_xm2oa")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 1.5, 0)
 size = Vector3(2, 3, 0.1)
 material = SubResource("StandardMaterial3D_xm2oa")
 

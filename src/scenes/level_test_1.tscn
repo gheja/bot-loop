@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d08o8k1bhvrak"]
+[gd_scene load_steps=8 format=3 uid="uid://d08o8k1bhvrak"]
 
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_jnifh"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_s05vh"]
+[ext_resource type="PackedScene" uid="uid://2l7r5ndv1t6j" path="res://objects/object_wall_corner.tscn" id="3_u2nu2"]
 [ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="3_x334m"]
 [ext_resource type="PackedScene" uid="uid://c85wkhccv5rxm" path="res://objects/object_spawn_position.tscn" id="4_u2nu2"]
 [ext_resource type="PackedScene" uid="uid://dnnjjb6md5gvt" path="res://objects/object_stop_button.tscn" id="5_2bs7r"]
@@ -10,26 +11,27 @@
 [node name="LevelTest1" type="Node3D"]
 
 [node name="LevelBase" parent="." instance=ExtResource("1_jnifh")]
+transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 
 [node name="ObjectFloor" parent="LevelBase/LevelObjectContainer" index="0" instance=ExtResource("2_s05vh")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(15.6864, 0, 0, 0, 15.6864, 0, 0, 0, 15.6864, 0, 0, 0)
 
-[node name="ObjectWall" parent="LevelBase/LevelObjectContainer" index="1" instance=ExtResource("3_x334m")]
+[node name="ObjectWallCorner" parent="LevelBase/LevelObjectContainer" index="1" instance=ExtResource("3_u2nu2")]
 
-[node name="ObjectWall2" parent="LevelBase/LevelObjectContainer" index="2" instance=ExtResource("3_x334m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="ObjectWallCorner2" parent="LevelBase/LevelObjectContainer" index="2" instance=ExtResource("3_u2nu2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2)
 
-[node name="ObjectWall3" parent="LevelBase/LevelObjectContainer" index="3" instance=ExtResource("3_x334m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+[node name="ObjectWall2" parent="LevelBase/LevelObjectContainer" index="3" instance=ExtResource("3_x334m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="ObjectWall4" parent="LevelBase/LevelObjectContainer" index="4" instance=ExtResource("3_x334m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+[node name="ObjectWall3" parent="LevelBase/LevelObjectContainer" index="4" instance=ExtResource("3_x334m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
 [node name="ObjectSpawnPosition" parent="LevelBase/LevelObjectContainer" index="5" instance=ExtResource("4_u2nu2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="ObjectStopButton" parent="LevelBase/LevelObjectContainer" index="6" instance=ExtResource("5_2bs7r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, -4)
 
 [node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("6_wck52")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)

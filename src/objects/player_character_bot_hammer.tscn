@@ -100,7 +100,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24288, 0)
 [node name="CameraPivot" type="Node3D" parent="Node3D"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Node3D/CameraPivot"]
-spring_length = 3.0
+transform = Transform3D(1.00842, 0, 0, 0, 1.00842, 0, 0, 0, 1.00842, 0, 0, 0)
+spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/CameraPivot/SpringArm3D"]
 current = true
