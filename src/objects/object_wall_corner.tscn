@@ -24,15 +24,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1)
 size = Vector3(2, 3, 0.1)
 material = SubResource("StandardMaterial3D_xm2oa")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 1.5, 0)
-size = Vector3(2, 3, 0.1)
-material = SubResource("StandardMaterial3D_xm2oa")
-
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 size = Vector3(1.75, 2.5, 1.75)
 material = SubResource("StandardMaterial3D_111vw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 1.5, 0.0249023)
+size = Vector3(2.0498, 3, 0.1)
+material = SubResource("StandardMaterial3D_xm2oa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -49,11 +49,11 @@ size = Vector3(2.1217, 0.240479, 0.1)
 material = ExtResource("1_0p2m4")
 
 [node name="Line2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.03559, 2.62893, 0.0590105)
-size = Vector3(2.10938, 0.373535, 0.1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.06555, 2.62893, 0.0140686)
+size = Vector3(2.19855, 0.373535, 0.1)
 material = SubResource("StandardMaterial3D_wfjwq")
 
 [node name="Color2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.07135, 2.62893, 0.0746355)
-size = Vector3(2.12451, 0.240479, 0.1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.1013, 2.62893, 0.0146026)
+size = Vector3(2.27261, 0.240479, 0.1)
 material = ExtResource("1_0p2m4")
