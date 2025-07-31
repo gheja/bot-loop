@@ -36,8 +36,19 @@ transform = Transform3D(1.02365, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.823, 0)
 size = Vector3(3, 0.1, 0.1)
 material = SubResource("StandardMaterial3D_nvovq")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0670567)
+[node name="SmallLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32932, 0.787296, 0.0670567)
 pixel_size = 0.008
 outline_modulate = Color(0, 0, 0, 0)
-text = "Hello"
+text = "Hey!...
+Are you still here?...
+Sigh... "
+horizontal_alignment = 0
+vertical_alignment = 0
+justification_flags = 0
+
+[node name="BigLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0670567)
+outline_modulate = Color(0, 0, 0, 0)
+text = "30.00"
+font_size = 128
