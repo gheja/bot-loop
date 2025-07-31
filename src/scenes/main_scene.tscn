@@ -27,4 +27,5 @@ shadow_enabled = true
 [node name="LevelBase" parent="." instance=ExtResource("2_pw63i")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
+one_shot = true
