@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpq78ij8mdpa1"]
+
+[ext_resource type="PackedScene" uid="uid://p7hb5n2cphkq" path="res://assets/models/cage_1.glb" id="1_5k571"]
+
+[node name="ModelCage" type="Node3D"]
+
+[node name="cage_1" parent="." instance=ExtResource("1_5k571")]

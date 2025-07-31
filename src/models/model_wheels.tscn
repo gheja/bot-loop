@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh2ofm4m5omdm"]
+
+[ext_resource type="PackedScene" uid="uid://d1c6npie2eut3" path="res://assets/models/wheels_1.glb" id="1_egf5i"]
+
+[node name="ModelWheels" type="Node3D"]
+
+[node name="wheels_1" parent="." instance=ExtResource("1_egf5i")]
