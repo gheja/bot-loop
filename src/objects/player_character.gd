@@ -56,5 +56,5 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		camera_pivot.rotation.x -= event.relative.y * mouse_sensitivity
-		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, deg_to_rad(-75), deg_to_rad(-15))
+		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, deg_to_rad(-85), deg_to_rad(-15))
 		camera_pivot.rotation.y += -event.relative.x * mouse_sensitivity

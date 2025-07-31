@@ -12,6 +12,9 @@ size = Vector3(0.261719, 0.318359, 1.42639)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_erfry"]
 height = 0.5
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_mxwbm"]
+radius = 0.2
+
 [sub_resource type="Animation" id="Animation_d0fie"]
 length = 0.001
 tracks/0/type = "value"
@@ -29,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r2u8h"]
 resource_name = "hammer_hit"
-length = 0.6
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -101,6 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24288, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Node3D/CameraPivot"]
 transform = Transform3D(1.00842, 0, 0, 0, 1.00842, 0, 0, 0, 1.00842, 0, 0, 0)
+shape = SubResource("SphereShape3D_mxwbm")
 spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/CameraPivot/SpringArm3D"]
