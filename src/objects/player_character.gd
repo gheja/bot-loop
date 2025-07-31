@@ -18,6 +18,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
+	if Input.is_action_just_pressed("action_primary"):
+		$AnimationPlayer.play("hammer_hit")
 
 func update_body_visual_rotation():
 	upper_body.rotation.y = camera_pivot.rotation.y
