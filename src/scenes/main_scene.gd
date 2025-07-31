@@ -38,14 +38,17 @@ func _on_timer_started():
 	main_light.light_color = Color("#ffcbb5")
 	world_environment.environment.ambient_light_color = Color("#dce9ec")
 	world_environment.environment.ambient_light_energy = 0.25
+	Signals.set_display_text.emit("Start")
 
 func _on_timer_stopped():
 	main_light.light_color = Color("#ffffff")
 	world_environment.environment.ambient_light_color = Color("#e7ffff")
 	world_environment.environment.ambient_light_energy = 0.25
+	Signals.set_display_text.emit("Stop")
 
 func _on_timer_failed():
 	main_light.light_color = Color("#ff0000")
 	# world_environment.environment.ambient_light_energy = 0.0
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
+	Signals.set_display_text.emit("Fail")
