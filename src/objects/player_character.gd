@@ -21,13 +21,25 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("action_primary"):
 		$AnimationPlayer.play("hammer_hit")
 
+# thanks Nermit!
+# https://forum.godotengine.org/t/rotation-wrap-around-issue/16014/2
+static func _short_angle_dist(from, to):
+	var max_angle = PI * 2
+	var difference = fmod(to - from, max_angle)
+	return fmod(2 * difference, max_angle) - difference
+
 func update_body_visual_rotation():
-	upper_body.rotation.y = camera_pivot.rotation.y
+	# BUG: TODO: the upper body has collision, so it is not just visual!!!
+	
+	# upper_body.rotation.y = camera_pivot.rotation.y + PI
+	upper_body.rotation.y = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
 	
 	var velocity_2d = Vector2(self.velocity.x, self.velocity.z)
 	if velocity_2d.length() > 0.1:
-		var angle = Vector2.ZERO.angle_to_point(velocity_2d) + PI/2
-		lower_body.rotation.y = - angle
+		var target_angle = Vector2.ZERO.angle_to_point(velocity_2d) - PI/2
+		var target_rotation = lower_body.rotation.y + _short_angle_dist(lower_body.rotation.y, -target_angle)
+		
+		lower_body.rotation.y = lerp(lower_body.rotation.y, target_rotation, 0.15)
 
 func _physics_process(delta: float) -> void:
 	var vec = Input.get_vector("move_left", "move_right", "move_up", "move_down")

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signals="*res://autoload/signals.gd"
-TransitionUi="*res://autoload/transition_ui.tscn"
 
 [display]
 

@@ -1,37 +1,16 @@
 [gd_scene load_steps=10 format=3 uid="uid://vtcyr4a4c47f"]
 
 [ext_resource type="Script" uid="uid://c8ry4ey5mq5yc" path="res://objects/player_character.gd" id="1_r2u8h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kd2n"]
-albedo_color = Color(1, 0.545098, 0.560784, 1)
+[ext_resource type="PackedScene" uid="uid://d1c6npie2eut3" path="res://assets/models/wheels_1.glb" id="2_d0fie"]
+[ext_resource type="PackedScene" uid="uid://p7hb5n2cphkq" path="res://assets/models/cage_1.glb" id="3_mxwbm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r2u8h"]
 size = Vector3(0.261719, 0.318359, 1.42639)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jy05a"]
-albedo_color = Color(0.466667, 0.227451, 0.486275, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h5vi8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_erfry"]
 height = 0.5
-
-[sub_resource type="Animation" id="Animation_r2u8h"]
-resource_name = "hammer_hit"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/UpperBody/Hammer:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.118839, 0, 0), Vector3(-1.78062, 0, 0), Vector3(-1.78062, 0, 0), Vector3(0.118839, 0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_d0fie"]
 length = 0.001
@@ -45,7 +24,24 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.118839, 0, 0)]
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r2u8h"]
+resource_name = "hammer_hit"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/UpperBody/Hammer:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(2.34223, 0, 0), Vector3(1.96196, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mxwbm"]
@@ -60,47 +56,35 @@ script = ExtResource("1_r2u8h")
 [node name="Visuals" type="Node3D" parent="."]
 
 [node name="LowerBody" type="Node3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visuals/LowerBody"]
-size = Vector3(1, 0.3, 1)
-material = SubResource("StandardMaterial3D_5kd2n")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Visuals/LowerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.385681)
-size = Vector3(1.41895, 0.3, 0.228638)
-material = SubResource("StandardMaterial3D_5kd2n")
+[node name="wheels_1" parent="Visuals/LowerBody" instance=ExtResource("2_d0fie")]
 
 [node name="UpperBody" type="Node3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80354, 0)
 
 [node name="HammerStatic" type="Node3D" parent="Visuals/UpperBody"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visuals/UpperBody/HammerStatic"]
-transform = Transform3D(1, 0, 0, 0, 0.824788, -0.565442, 0, 0.565442, 0.824788, 0, 0.369683, -0.379026)
-size = Vector3(0.254883, 0.299805, 0.274414)
-
 [node name="Hammer" type="Node3D" parent="Visuals/UpperBody"]
-transform = Transform3D(1, 0, 0, 0, 0.992947, -0.11856, 0, 0.11856, 0.992947, 0, 0.576558, -0.433425)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216275, 0.150167)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Visuals/UpperBody/Hammer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.439467)
+transform = Transform3D(-1, 1.03648e-08, 8.68062e-08, -1.03648e-08, 0.971888, -0.235447, -8.68062e-08, -0.235447, -0.971888, -7.08727e-09, -0.106907, -0.455885)
 size = Vector3(0.15, 0.15, 1)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Visuals/UpperBody/Hammer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0155932, 1.12573)
+transform = Transform3D(-1, 1.03648e-08, 8.68062e-08, -1.03648e-08, 0.971888, -0.235447, -8.68062e-08, -0.235447, -0.971888, 5.2323e-08, -0.28364, -1.11918)
 radius = 0.236328
 height = 0.34082
 
 [node name="Area3D" type="Area3D" parent="Visuals/UpperBody/Hammer"]
+transform = Transform3D(-1, 1.03648e-08, 8.68062e-08, -1.03648e-08, 0.971888, -0.235447, -8.68062e-08, -0.235447, -0.971888, -4.52357e-08, -0.00343573, -0.0287729)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/UpperBody/Hammer/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -5.29e-07, 0, 5.29e-07, 1, 0, -9.53674e-07, 0.652891)
 shape = SubResource("BoxShape3D_r2u8h")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visuals/UpperBody"]
-size = Vector3(1, 0.7, 1)
-material = SubResource("StandardMaterial3D_jy05a")
+[node name="cage_1" parent="Visuals/UpperBody" instance=ExtResource("3_mxwbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.363618, 0)
 
 [node name="CollisionShapeLower" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
