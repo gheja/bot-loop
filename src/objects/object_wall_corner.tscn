@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://2l7r5ndv1t6j"]
+[gd_scene load_steps=6 format=3 uid="uid://2l7r5ndv1t6j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2oa"]
 albedo_color = Color(0.728822, 0.728822, 0.728822, 1)
@@ -9,6 +9,15 @@ disable_receive_shadows = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm2oa"]
 size = Vector3(2, 3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfjwq"]
+albedo_color = Color(0.886262, 0.886261, 0.886262, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p2m4"]
+albedo_color = Color(1, 0.411765, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.411765, 0, 1)
+disable_receive_shadows = true
 
 [node name="ObjectWallCorner" type="StaticBody3D"]
 
@@ -30,3 +39,23 @@ material = SubResource("StandardMaterial3D_111vw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_xm2oa")
+
+[node name="Line1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0446777, 2.62893, 1.06555)
+size = Vector3(2.08936, 0.373535, 0.1)
+material = SubResource("StandardMaterial3D_wfjwq")
+
+[node name="Color1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0622559, 2.62893, 1.1013)
+size = Vector3(2.12451, 0.240479, 0.1)
+material = SubResource("StandardMaterial3D_0p2m4")
+
+[node name="Line2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.03932, 2.62893, 0.0834246)
+size = Vector3(2, 0.373535, 0.1)
+material = SubResource("StandardMaterial3D_wfjwq")
+
+[node name="Color2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.07508, 2.62893, 0.0992937)
+size = Vector3(2.03174, 0.240479, 0.1)
+material = SubResource("StandardMaterial3D_0p2m4")

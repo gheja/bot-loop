@@ -20,6 +20,12 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 1, 3, 2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, 0.482963, -0.12941, -0.12941, 0.466506, 0.875, 0.482963, -0.741025, 0.466506, 0, 4, 0)
+visible = false
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.482963, -0.12941, -0.12941, 0.466506, 0.875, 0.482963, -0.741025, 0.466506, 0, 4, 0)
+light_color = Color(1, 0.796917, 0.709614, 1)
 shadow_enabled = true
 
 [node name="MainInterface" parent="." instance=ExtResource("1_w2twt")]
