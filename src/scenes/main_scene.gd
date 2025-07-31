@@ -53,7 +53,6 @@ func _on_timer_timeout():
 
 func _on_stop_pressed():
 	timer.stop()
-	print(timer.time_left)
 	Signals.timer_stopped.emit()
 
 func _on_timer_started():
@@ -68,6 +67,5 @@ func _on_timer_stopped():
 
 func _on_timer_failed():
 	main_light.light_color = Color("#ff0000")
-	# world_environment.environment.ambient_light_energy = 0.0
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
