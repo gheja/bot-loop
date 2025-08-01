@@ -9,3 +9,5 @@ signal timer_stopped
 
 signal set_display_text
 signal update_timer
+
+signal trigger_activation_changed
