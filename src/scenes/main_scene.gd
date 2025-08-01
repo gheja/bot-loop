@@ -48,9 +48,13 @@ func start_main_timer():
 	Signals.update_timer.emit(timer.time_left)
 	Signals.timer_started.emit()
 
-func restart_level_with_wait():
+func restart_level_with_wait(success: bool):
 	await get_tree().create_timer(2.0).timeout
-	Signals.start_transition.emit()
+	
+	if success:
+		Signals.start_transition.emit()
+	else:
+		Signals.start_transition.emit("#441100")
 
 func _process(delta: float) -> void:
 	main_interface.update(timer.time_left)
@@ -76,11 +80,11 @@ func reset_colors():
 func _on_timer_stopped():
 	reset_colors()
 	
-	restart_level_with_wait()
+	restart_level_with_wait(true)
 
 func _on_timer_failed():
 	main_light.light_color = Color("#ff0000")
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
 	
-	restart_level_with_wait()
+	restart_level_with_wait(false)
