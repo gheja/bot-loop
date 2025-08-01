@@ -48,6 +48,8 @@ func _ready() -> void:
 		if current_level.has_intro:
 			# this should really be part of the level, not the main script...
 			start_intro()
+		else:
+			start_player_selection()
 	else:
 		start_player_selection()
 	
