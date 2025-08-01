@@ -76,7 +76,7 @@ func start_player_selection():
 	for i in get_available_player_indexes():
 		s += "[" + str(i) + "] "
 	
-	main_interface.set_controls_label_text("[color=#0f0]Select your robot:\n" + s + "[/color]")
+	main_interface.set_controls_label_text("[color=#0ff]Select your robot:\n" + s + "[/color]")
 
 func set_active_player(index: int):
 	var player_obj: ObjectPlayerCharacter = null
@@ -97,7 +97,9 @@ func set_active_player(index: int):
 		"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
 		"[color=#ff0]" +
 		player_obj.controls_help_text +
-		"[/color]"
+		"[/color]\n" +
+		"\n" +
+		"[color=#0ff][R] Restart loop\n[Q] Back to selection[/color]"
 	)
 	var player_camera = player_obj.find_child("Camera3D")
 	assert(player_camera, "Could not locate player camera")
