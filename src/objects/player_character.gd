@@ -6,9 +6,6 @@ extends CharacterBody3D
 @export var player_index = -1
 @export var has_primary_action = true
 
-# TODO: should be global
-@export_range(0.0, 1.0) var mouse_sensitivity = 0.01
-
 @onready var camera_pivot = $Node3D/CameraPivot
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
@@ -102,9 +99,9 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		camera_pivot.rotation.x -= event.relative.y * mouse_sensitivity
+		camera_pivot.rotation.x -= event.relative.y * Constants.MOUSE_SENSITIVITY
 		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, deg_to_rad(-85), deg_to_rad(-15))
-		camera_pivot.rotation.y += -event.relative.x * mouse_sensitivity
+		camera_pivot.rotation.y += -event.relative.x * Constants.MOUSE_SENSITIVITY
 
 func _on_save_player_recording():
 	if not recording:
