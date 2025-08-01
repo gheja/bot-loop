@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://camdrurfym6xn"]
+
+[ext_resource type="Texture2D" uid="uid://d1fr5hm1fs0vi" path="res://assets/graphics/sparkle_2_128.png" id="1_7f0ft"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5om3p"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vd56w"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_7f0ft")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_3jlgx"]
+material = SubResource("StandardMaterial3D_vd56w")
+size = Vector2(0.3, 0.3)
+
+[sub_resource type="Curve" id="Curve_l85qr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0867052, 1), 0.0, 0.0, 0, 0, Vector2(0.485549, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="ObjectTrap" type="Node3D"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.816984, -1.37531, 0.349818, 0.560659, 1.46867, -0.667829, 0.134903, 2.2252, 0.656987, 0, 0.0605993, 0)
+radius = 0.05
+radial_segments = 4
+rings = 2
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.816984, 0.342861, 0.565222, 0.560659, -1.16016, -0.732194, 0.134903, 2.74526, -0.38002, 0, 0.0605993, 0)
+radius = 0.05
+radial_segments = 4
+rings = 2
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.349818, -2.72339, 0.231365, -0.667829, -1.24455, -0.617984, 0.656987, 0.185008, -0.751376, 0, 0.0605993, 0)
+radius = 0.05
+radial_segments = 4
+rings = 2
+
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0496631, 0)
+shape = SubResource("SphereShape3D_5om3p")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.187055, 0)
+amount = 1
+lifetime = 3.0
+randomness = 0.33
+mesh = SubResource("QuadMesh_3jlgx")
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+scale_amount_curve = SubResource("Curve_l85qr")
