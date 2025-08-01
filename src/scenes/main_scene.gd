@@ -16,9 +16,6 @@ func _ready() -> void:
 	
 	GameState.loops += 1
 	
-	if GameState.loops > 1:
-		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
-	
 	clear_controls_help_text()
 	reset_colors()
 	
@@ -98,6 +95,9 @@ func start_intro_text():
 	start_player_selection()
 
 func start_main_timer():
+	if GameState.loops > 1:
+		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
+	
 	timer.start()
 	GameState.state = GameState.STATE_RUNNING
 	Signals.set_controls_lock.emit(true)
