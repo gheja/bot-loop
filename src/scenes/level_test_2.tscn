@@ -75,7 +75,6 @@ player_index = 1
 
 [node name="PlayerCharacterBotHammer2" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("8_ardte")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51301, 1, 5.98928)
-tmp_my_loop_index = 1
 player_index = 2
 
 [editable path="LevelBase"]

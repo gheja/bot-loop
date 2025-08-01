@@ -13,3 +13,4 @@ signal update_timer
 signal trigger_activation_changed
 
 signal set_controls_lock
+signal save_player_recording

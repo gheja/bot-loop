@@ -18,6 +18,8 @@ var recording = false
 var recording_index = 0
 var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
 
+var current_recording = []
+
 # NOTE: maybe we should handle all of these in _physics_process()
 var inputs = {
 	"vec": Vector2.ZERO,
@@ -29,7 +31,9 @@ var inputs = {
 func _ready() -> void:
 	assert(player_index != -1, "Player object is not set up correctly")
 	
-	recording_index = tmp_my_loop_index
+	Signals.save_player_recording.connect(_on_save_player_recording)
+	
+	recording_index = player_index - 1
 
 func make_active():
 	recording = true
@@ -77,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		inputs.jump_pressed = false
 		inputs.upper_body_rotation = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
 
-		GameState.player_recordings[recording_index].append(inputs.duplicate())
+		current_recording.append(inputs.duplicate())
 	else:
 		if GameState.player_recordings[recording_index].size() <= frame_number:
 			print("No recording for frame, skipping physics frame")
@@ -96,3 +100,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_pivot.rotation.x -= event.relative.y * mouse_sensitivity
 		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, deg_to_rad(-85), deg_to_rad(-15))
 		camera_pivot.rotation.y += -event.relative.x * mouse_sensitivity
+
+func _on_save_player_recording():
+	if not recording:
+		return
+	
+	GameState.player_recordings[recording_index] = current_recording.duplicate()

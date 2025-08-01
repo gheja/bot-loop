@@ -84,6 +84,10 @@ func start_main_timer():
 func restart_level_with_wait(success: bool):
 	await get_tree().create_timer(2.0).timeout
 	
+	# right before restarting we should save, up until this point the player has
+	# a chance to restart the run therefore discarding the recording
+	Signals.save_player_recording.emit()
+	
 	if success:
 		Signals.start_transition.emit()
 	else:
