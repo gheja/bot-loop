@@ -30,8 +30,21 @@ func _ready() -> void:
 	else:
 		start_player_selection()
 
+func get_available_player_indexes():
+	var result = []
+	
+	for obj in get_tree().get_nodes_in_group("player_objects"):
+		result.append((obj as ObjectPlayerCharacter).player_index)
+	
+	return result
+
 func start_player_selection():
-	main_interface.set_controls_label_text("[color=#0f0]Select your robot\n[1] [2][/color]")
+	var s = ""
+	
+	for i in get_available_player_indexes():
+		s += "[" + str(i) + "] "
+	
+	main_interface.set_controls_label_text("[color=#0f0]Select your robot:\n" + s + "[/color]")
 	
 	# temporarily auto-select
 	if GameState.loops == 1:
