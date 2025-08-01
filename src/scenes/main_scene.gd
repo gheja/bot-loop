@@ -12,6 +12,7 @@ extends Node3D
 @export var level_list: Array[PackedScene]
 
 var current_level: LevelClass
+var current_player_index: int = -1
 
 func _ready() -> void:
 	var level = level_list[GameState.current_level_index].instantiate()
@@ -43,6 +44,9 @@ func _ready() -> void:
 			start_intro()
 	else:
 		start_player_selection()
+	
+	# forget player auto-selection
+	GameState.auto_select_player_index = -1
 
 func get_available_player_indexes():
 	var result = []
@@ -54,8 +58,15 @@ func get_available_player_indexes():
 
 func start_player_selection():
 	GameState.state = GameState.STATE_PLAYER_SELECTION
+	
+	# this one has the highest priority
+	if GameState.auto_select_player_index != -1:
+		set_active_player(GameState.auto_select_player_index)
+		return
+	
 	var player_indexes = get_available_player_indexes()
 	
+	# if we only have one palyer, select that
 	if player_indexes.size() == 1:
 		set_active_player(player_indexes[0])
 		return
@@ -183,6 +194,10 @@ func restart_pressed():
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_action_restart"):
+		GameState.auto_select_player_index = current_player_index
+		restart_pressed()
+	
+	if Input.is_action_just_pressed("ui_action_back"):
 		restart_pressed()
 	
 	if GameState.state == GameState.STATE_PLAYER_SELECTION:

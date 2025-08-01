@@ -8,6 +8,7 @@ const STATE_RESTARTING = 5
 
 var loops = 0
 var current_level_index = 0
+var auto_select_player_index = -1
 var play_intro = true
 var state = GameState.STATE_INTRO
 
