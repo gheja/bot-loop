@@ -104,6 +104,10 @@ ui_action_select_4={
 3d_physics/layer_1="Collision"
 3d_physics/layer_2="Interaction"
 
+[physics]
+
+common/max_physics_steps_per_frame=30
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
