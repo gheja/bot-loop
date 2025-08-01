@@ -131,3 +131,6 @@ func _on_timer_started():
 func break_down():
 	self.add_child(effect_scene.instantiate())
 	is_broken_down = true
+
+func _on_hit_box_area_entered(area: Area3D) -> void:
+	break_down()
