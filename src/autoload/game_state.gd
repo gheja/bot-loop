@@ -7,6 +7,7 @@ const STATE_FINISHED = 4
 const STATE_RESTARTING = 5
 
 var loops = 0
+var current_level_index = 0
 var play_intro = true
 var state = GameState.STATE_INTRO
 

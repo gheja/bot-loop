@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bie2uwadt7uwm"]
+[gd_scene load_steps=6 format=3 uid="uid://bie2uwadt7uwm"]
 
 [ext_resource type="Script" uid="uid://c1wsatcoqlr2u" path="res://scenes/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dqfv168hkiq2f" path="res://scenes/main_interface.tscn" id="1_w2twt"]
-[ext_resource type="PackedScene" uid="uid://dtcd4uun008gj" path="res://scenes/level_test_2.tscn" id="3_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://tedcrjvwtdhi" path="res://scenes/level_1.tscn" id="3_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://dtcd4uun008gj" path="res://scenes/level_test_2.tscn" id="3_pu3yx"]
 
 [sub_resource type="Environment" id="Environment_w2twt"]
 ambient_light_source = 2
@@ -11,6 +12,7 @@ ambient_light_energy = 0.25
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_7ykc4")
+level_list = Array[PackedScene]([ExtResource("3_7ykc4"), ExtResource("3_pu3yx")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w2twt")
@@ -30,7 +32,5 @@ wait_time = 5.0
 one_shot = true
 
 [node name="LevelContainer" type="Node3D" parent="."]
-
-[node name="LevelTest2" parent="LevelContainer" instance=ExtResource("3_7ykc4")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

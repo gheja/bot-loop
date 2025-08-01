@@ -4,14 +4,25 @@ extends Node3D
 @onready var timer: Timer = $Timer
 @onready var main_light: DirectionalLight3D = $MainLight
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
+@onready var level_container: Node3D = $LevelContainer
+
+@export var level_list: Array[PackedScene]
+
+var current_level: LevelClass
 
 func _ready() -> void:
+	var level = level_list[GameState.current_level_index].instantiate()
+	level_container.add_child(level)
+	
+	current_level = get_tree().get_nodes_in_group("level_root_object")[0]
+	
 	Signals.stop_pressed.connect(_on_stop_pressed)
 	Signals.timer_started.connect(_on_timer_started)
 	Signals.timer_stopped.connect(_on_timer_stopped)
 	Signals.timer_failed.connect(_on_timer_failed)
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
 
+	timer.wait_time = current_level.time_limit
 	timer.timeout.connect(_on_timer_timeout)
 	
 	GameState.loops += 1
@@ -23,7 +34,10 @@ func _ready() -> void:
 	
 	if GameState.play_intro:
 		GameState.play_intro = false
-		start_intro_text()
+		
+		if current_level.has_intro:
+			# this should really be part of the level, not the main script...
+			start_intro_text()
 	else:
 		start_player_selection()
 
@@ -153,6 +167,8 @@ func _on_timer_timeout():
 	Signals.timer_failed.emit()
 
 func _on_stop_pressed():
+	GameState.current_level_index += 1
+	
 	clear_controls_help_text()
 	timer.stop()
 	Signals.timer_stopped.emit()

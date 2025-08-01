@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc3b4lsyqgmcq" path="res://scenes/level_base.gd" id="1_548ah"]
 
-[node name="LevelBase" type="Node3D"]
+[node name="LevelBase" type="Node3D" groups=["level_root_object"]]
 script = ExtResource("1_548ah")
 
 [node name="LevelObjectContainer" type="Node3D" parent="."]

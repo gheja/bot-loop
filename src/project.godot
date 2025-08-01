@@ -34,6 +34,7 @@ window/custom_user_dir_name=""
 [global_group]
 
 player_objects=""
+level_root_object=""
 
 [input]
 
