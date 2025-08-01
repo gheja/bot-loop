@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bie2uwadt7uwm"]
+[gd_scene load_steps=9 format=3 uid="uid://bie2uwadt7uwm"]
 
 [ext_resource type="Script" uid="uid://c1wsatcoqlr2u" path="res://scenes/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dqfv168hkiq2f" path="res://scenes/main_interface.tscn" id="1_w2twt"]
@@ -10,6 +10,133 @@ ambient_light_source = 2
 ambient_light_color = Color(0.905882, 1, 1, 1)
 ambient_light_energy = 0.25
 
+[sub_resource type="Animation" id="Animation_pu3yx"]
+resource_name = "intro"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MainLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.15, 0.15, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../WorldEnvironment:environment:ambient_light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0001, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.25]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IntroCamera:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.638702, 1.49187, -5.58115), Vector3(-0.139879, 1.49187, -3.36327), Vector3(1.85542, 1.49187, 5.50822)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IntroCamera:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.114867, 0, 0), Vector3(-0.574336, 0, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start_intro_text"
+}, {
+"args": [],
+"method": &"intro_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gubc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MainLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../WorldEnvironment:environment:ambient_light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("IntroCamera:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.638702, 1.49187, -5.58115)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("IntroCamera:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt2n2"]
+_data = {
+&"RESET": SubResource("Animation_gubc5"),
+&"intro": SubResource("Animation_pu3yx")
+}
+
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_7ykc4")
 level_list = Array[PackedScene]([ExtResource("3_7ykc4"), ExtResource("3_pu3yx")])
@@ -17,7 +144,7 @@ level_list = Array[PackedScene]([ExtResource("3_7ykc4"), ExtResource("3_pu3yx")]
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w2twt")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1, 5, 8.10909)
 current = true
 
@@ -32,5 +159,15 @@ wait_time = 5.0
 one_shot = true
 
 [node name="LevelContainer" type="Node3D" parent="."]
+
+[node name="IntroStuffs" type="Node3D" parent="."]
+
+[node name="IntroCamera" type="Camera3D" parent="IntroStuffs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638702, 1.49187, -5.58115)
+
+[node name="IntroAnimationPlayer" type="AnimationPlayer" parent="IntroStuffs"]
+libraries = {
+&"": SubResource("AnimationLibrary_rt2n2")
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

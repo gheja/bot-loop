@@ -2,9 +2,12 @@ extends Node3D
 
 @onready var main_interface: MainInterface = $MainInterface
 @onready var timer: Timer = $Timer
+@onready var main_camera: Camera3D = $MainCamera
 @onready var main_light: DirectionalLight3D = $MainLight
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var level_container: Node3D = $LevelContainer
+@onready var intro_animation_player: AnimationPlayer = $IntroStuffs/IntroAnimationPlayer
+@onready var intro_camera: Camera3D = $IntroStuffs/IntroCamera
 
 @export var level_list: Array[PackedScene]
 
@@ -37,7 +40,7 @@ func _ready() -> void:
 		
 		if current_level.has_intro:
 			# this should really be part of the level, not the main script...
-			start_intro_text()
+			start_intro()
 	else:
 		start_player_selection()
 
@@ -84,8 +87,33 @@ func set_active_player(index: int):
 		player_obj.controls_help_text +
 		"[/color]"
 	)
+	var player_camera = player_obj.find_child("Camera3D")
+	assert(player_camera, "Could not locate player camera")
+	follow_camera(player_camera, false)
 	
 	start_main_timer()
+
+var _camera_to_follow: Camera3D
+var _camera_follow_progress = 1.0
+
+func follow_camera(new_camera: Camera3D, snap: bool = false):
+	_camera_to_follow = new_camera
+	
+	if snap:
+		_camera_follow_progress  = 1.0
+	else:
+		_camera_follow_progress = 0.0
+
+func follow_camera_step(delta: float):
+	if not _camera_to_follow:
+		return
+	
+	# fixed 1 second transition
+	_camera_follow_progress = min(_camera_follow_progress + delta, 1.0)
+	
+	# this is wildly inaccurate
+	main_camera.global_position = main_camera.global_position + (_camera_to_follow.global_position - main_camera.position) * _camera_follow_progress
+	main_camera.global_rotation = main_camera.global_rotation + (_camera_to_follow.global_rotation - main_camera.rotation) * _camera_follow_progress
 
 func start_intro_text():
 	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
@@ -105,8 +133,10 @@ func start_intro_text():
 		
 		Signals.set_display_text.emit(text)
 		await get_tree().create_timer(0.05).timeout
-	
-	start_player_selection()
+
+func start_intro():
+	follow_camera(intro_camera, true)
+	intro_animation_player.play("intro")
 
 func start_main_timer():
 	if GameState.loops > 1:
@@ -160,6 +190,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("ui_action_select_" + str(i)):
 				set_active_player(i)
 	
+	follow_camera_step(delta)
 	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
 
@@ -200,3 +231,6 @@ func _on_timer_failed():
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(false)
+
+func intro_finished():
+	start_player_selection()
