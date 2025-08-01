@@ -56,7 +56,7 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_t5a1n"]
 radius = 1.0
 
-[node name="PlayerCharacterBotHammer" type="CharacterBody3D"]
+[node name="PlayerCharacterBotHammer" type="CharacterBody3D" groups=["player_objects"]]
 script = ExtResource("1_r2u8h")
 
 [node name="Visuals" type="Node3D" parent="."]

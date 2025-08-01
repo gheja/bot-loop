@@ -1,8 +1,10 @@
+class_name ObjectPlayerCharacter
 extends CharacterBody3D
 
 @export var tmp_my_loop_index = 0
 @export var max_speed = 5
-@export var is_actively_controlled = true
+@export var is_actively_controlled = false
+@export var player_index = -1
 
 # TODO: should be global
 @export_range(0.0, 1.0) var mouse_sensitivity = 0.01
@@ -25,15 +27,15 @@ var inputs = {
 }
 
 func _ready() -> void:
+	assert(player_index != -1, "Player object is not set up correctly")
+	
 	recording_index = tmp_my_loop_index
-	
-	if GameState.loops == tmp_my_loop_index:
-		recording = true
-		
-		GameState.player_recordings[recording_index] = []
-	
-	if is_actively_controlled:
-		camera.make_current()
+
+func make_active():
+	recording = true
+	is_actively_controlled = true
+	GameState.player_recordings[recording_index] = []
+	camera.make_current()
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
@@ -56,6 +58,12 @@ func update_body_visual_rotation():
 		lower_body.rotation.y = lerp(lower_body.rotation.y, target_rotation, 0.15)
 
 func _physics_process(delta: float) -> void:
+	if not GameState.controls_locked:
+		return
+	
+	if not GameState.state == GameState.STATE_RUNNING:
+		return
+	
 	frame_number += 1
 	
 	if recording:

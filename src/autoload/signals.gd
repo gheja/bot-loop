@@ -11,3 +11,5 @@ signal set_display_text
 signal update_timer
 
 signal trigger_activation_changed
+
+signal set_controls_lock

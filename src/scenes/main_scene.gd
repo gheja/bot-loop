@@ -10,8 +10,8 @@ func _ready() -> void:
 	Signals.timer_started.connect(_on_timer_started)
 	Signals.timer_stopped.connect(_on_timer_stopped)
 	Signals.timer_failed.connect(_on_timer_failed)
-	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Signals.set_controls_lock.connect(_on_set_controls_lock)
+
 	timer.timeout.connect(_on_timer_timeout)
 	
 	GameState.loops += 1
@@ -21,11 +21,37 @@ func _ready() -> void:
 	
 	reset_colors()
 	
+	Signals.set_controls_lock.emit(false)
+	
 	if GameState.play_intro:
 		GameState.play_intro = false
 		start_intro_text()
 	else:
-		start_main_timer()
+		start_player_selection()
+
+func start_player_selection():
+	# temporarily auto-select
+	if GameState.loops == 1:
+		set_active_player(1)
+	elif GameState.loops == 2:
+		set_active_player(2)
+	
+	start_main_timer()
+
+func set_active_player(index: int):
+	var player_obj: ObjectPlayerCharacter = null
+	
+	for obj in get_tree().get_nodes_in_group("player_objects"):
+		obj = obj as ObjectPlayerCharacter
+		if obj.player_index == index:
+			player_obj = obj
+			break
+	
+	if not player_obj:
+		print("Could not find player object by index")
+		return
+	
+	player_obj.make_active()
 
 func start_intro_text():
 	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
@@ -46,10 +72,12 @@ func start_intro_text():
 		Signals.set_display_text.emit(text)
 		await get_tree().create_timer(0.05).timeout
 	
-	start_main_timer()
+	start_player_selection()
 
 func start_main_timer():
 	timer.start()
+	GameState.state = GameState.STATE_RUNNING
+	Signals.set_controls_lock.emit(true)
 	Signals.update_timer.emit(timer.time_left)
 	Signals.timer_started.emit()
 
@@ -60,6 +88,14 @@ func restart_level_with_wait(success: bool):
 		Signals.start_transition.emit()
 	else:
 		Signals.start_transition.emit("#441100")
+
+func _on_set_controls_lock(state: bool):
+	GameState.controls_locked = state
+	
+	if state:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _process(delta: float) -> void:
 	main_interface.update(timer.time_left)
@@ -85,6 +121,8 @@ func reset_colors():
 func _on_timer_stopped():
 	reset_colors()
 	
+	GameState.state = GameState.STATE_FINISHED
+	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(true)
 
 func _on_timer_failed():
@@ -92,4 +130,6 @@ func _on_timer_failed():
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
 	
+	GameState.state = GameState.STATE_FINISHED
+	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(false)

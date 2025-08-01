@@ -29,6 +29,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/custom_user_dir_name=""
 
+[global_group]
+
+player_objects=""
+
 [input]
 
 move_left={
