@@ -20,25 +20,30 @@ func _ready() -> void:
 		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
 	
 	reset_colors()
-	start_intro_text()
+	
+	if GameState.play_intro:
+		GameState.play_intro = false
+		start_intro_text()
+	else:
+		start_main_timer()
 
 func start_intro_text():
-	var text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
-	var s = ""
-	var c
+	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
+	var text = ""
+	var ch
 	
 	for i in text.length():
-		c = text[i]
+		ch = text[i]
 		
-		if c == "#":
+		if ch == "#":
 			await get_tree().create_timer(0.5).timeout
 			continue
-		elif c == "*":
-			s = ""
+		elif ch == "*":
+			text = ""
 		else:
-			s += c
+			text += ch
 		
-		Signals.set_display_text.emit(s)
+		Signals.set_display_text.emit(text)
 		await get_tree().create_timer(0.05).timeout
 	
 	start_main_timer()
