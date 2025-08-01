@@ -32,8 +32,8 @@ func start_intro_text():
 	var text = ""
 	var ch
 	
-	for i in text.length():
-		ch = text[i]
+	for i in intro_text.length():
+		ch = intro_text[i]
 		
 		if ch == "#":
 			await get_tree().create_timer(0.5).timeout
