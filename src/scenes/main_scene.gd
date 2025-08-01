@@ -92,6 +92,7 @@ func set_active_player(index: int):
 		return
 	
 	player_obj.make_active()
+	current_player_index = index
 	main_interface.set_controls_label_text(
 		"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
 		"[color=#ff0]" +
