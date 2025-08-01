@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://clppxajtfgsvg"]
+
+[ext_resource type="Script" uid="uid://5517e6xwgvvd" path="res://scenes/debug_interface.gd" id="1_ac31d"]
+
+[node name="DebugIterface" type="CanvasLayer"]
+script = ExtResource("1_ac31d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="DebugLabel" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -6
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "123
+123
+123
+123"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

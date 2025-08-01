@@ -21,6 +21,7 @@ Signals="*res://autoload/signals.gd"
 TransitionUi="*res://autoload/transition_ui.tscn"
 GameState="*res://autoload/game_state.gd"
 Constants="*res://autoload/constants.gd"
+DebugInterfaceA="*res://scenes/debug_interface.tscn"
 
 [display]
 
