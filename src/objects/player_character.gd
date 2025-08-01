@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
 @onready var upper_body = $Visuals/UpperBody
+@onready var player_index_label: Label3D = $Visuals/PlayerIndexLabel
 
 var recording = false
 var recording_index = 0
@@ -32,6 +33,9 @@ func _ready() -> void:
 	assert(player_index != -1, "Player object is not set up correctly")
 	
 	Signals.save_player_recording.connect(_on_save_player_recording)
+	Signals.timer_started.connect(_on_timer_started)
+	
+	player_index_label.text = str(player_index)
 	
 	recording_index = player_index - 1
 
@@ -107,3 +111,6 @@ func _on_save_player_recording():
 		return
 	
 	GameState.player_recordings[recording_index] = current_recording.duplicate()
+
+func _on_timer_started():
+	player_index_label.hide()
