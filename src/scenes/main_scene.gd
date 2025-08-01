@@ -39,20 +39,19 @@ func get_available_player_indexes():
 	return result
 
 func start_player_selection():
+	GameState.state = GameState.STATE_PLAYER_SELECTION
+	var player_indexes = get_available_player_indexes()
+	
+	if player_indexes.size() == 1:
+		set_active_player(player_indexes[0])
+		return
+	
 	var s = ""
 	
 	for i in get_available_player_indexes():
 		s += "[" + str(i) + "] "
 	
 	main_interface.set_controls_label_text("[color=#0f0]Select your robot:\n" + s + "[/color]")
-	
-	# temporarily auto-select
-	if GameState.loops == 1:
-		set_active_player(1)
-	elif GameState.loops == 2:
-		set_active_player(2)
-	
-	start_main_timer()
 
 func set_active_player(index: int):
 	var player_obj: ObjectPlayerCharacter = null
@@ -74,6 +73,8 @@ func set_active_player(index: int):
 		player_obj.controls_help_text +
 		"[/color]"
 	)
+	
+	start_main_timer()
 
 func start_intro_text():
 	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
@@ -139,6 +140,11 @@ func restart_pressed():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_action_restart"):
 		restart_pressed()
+	
+	if GameState.state == GameState.STATE_PLAYER_SELECTION:
+		for i in get_available_player_indexes():
+			if Input.is_action_just_pressed("ui_action_select_" + str(i)):
+				set_active_player(i)
 	
 	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
