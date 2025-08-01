@@ -31,7 +31,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_r2u8h"]
-resource_name = "hammer_hit"
+resource_name = "primary_action"
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -50,7 +50,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mxwbm"]
 _data = {
 &"RESET": SubResource("Animation_d0fie"),
-&"hammer_hit": SubResource("Animation_r2u8h")
+&"primary_action": SubResource("Animation_r2u8h")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t5a1n"]

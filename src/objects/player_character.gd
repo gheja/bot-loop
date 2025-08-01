@@ -1,10 +1,10 @@
 class_name ObjectPlayerCharacter
 extends CharacterBody3D
 
-@export var tmp_my_loop_index = 0
 @export var max_speed = 5
 @export var is_actively_controlled = false
 @export var player_index = -1
+@export var has_primary_action = true
 
 # TODO: should be global
 @export_range(0.0, 1.0) var mouse_sensitivity = 0.01
@@ -43,8 +43,9 @@ func make_active():
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
-	if inputs.action_pressed:
-		$AnimationPlayer.play("hammer_hit")
+	if has_primary_action:
+		if inputs.action_pressed:
+			$AnimationPlayer.play("primary_action")
 
 # thanks Nermit!
 # https://forum.godotengine.org/t/rotation-wrap-around-issue/16014/2
