@@ -82,7 +82,11 @@ func start_main_timer():
 	Signals.timer_started.emit()
 
 func restart_level_with_wait(success: bool):
+	# wait with setting the state because the player can still interact now
+	
 	await get_tree().create_timer(2.0).timeout
+	
+	GameState.state = GameState.STATE_RESTARTING
 	
 	# right before restarting we should save, up until this point the player has
 	# a chance to restart the run therefore discarding the recording
@@ -101,7 +105,16 @@ func _on_set_controls_lock(state: bool):
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func restart_pressed():
+	if GameState.state == GameState.STATE_RESTARTING:
+		return
+	
+	Signals.start_transition.emit("#330066")
+
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_action_restart"):
+		restart_pressed()
+	
 	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
 
