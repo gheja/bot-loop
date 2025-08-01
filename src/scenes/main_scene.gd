@@ -15,6 +15,12 @@ var current_level: LevelClass
 var current_player_index: int = -1
 
 func _ready() -> void:
+	# first thing to do, even before the robots exist
+	if GameState.reset_recordings_on_start:
+		# TODO: hackish, if we have more robots, then add more arrays here
+		GameState.player_recordings = [[],[],[],[],[],[]]
+		GameState.reset_recordings_on_start = false
+		
 	var level = level_list[GameState.current_level_index].instantiate()
 	level_container.add_child(level)
 	
@@ -212,11 +218,15 @@ func _process(delta: float) -> void:
 	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
 
+func prepare_for_next_level():
+	GameState.reset_recordings_on_start = true
+	GameState.current_level_index += 1
+
 func _on_timer_timeout():
 	Signals.timer_failed.emit()
 
 func _on_stop_pressed():
-	GameState.current_level_index += 1
+	prepare_for_next_level()
 	
 	clear_controls_help_text()
 	timer.stop()

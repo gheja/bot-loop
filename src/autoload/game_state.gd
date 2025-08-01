@@ -12,5 +12,6 @@ var auto_select_player_index = -1
 var play_intro = true
 var state = GameState.STATE_INTRO
 
-var player_recordings = [[], []]
+var player_recordings = []
+var reset_recordings_on_start = true
 var controls_locked = false
