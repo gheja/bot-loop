@@ -1,5 +1,6 @@
 extends Node
 
+signal intro_started
 signal stop_pressed
 signal start_transition
 

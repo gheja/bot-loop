@@ -6,6 +6,8 @@ extends Node3D
 
 func _ready() -> void:
 	big_label.hide()
+	big_label.text = ""
+	small_label.text = ""
 	
 	Signals.set_display_text.connect(set_text)
 	Signals.timer_started.connect(_on_timer_started)

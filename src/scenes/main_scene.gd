@@ -136,7 +136,7 @@ func follow_camera_step(delta: float):
 	main_camera.global_rotation = main_camera.global_rotation + (_camera_to_follow.global_rotation - main_camera.rotation) * _camera_follow_progress
 
 func start_intro_text():
-	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
+	var intro_text = "#Hey!\n.#.#.#*Are you still\nthere?\n.#.#.#*Nevermind, I\nwill just reboot\nthis thing.#.#.#*Push the STOP\nbutton if you're\nthere.#.#.#"
 	var text = ""
 	var ch
 	
@@ -144,7 +144,7 @@ func start_intro_text():
 		ch = intro_text[i]
 		
 		if ch == "#":
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.25).timeout
 			continue
 		elif ch == "*":
 			text = ""
@@ -157,6 +157,7 @@ func start_intro_text():
 func start_intro():
 	follow_camera(intro_camera, true)
 	intro_animation_player.play("intro")
+	Signals.intro_started.emit()
 
 func start_main_timer():
 	if GameState.loops > 1:

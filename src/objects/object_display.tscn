@@ -38,11 +38,12 @@ material = SubResource("StandardMaterial3D_nvovq")
 
 [node name="SmallLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32932, 0.787296, 0.0670567)
-pixel_size = 0.008
+pixel_size = 0.0075
 outline_modulate = Color(0, 0, 0, 0)
-text = "Hey!...
-Are you still here?...
-Sigh... "
+text = "Push the STOP
+button if you're
+there..."
+font_size = 48
 horizontal_alignment = 0
 vertical_alignment = 0
 justification_flags = 0
