@@ -14,6 +14,11 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	timer.timeout.connect(_on_timer_timeout)
 	
+	GameState.loops += 1
+	
+	if GameState.loops > 1:
+		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
+	
 	reset_colors()
 	start_intro_text()
 
