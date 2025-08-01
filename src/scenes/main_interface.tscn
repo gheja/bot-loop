@@ -73,6 +73,8 @@ layout_mode = 0
 offset_right = 1011.0
 offset_bottom = 232.0
 mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.784314)
+theme_override_constants/outline_size = 10
 bbcode_enabled = true
 text = "[Arrow keys] [W-A-S-D] Move
 [Mouse] Look around
