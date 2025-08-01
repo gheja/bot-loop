@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1wsatcoqlr2u" path="res://scenes/main_scene.gd" id="1_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://dqfv168hkiq2f" path="res://scenes/main_interface.tscn" id="1_w2twt"]
-[ext_resource type="PackedScene" uid="uid://d08o8k1bhvrak" path="res://scenes/level_test_1.tscn" id="3_7ykc4"]
+[ext_resource type="PackedScene" uid="uid://dtcd4uun008gj" path="res://scenes/level_test_2.tscn" id="3_7ykc4"]
 
 [sub_resource type="Environment" id="Environment_w2twt"]
 ambient_light_source = 2
@@ -30,6 +30,6 @@ one_shot = true
 
 [node name="LevelContainer" type="Node3D" parent="."]
 
-[node name="LevelTest1" parent="LevelContainer" instance=ExtResource("3_7ykc4")]
+[node name="LevelTest2" parent="LevelContainer" instance=ExtResource("3_7ykc4")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

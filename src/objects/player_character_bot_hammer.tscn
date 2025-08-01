@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vtcyr4a4c47f"]
+[gd_scene load_steps=12 format=3 uid="uid://vtcyr4a4c47f"]
 
 [ext_resource type="Script" uid="uid://c8ry4ey5mq5yc" path="res://objects/player_character.gd" id="1_r2u8h"]
 [ext_resource type="PackedScene" uid="uid://d1c6npie2eut3" path="res://assets/models/wheels_1.glb" id="2_d0fie"]
@@ -52,6 +52,9 @@ _data = {
 &"RESET": SubResource("Animation_d0fie"),
 &"hammer_hit": SubResource("Animation_r2u8h")
 }
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t5a1n"]
+radius = 1.0
 
 [node name="PlayerCharacterBotHammer" type="CharacterBody3D"]
 script = ExtResource("1_r2u8h")
@@ -114,3 +117,11 @@ current = true
 libraries = {
 &"": SubResource("AnimationLibrary_mxwbm")
 }
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441064, 0)
+shape = SubResource("SphereShape3D_t5a1n")

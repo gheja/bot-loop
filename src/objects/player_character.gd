@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var tmp_my_loop_index = 0
 @export var max_speed = 5
 @export var is_actively_controlled = true
 
@@ -12,6 +13,7 @@ extends CharacterBody3D
 @onready var upper_body = $Visuals/UpperBody
 
 var recording = false
+var recording_index = 0
 var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
 
 # NOTE: maybe we should handle all of these in _physics_process()
@@ -23,10 +25,12 @@ var inputs = {
 }
 
 func _ready() -> void:
-	if GameState.loops == 0:
+	recording_index = tmp_my_loop_index
+	
+	if GameState.loops == tmp_my_loop_index:
 		recording = true
 		
-		GameState.player_recording = []
+		GameState.player_recordings[recording_index] = []
 	
 	if is_actively_controlled:
 		camera.make_current()
@@ -65,13 +69,13 @@ func _physics_process(delta: float) -> void:
 		inputs.jump_pressed = false
 		inputs.upper_body_rotation = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
 
-		GameState.player_recording.append(inputs.duplicate())
+		GameState.player_recordings[recording_index].append(inputs.duplicate())
 	else:
-		if GameState.player_recording.size() < frame_number:
+		if GameState.player_recordings[recording_index].size() <= frame_number:
 			print("No recording for frame, skipping physics frame")
 			return
 		
-		inputs = GameState.player_recording[frame_number]
+		inputs = GameState.player_recordings[recording_index][frame_number]
 	
 	var vec3 = Vector3(inputs.vec.x, 0.0, inputs.vec.y)
 	
