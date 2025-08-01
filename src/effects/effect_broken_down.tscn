@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://bor76qpgupae"]
+
+[ext_resource type="Texture2D" uid="uid://blnktvjim2wo" path="res://assets/graphics/smoke_texture_512.png" id="1_a2bcl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu1db"]
+shading_mode = 0
+albedo_color = Color(1, 0.721569, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kba15"]
+material = SubResource("StandardMaterial3D_xu1db")
+radius = 0.05
+height = 0.125
+radial_segments = 4
+rings = 4
+
+[sub_resource type="Curve" id="Curve_0wygf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2bcl"]
+shading_mode = 0
+albedo_color = Color(1, 0.968627, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xu1db"]
+material = SubResource("StandardMaterial3D_a2bcl")
+radius = 0.043
+height = 0.15
+radial_segments = 4
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta72s"]
+transparency = 1
+albedo_texture = ExtResource("1_a2bcl")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qxjhs"]
+material = SubResource("StandardMaterial3D_ta72s")
+
+[sub_resource type="Curve" id="Curve_g6ej2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.127168, 0.977528), 0.0, 0.0, 0, 0, Vector2(0.855491, 0.988764), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="EffectBrokenDown" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+amount = 3
+lifetime = 2.5
+explosiveness = 0.9
+randomness = 0.5
+mesh = SubResource("SphereMesh_kba15")
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+scale_amount_curve = SubResource("Curve_0wygf")
+
+[node name="CPUParticles3D3" type="CPUParticles3D" parent="."]
+cast_shadow = 0
+amount = 2
+lifetime = 1.75
+explosiveness = 0.9
+randomness = 0.5
+mesh = SubResource("SphereMesh_xu1db")
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+scale_amount_curve = SubResource("Curve_0wygf")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+amount = 15
+lifetime = 4.0
+mesh = SubResource("QuadMesh_qxjhs")
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+linear_accel_min = 0.1
+linear_accel_max = 0.2
+angle_min = -15.0
+angle_max = 15.0
+scale_amount_curve = SubResource("Curve_g6ej2")
