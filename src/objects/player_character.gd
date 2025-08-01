@@ -13,9 +13,12 @@ extends CharacterBody3D
 @onready var upper_body = $Visuals/UpperBody
 @onready var player_index_label: Label3D = $Visuals/PlayerIndexLabel
 
+@onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
+
 var recording = false
 var recording_index = 0
 var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
+var is_broken_down = false
 
 var current_recording = []
 
@@ -95,6 +98,15 @@ func _physics_process(delta: float) -> void:
 		
 		inputs = GameState.player_recordings[recording_index][frame_number]
 	
+	# we need to handle breakdown even when playing back a recording
+	# TODO: should we just stop all processing here? probably... let's see
+	
+	if is_broken_down:
+		inputs.vec = Vector2.ZERO
+		inputs.action_pressed = false
+		inputs.jump_pressed = false
+		inputs.upper_body_rotation = upper_body.rotation.y
+	
 	var vec3 = Vector3(inputs.vec.x, 0.0, inputs.vec.y)
 	
 	self.velocity = vec3 * max_speed + get_gravity()
@@ -115,3 +127,7 @@ func _on_save_player_recording():
 
 func _on_timer_started():
 	player_index_label.hide()
+
+func break_down():
+	self.add_child(effect_scene.instantiate())
+	is_broken_down = true
