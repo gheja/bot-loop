@@ -11,14 +11,29 @@ extends CharacterBody3D
 @onready var lower_body = $Visuals/LowerBody
 @onready var upper_body = $Visuals/UpperBody
 
+var recording = false
+var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
+
+# NOTE: maybe we should handle all of these in _physics_process()
+var inputs = {
+	"vec": Vector2.ZERO,
+	"action_pressed": false,
+	"jump_pressed": false,
+	"upper_body_rotation": 0.0,
+}
 
 func _ready() -> void:
+	if GameState.loops == 0:
+		recording = true
+		
+		GameState.player_recording = []
+	
 	if is_actively_controlled:
 		camera.make_current()
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
-	if Input.is_action_just_pressed("action_primary"):
+	if inputs.action_pressed:
 		$AnimationPlayer.play("hammer_hit")
 
 # thanks Nermit!
@@ -29,11 +44,6 @@ static func _short_angle_dist(from, to):
 	return fmod(2 * difference, max_angle) - difference
 
 func update_body_visual_rotation():
-	# BUG: TODO: the upper body has collision, so it is not just visual!!!
-	
-	# upper_body.rotation.y = camera_pivot.rotation.y + PI
-	upper_body.rotation.y = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
-	
 	var velocity_2d = Vector2(self.velocity.x, self.velocity.z)
 	if velocity_2d.length() > 0.1:
 		var target_angle = Vector2.ZERO.angle_to_point(velocity_2d) - PI/2
@@ -42,15 +52,31 @@ func update_body_visual_rotation():
 		lower_body.rotation.y = lerp(lower_body.rotation.y, target_rotation, 0.15)
 
 func _physics_process(delta: float) -> void:
-	var vec = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	frame_number += 1
 	
-	# correct the angle based on the look direction
-	vec = vec.rotated(-camera_pivot.rotation.y)
+	if recording:
+		var vec = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		
+		# correct the angle based on the look direction
+		vec = vec.rotated(-camera_pivot.rotation.y)
+		
+		inputs.vec = vec
+		inputs.action_pressed = Input.is_action_just_pressed("action_primary")
+		inputs.jump_pressed = false
+		inputs.upper_body_rotation = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
+
+		GameState.player_recording.append(inputs.duplicate())
+	else:
+		if GameState.player_recording.size() < frame_number:
+			print("No recording for frame, skipping physics frame")
+			return
+		
+		inputs = GameState.player_recording[frame_number]
 	
-	var vec3 = Vector3(vec.x, 0.0, vec.y)
+	var vec3 = Vector3(inputs.vec.x, 0.0, inputs.vec.y)
 	
 	self.velocity = vec3 * max_speed + get_gravity()
-	
+	upper_body.rotation.y = inputs.upper_body_rotation
 	self.move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:
