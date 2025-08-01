@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://2l7r5ndv1t6j"]
 
-[ext_resource type="Material" uid="uid://cxu0npcuoc5fe" path="res://materials/light_strip_failed.tres" id="1_0p2m4"]
+[ext_resource type="Material" uid="uid://batshx6auqv13" path="res://materials/light_strip_stopped.tres" id="1_0p2m4"]
 [ext_resource type="Script" uid="uid://deabq7ojscdl6" path="res://objects/object_wall.gd" id="1_n0v6m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2oa"]

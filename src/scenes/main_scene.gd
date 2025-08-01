@@ -14,8 +14,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	timer.timeout.connect(_on_timer_timeout)
 	
-	Signals.timer_stopped.emit()
-	
+	reset_colors()
 	start_intro_text()
 
 func start_intro_text():
@@ -44,6 +43,10 @@ func start_main_timer():
 	Signals.update_timer.emit(timer.time_left)
 	Signals.timer_started.emit()
 
+func restart_level_with_wait():
+	await get_tree().create_timer(2.0).timeout
+	Signals.start_transition.emit()
+
 func _process(delta: float) -> void:
 	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
@@ -60,12 +63,19 @@ func _on_timer_started():
 	world_environment.environment.ambient_light_color = Color("#dce9ec")
 	world_environment.environment.ambient_light_energy = 0.25
 
-func _on_timer_stopped():
+func reset_colors():
 	main_light.light_color = Color("#ffffff")
 	world_environment.environment.ambient_light_color = Color("#e7ffff")
 	world_environment.environment.ambient_light_energy = 0.25
+
+func _on_timer_stopped():
+	reset_colors()
+	
+	restart_level_with_wait()
 
 func _on_timer_failed():
 	main_light.light_color = Color("#ff0000")
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
+	
+	restart_level_with_wait()
