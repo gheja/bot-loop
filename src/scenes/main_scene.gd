@@ -19,6 +19,7 @@ func _ready() -> void:
 	if GameState.loops > 1:
 		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
 	
+	clear_controls_help_text()
 	reset_colors()
 	
 	Signals.set_controls_lock.emit(false)
@@ -30,6 +31,8 @@ func _ready() -> void:
 		start_player_selection()
 
 func start_player_selection():
+	main_interface.set_controls_label_text("[color=#0f0]Select your robot\n[1] [2][/color]")
+	
 	# temporarily auto-select
 	if GameState.loops == 1:
 		set_active_player(1)
@@ -52,6 +55,12 @@ func set_active_player(index: int):
 		return
 	
 	player_obj.make_active()
+	main_interface.set_controls_label_text(
+		"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
+		"[color=#ff0]" +
+		player_obj.controls_help_text +
+		"[/color]"
+	)
 
 func start_intro_text():
 	var intro_text = ".#.#.#*#Hello world!#\nNice to see you!\n#.#.#.#*#How are you?\n#.#.#.#*Ah, well...\nGood luck!\n#;)#"
@@ -97,6 +106,9 @@ func restart_level_with_wait(success: bool):
 	else:
 		Signals.start_transition.emit("#441100")
 
+func clear_controls_help_text():
+	main_interface.set_controls_label_text("")
+
 func _on_set_controls_lock(state: bool):
 	GameState.controls_locked = state
 	
@@ -122,6 +134,7 @@ func _on_timer_timeout():
 	Signals.timer_failed.emit()
 
 func _on_stop_pressed():
+	clear_controls_help_text()
 	timer.stop()
 	Signals.timer_stopped.emit()
 
@@ -138,6 +151,7 @@ func reset_colors():
 func _on_timer_stopped():
 	reset_colors()
 	
+	clear_controls_help_text()
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(true)
@@ -147,6 +161,7 @@ func _on_timer_failed():
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
 	
+	clear_controls_help_text()
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(false)

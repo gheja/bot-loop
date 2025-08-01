@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var is_actively_controlled = false
 @export var player_index = -1
 @export var has_primary_action = true
+@export var controls_help_text = "[E] [Click] Use hammer"
 
 @onready var camera_pivot = $Node3D/CameraPivot
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
