@@ -18,6 +18,7 @@ func set_material_on_obj(name, material):
 func set_material(material):
 	set_material_on_obj("Color1", material)
 	set_material_on_obj("Color2", material)
+	set_material_on_obj("Color3", material)
 
 func _on_timer_started():
 	set_material(material_running)
