@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbv1iy11bd6x1"]
+
+[ext_resource type="Script" uid="uid://c8ry4ey5mq5yc" path="res://objects/player_character_base.gd" id="1_w4qtm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h5vi8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_erfry"]
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mxwbm"]
+radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t5a1n"]
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mxwbm"]
+height = 0.400269
+radius = 0.581543
+
+[node name="PlayerCharacterBase" type="CharacterBody3D" groups=["player_objects"]]
+script = ExtResource("1_w4qtm")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="LowerBody" type="Node3D" parent="Visuals"]
+
+[node name="UpperBody" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80354, 0)
+
+[node name="PlayerIndexLabel" type="Label3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+pixel_size = 0.0025
+billboard = 1
+fixed_size = true
+text = "1"
+font_size = 64
+
+[node name="CollisionShapeLower" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_h5vi8")
+
+[node name="CollisionShapeUpper" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_erfry")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24288, 0)
+
+[node name="CameraPivot" type="Node3D" parent="Node3D"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Node3D/CameraPivot"]
+transform = Transform3D(1.00842, 0, 0, 0, 1.00842, 0, 0, 0, 1.00842, 0, 0, 0)
+shape = SubResource("SphereShape3D_mxwbm")
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/CameraPivot/SpringArm3D"]
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441064, 0)
+shape = SubResource("SphereShape3D_t5a1n")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.134216, 0)
+shape = SubResource("CylinderShape3D_mxwbm")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

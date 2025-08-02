@@ -141,6 +141,10 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.43438
 
 [node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("8_guvtl")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
+
+[node name="PlayerCharacterBase" parent="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer" index="0"]
 player_index = 1
 
 [editable path="LevelBase"]
+[editable path="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer"]
+[editable path="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer/PlayerCharacterBase"]
