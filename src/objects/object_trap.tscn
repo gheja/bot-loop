@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://camdrurfym6xn"]
+[gd_scene load_steps=7 format=3 uid="uid://camdrurfym6xn"]
 
 [ext_resource type="Texture2D" uid="uid://d1fr5hm1fs0vi" path="res://assets/graphics/sparkle_2_128.png" id="1_7f0ft"]
+[ext_resource type="Script" uid="uid://ds88hpjf6v106" path="res://objects/object_trap.gd" id="1_vd56w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5om3p"]
 radius = 0.1
@@ -25,6 +26,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0867052, 1), 0.0, 0.0, 0, 0, V
 point_count = 3
 
 [node name="ObjectTrap" type="Node3D"]
+script = ExtResource("1_vd56w")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 transform = Transform3D(0.816984, -1.37531, 0.349818, 0.560659, 1.46867, -0.667829, 0.134903, 2.2252, 0.656987, 0, 0.0605993, 0)
