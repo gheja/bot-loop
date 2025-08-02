@@ -153,8 +153,11 @@ func break_down():
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
 	if bot_class == "hammer":
-		break_down()
+		pass
 	elif bot_class == "roomba":
 		var parent = area.get_parent()
 		if parent is ObjectTrap:
 			parent.queue_free()
+			return
+	
+	break_down()
