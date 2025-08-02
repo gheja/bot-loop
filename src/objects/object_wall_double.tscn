@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://slrmkmjxe0mo"]
+
+[ext_resource type="Script" uid="uid://deabq7ojscdl6" path="res://objects/object_wall.gd" id="1_t4otw"]
+[ext_resource type="Material" uid="uid://batshx6auqv13" path="res://materials/light_strip_stopped.tres" id="2_rvqnk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2oa"]
+albedo_color = Color(0.728822, 0.728822, 0.728822, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_111vw"]
+albedo_color = Color(0.442911, 0.442911, 0.442911, 1)
+disable_receive_shadows = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm2oa"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hod4d"]
+albedo_color = Color(0.886262, 0.886261, 0.886262, 1)
+
+[node name="ObjectWallDouble" type="StaticBody3D"]
+script = ExtResource("1_t4otw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1)
+size = Vector3(2, 3, 0.1)
+material = SubResource("StandardMaterial3D_xm2oa")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+size = Vector3(1.75, 2.5, 1.75)
+material = SubResource("StandardMaterial3D_111vw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_xm2oa")
+
+[node name="Line1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62893, 1.06555)
+size = Vector3(2.01563, 0.373535, 0.1)
+material = SubResource("StandardMaterial3D_hod4d")
+
+[node name="Color1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62893, 1.1013)
+size = Vector3(2, 0.240479, 0.1)
+material = ExtResource("2_rvqnk")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8.74228e-08, 1.5, -1)
+size = Vector3(2, 3, 0.1)
+material = SubResource("StandardMaterial3D_xm2oa")
+
+[node name="Line2" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.31533e-08, 2.62893, -1.06555)
+size = Vector3(2.01563, 0.373535, 0.1)
+material = SubResource("StandardMaterial3D_hod4d")
+
+[node name="Color2" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.62787e-08, 2.62893, -1.1013)
+size = Vector3(2, 0.240479, 0.1)
+material = ExtResource("2_rvqnk")
