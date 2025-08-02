@@ -5,7 +5,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_h5vi8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_erfry"]
-height = 0.5
+height = 0.081543
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mxwbm"]
 radius = 0.2

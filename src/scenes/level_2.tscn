@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1lxwl3px8p3p"]
+[gd_scene load_steps=11 format=3 uid="uid://d1lxwl3px8p3p"]
 
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_ne2mo"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_6cvei"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="7_fldb1"]
 [ext_resource type="PackedScene" uid="uid://camdrurfym6xn" path="res://objects/object_trap.tscn" id="8_6cvei"]
 [ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="8_guvtl"]
+[ext_resource type="PackedScene" uid="uid://fbuqkwk1smo1" path="res://objects/player_character_roomba.tscn" id="9_que50"]
 
 [node name="Level2" type="Node3D"]
 
@@ -139,12 +140,12 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.61798
 [node name="ObjectTrap7" parent="LevelBase/LevelObjectContainer" index="40" instance=ExtResource("8_6cvei")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.43438, 2.37993e-07, -1.012)
 
-[node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("8_guvtl")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
-
-[node name="PlayerCharacterBase" parent="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer" index="0"]
+[node name="PlayerCharacterRoomba" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("9_que50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.99285)
 player_index = 1
 
+[node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("8_guvtl")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
+player_index = 2
+
 [editable path="LevelBase"]
-[editable path="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer"]
-[editable path="LevelBase/PlayerObjectContainer/PlayerCharacterBotHammer/PlayerCharacterBase"]

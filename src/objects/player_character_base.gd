@@ -7,6 +7,8 @@ extends CharacterBody3D
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
 
+@export_enum("hammer", "roomba") var bot_class = "hammer"
+
 @onready var camera_pivot = $Node3D/CameraPivot
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
@@ -31,6 +33,12 @@ var inputs = {
 }
 
 func _ready() -> void:
+	if player_index == -1:
+		# this is hackis but at least this way we don't need to edit the children
+		var parent = get_parent()
+		if parent is PlayerCharacterSubclass:
+			player_index = parent.player_index
+	
 	assert(player_index != -1, "Player object is not set up correctly")
 	
 	Signals.save_player_recording.connect(_on_save_player_recording)
@@ -133,4 +141,9 @@ func break_down():
 	is_broken_down = true
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	break_down()
+	if bot_class == "hammer":
+		break_down()
+	elif bot_class == "roomba":
+		var parent = area.get_parent()
+		if parent is ObjectTrap:
+			parent.queue_free()

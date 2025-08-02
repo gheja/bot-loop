@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://fbuqkwk1smo1"]
+
+[ext_resource type="Script" uid="uid://cqlw0x5ovn8m2" path="res://objects/player_character_subclass.gd" id="1_1dx07"]
+[ext_resource type="PackedScene" uid="uid://cbv1iy11bd6x1" path="res://objects/player_character_base.tscn" id="1_tx1vf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1vv4"]
+albedo_color = Color(0.252028, 0.252028, 0.252028, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dx07"]
+albedo_color = Color(0.0430392, 0.0430391, 0.0430392, 1)
+
+[sub_resource type="Animation" id="Animation_mxwbm"]
+resource_name = "primary_action"
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_t5a1n"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eaipk"]
+_data = {
+&"RESET": SubResource("Animation_t5a1n"),
+&"primary_action": SubResource("Animation_mxwbm")
+}
+
+[node name="PlayerCharacterRoomba" type="Node3D"]
+script = ExtResource("1_1dx07")
+
+[node name="PlayerCharacterBase" parent="." instance=ExtResource("1_tx1vf")]
+has_primary_action = false
+bot_class = "roomba"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224579, 0)
+radius = 0.830078
+height = 0.464783
+sides = 19
+material = SubResource("StandardMaterial3D_h1vv4")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521325, 0)
+radius = 0.733887
+height = 0.0906677
+sides = 19
+material = SubResource("StandardMaterial3D_1dx07")
+
+[node name="CollisionShapeUpper" parent="PlayerCharacterBase" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540771, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
+libraries = {
+&"": SubResource("AnimationLibrary_eaipk")
+}
+
+[editable path="PlayerCharacterBase"]
