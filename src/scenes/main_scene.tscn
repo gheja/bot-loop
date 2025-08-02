@@ -140,7 +140,7 @@ _data = {
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_7ykc4")
-level_list = Array[PackedScene]([ExtResource("2_gubc5"), ExtResource("3_7ykc4"), ExtResource("3_pu3yx")])
+level_list = Array[PackedScene]([ExtResource("3_7ykc4"), ExtResource("2_gubc5"), ExtResource("3_pu3yx")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w2twt")
