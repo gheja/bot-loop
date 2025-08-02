@@ -14,6 +14,7 @@ extends CharacterBody3D
 @onready var lower_body = $Visuals/LowerBody
 @onready var upper_body = $Visuals/UpperBody
 @onready var player_index_label: Label3D = $Visuals/PlayerIndexLabel
+@onready var moving_platform_raycast: RayCast3D = $MovingPlatformRaycast
 
 @onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
 
@@ -118,6 +119,16 @@ func _physics_process(delta: float) -> void:
 	var vec3 = Vector3(inputs.vec.x, 0.0, inputs.vec.y)
 	
 	self.velocity = vec3 * max_speed + get_gravity()
+	
+	# platform handling
+	if moving_platform_raycast.is_colliding():
+		var obj = moving_platform_raycast.get_collider() as Node3D
+		
+		if obj.is_in_group("moving_platform_static_bodies"):
+			var platform = obj.get_parent().get_parent().get_parent() as ObjectMovingPlatform
+			# NOTE: force-move the object using the global_position
+			self.global_position += platform.current_velocity
+	
 	upper_body.rotation.y = inputs.upper_body_rotation
 	self.move_and_slide()
 

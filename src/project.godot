@@ -35,6 +35,7 @@ window/custom_user_dir_name=""
 
 player_objects=""
 level_root_object=""
+moving_platform_static_bodies=""
 
 [input]
 
@@ -105,6 +106,7 @@ ui_action_select_4={
 3d_physics/layer_1="Collision"
 3d_physics/layer_2="Interaction"
 3d_physics/layer_3="Hurt"
+3d_physics/layer_4="Platform"
 
 [physics]
 

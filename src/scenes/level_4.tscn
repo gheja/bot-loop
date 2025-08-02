@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://3i8l652qpa3j"]
+[gd_scene load_steps=15 format=3 uid="uid://3i8l652qpa3j"]
 
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_rr1tt"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_7ewpb"]
@@ -11,7 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://tnxcmgvwwnw7" path="res://objects/object_door.tscn" id="8_y88yj"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="9_675ay"]
 [ext_resource type="PackedScene" uid="uid://fbuqkwk1smo1" path="res://objects/player_character_roomba.tscn" id="10_q41qf"]
+[ext_resource type="PackedScene" uid="uid://drff2i0whitbx" path="res://objects/object_moving_platform.tscn" id="11_py6g0"]
 [ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="11_s0ibv"]
+
+[sub_resource type="Curve3D" id="Curve3D_py6g0"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3.9),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="Level4" type="Node3D"]
 
@@ -150,6 +158,16 @@ transform = Transform3D(0.936849, 0, 0.349733, 0, 0.999999, 0, -0.349733, 0, 0.9
 [node name="ObjectBox3" parent="LevelBase/LevelObjectContainer" index="43" instance=ExtResource("9_675ay")]
 transform = Transform3D(0.899542, 0, -0.436833, 0, 0.999999, 0, 0.436833, 0, 0.899542, 4.12733, 0, -0.381295)
 
+[node name="ObjectMovingPlatform" parent="LevelBase/LevelObjectContainer" index="44" instance=ExtResource("11_py6g0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.998213, 0, 0)
+
+[node name="Path3D" parent="LevelBase/LevelObjectContainer/ObjectMovingPlatform" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000556903, 0, 0)
+curve = SubResource("Curve3D_py6g0")
+
+[node name="CSGBox3D" parent="LevelBase/LevelObjectContainer/ObjectMovingPlatform/Path3D/PathFollow3D/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18918e-07, -0.1, 0)
+
 [node name="PlayerCharacterRoomba" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("10_q41qf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.98749, 0, 3.99285)
 player_index = 2
@@ -159,3 +177,4 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 3.99286,
 player_index = 1
 
 [editable path="LevelBase"]
+[editable path="LevelBase/LevelObjectContainer/ObjectMovingPlatform"]

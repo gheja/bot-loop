@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://drff2i0whitbx"]
+
+[ext_resource type="Script" uid="uid://due5oi6artl4x" path="res://objects/object_moving_platform.gd" id="1_5uvlu"]
+
+[sub_resource type="Curve3D" id="Curve3D_5uvlu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jxi6"]
+albedo_color = Color(0.568973, 0.568973, 0.568973, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm2oa"]
+size = Vector3(1.75, 0.2, 1.75)
+
+[node name="ObjectMovingPlatform" type="Node3D"]
+script = ExtResource("1_5uvlu")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_5uvlu")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Path3D/PathFollow3D" groups=["moving_platform_static_bodies"]]
+collision_layer = 9
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Path3D/PathFollow3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(1.75, 0.2, 1.75)
+material = SubResource("StandardMaterial3D_7jxi6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_xm2oa")
