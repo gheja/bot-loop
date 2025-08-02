@@ -1,6 +1,9 @@
 class_name MenuInterface
 extends CanvasLayer
 
+func _ready():
+	self.hide()
+
 func show2(is_main_menu: bool):
 	$PauseContent2.visible = not is_main_menu
 	$MainMenuContent.visible = is_main_menu
