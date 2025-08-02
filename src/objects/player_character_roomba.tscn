@@ -30,14 +30,14 @@ has_primary_action = false
 bot_class = "roomba"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224579, 0)
+transform = Transform3D(0.734258, 0, 0, 0, 0.663067, 0, 0, 0, 0.734258, 0, 0.166422, 0)
 radius = 0.830078
 height = 0.464783
 sides = 19
 material = SubResource("StandardMaterial3D_h1vv4")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521325, 0)
+transform = Transform3D(0.734258, 0, 0, 0, 0.663067, 0, 0, 0, 0.734258, 0, 0.363185, 0)
 radius = 0.733887
 height = 0.0906677
 sides = 19
