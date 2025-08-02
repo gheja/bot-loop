@@ -111,37 +111,52 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.64489
 transform = Transform3D(0.934993, 0, 0.354666, 0, 1, 0, -0.354666, 0, 0.934993, 1.90161, 0, -3.80222)
 
 [node name="ObjectBox5" parent="LevelBase/LevelObjectContainer" index="31" instance=ExtResource("7_fldb1")]
-transform = Transform3D(0.987061, 0, -0.160347, 0, 1, 0, 0.160347, 0, 0.987061, -4.11774, 0, -2.92322)
+transform = Transform3D(0.987061, 0, -0.160347, 0, 0.999999, 0, 0.160347, 0, 0.987061, -3.34276, 0, -2.29854)
 
 [node name="ObjectBox4" parent="LevelBase/LevelObjectContainer" index="32" instance=ExtResource("7_fldb1")]
 transform = Transform3D(0.934993, 0, 0.354666, 0, 1, 0, -0.354666, 0, 0.934993, 4.04405, 0, 1.32809)
 
-[node name="ObjectBox2" parent="LevelBase/LevelObjectContainer" index="33" instance=ExtResource("7_fldb1")]
+[node name="ObjectBox8" parent="LevelBase/LevelObjectContainer" index="33" instance=ExtResource("7_fldb1")]
+transform = Transform3D(0.934993, 0, 0.354666, 0, 1, 0, -0.354666, 0, 0.934993, 3.90397, 0, -0.519957)
+
+[node name="ObjectBox6" parent="LevelBase/LevelObjectContainer" index="34" instance=ExtResource("7_fldb1")]
+transform = Transform3D(0.974859, 0, 0.222824, 0, 1, 0, -0.222824, 0, 0.974859, 2.09659, 0, 0.453432)
+
+[node name="ObjectBox7" parent="LevelBase/LevelObjectContainer" index="35" instance=ExtResource("7_fldb1")]
+transform = Transform3D(0.992162, 0, -0.124953, 0, 0.999999, 0, 0.124953, 0, 0.992162, 2.93501, 1.5, -0.524721)
+
+[node name="ObjectBox2" parent="LevelBase/LevelObjectContainer" index="36" instance=ExtResource("7_fldb1")]
 transform = Transform3D(0.985879, 0, -0.167457, 0, 0.999999, 0, 0.167457, 0, 0.985879, 2.30167, 0, -1.47178)
 
-[node name="ObjectBox3" parent="LevelBase/LevelObjectContainer" index="34" instance=ExtResource("7_fldb1")]
+[node name="ObjectBox3" parent="LevelBase/LevelObjectContainer" index="37" instance=ExtResource("7_fldb1")]
 transform = Transform3D(0.937525, 0, 0.347917, 0, 0.999999, 0, -0.347917, 0, 0.937525, 3.82475, 0, -2.6959)
 
-[node name="ObjectTrap" parent="LevelBase/LevelObjectContainer" index="35" instance=ExtResource("8_6cvei")]
+[node name="ObjectTrap" parent="LevelBase/LevelObjectContainer" index="38" instance=ExtResource("8_6cvei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68359, 0, -2.27296)
 
-[node name="ObjectTrap2" parent="LevelBase/LevelObjectContainer" index="36" instance=ExtResource("8_6cvei")]
+[node name="ObjectTrap2" parent="LevelBase/LevelObjectContainer" index="39" instance=ExtResource("8_6cvei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.685376, 0, -1.27475)
 
-[node name="ObjectTrap3" parent="LevelBase/LevelObjectContainer" index="37" instance=ExtResource("8_6cvei")]
+[node name="ObjectTrap3" parent="LevelBase/LevelObjectContainer" index="40" instance=ExtResource("8_6cvei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30983, 0, -1.68243)
 
-[node name="ObjectTrap4" parent="LevelBase/LevelObjectContainer" index="38" instance=ExtResource("8_6cvei")]
+[node name="ObjectTrap8" parent="LevelBase/LevelObjectContainer" index="41" instance=ExtResource("8_6cvei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.311617, 0, -1.68243)
+
+[node name="ObjectTrap9" parent="LevelBase/LevelObjectContainer" index="42" instance=ExtResource("8_6cvei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.213094, 0, -1.21323)
+
+[node name="ObjectTrap4" parent="LevelBase/LevelObjectContainer" index="43" instance=ExtResource("8_6cvei")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02172, 0, -2.03654)
 
-[node name="ObjectTrap5" parent="LevelBase/LevelObjectContainer" index="39" instance=ExtResource("8_6cvei")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.09811, 0, -1.3066)
+[node name="ObjectTrap5" parent="LevelBase/LevelObjectContainer" index="44" instance=ExtResource("8_6cvei")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.743743, 0, -0.693653)
 
-[node name="ObjectTrap6" parent="LevelBase/LevelObjectContainer" index="40" instance=ExtResource("8_6cvei")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.61798, 0, -1.50366)
+[node name="ObjectTrap6" parent="LevelBase/LevelObjectContainer" index="45" instance=ExtResource("8_6cvei")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.88168, 0, -1.2544)
 
-[node name="ObjectTrap7" parent="LevelBase/LevelObjectContainer" index="41" instance=ExtResource("8_6cvei")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.43438, 2.37993e-07, -1.012)
+[node name="ObjectTrap7" parent="LevelBase/LevelObjectContainer" index="46" instance=ExtResource("8_6cvei")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -1.57478, 2.37993e-07, -0.511366)
 
 [node name="PlayerCharacterRoomba" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("9_que50")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99643, 0, 3.99285)
