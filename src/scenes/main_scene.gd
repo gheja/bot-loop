@@ -8,6 +8,7 @@ extends Node3D
 @onready var level_container: Node3D = $LevelContainer
 @onready var intro_animation_player: AnimationPlayer = $IntroStuffs/IntroAnimationPlayer
 @onready var intro_camera: Camera3D = $IntroStuffs/IntroCamera
+@onready var menu_interface: MenuInterface = $MenuInterface
 
 @export var level_list: Array[PackedScene]
 
@@ -31,6 +32,8 @@ func _ready() -> void:
 	Signals.timer_stopped.connect(_on_timer_stopped)
 	Signals.timer_failed.connect(_on_timer_failed)
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
+	Signals.pause.connect(_on_pause)
+	Signals.unpause.connect(_on_unpause)
 
 	timer.wait_time = current_level.time_limit
 	timer.timeout.connect(_on_timer_timeout)
@@ -42,6 +45,16 @@ func _ready() -> void:
 	
 	Signals.set_controls_lock.emit(false)
 	
+	start_level()
+	
+	# NOTE: the intro will trigger the main menu
+
+func show_main_menu():
+	# menu_interface.show()
+	menu_interface.show2(true)
+	get_tree().paused = true
+
+func start_level():
 	if GameState.play_intro:
 		GameState.play_intro = false
 		
@@ -107,7 +120,7 @@ func set_active_player(index: int):
 		player_obj.controls_help_text +
 		"[/color]\n" +
 		"\n" +
-		"[color=#0ff][R] Restart loop\n[Q] Back to selection[/color]"
+		"[color=#0ff][R] Restart loop\n[Q] Back to selection\n[P] Pause[/color]"
 	)
 	var player_camera = player_obj.find_child("Camera3D")
 	assert(player_camera, "Could not locate player camera")
@@ -262,6 +275,25 @@ func _on_timer_failed():
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
 	restart_level_with_wait(false)
+
+func _on_pause():
+	print("pause")
+	menu_interface.show2(false)
+	get_tree().paused = true
+	Signals.set_controls_lock.emit(false)
+
+func _on_unpause():
+	print("unpause")
+	menu_interface.hide()
+	get_tree().paused = false
+	
+	# NOTE: we should store and restore the state before, but this is still good enough for now
+	Signals.set_controls_lock.emit(true)
+
+func show_main_menu_if_needed():
+	if GameState.first_loop:
+		GameState.first_loop = false
+		show_main_menu()
 
 func intro_finished():
 	start_player_selection()

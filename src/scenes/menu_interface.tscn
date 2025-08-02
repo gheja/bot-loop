@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://de1cg28dx0mlf"]
+
+[ext_resource type="Script" uid="uid://c52bsj84hnb4a" path="res://scenes/menu_interface.gd" id="1_11g51"]
+
+[node name="MenuInterface" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_11g51")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="PauseContent2" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PauseContent2"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+
+
+
+
+[font_size=48]Bot Loop[/font_size]
+A GMTK Game Jam 2025 entry by gheja
+
+[color=#ccc]
+[b]Gabor Heja[/b]
+Code, graphics, models
+
+[b]Someone[/b]
+Music
+
+[b]Someone[/b]
+Sound
+[/color]
+
+"
+
+[node name="PauseText" type="RichTextLabel" parent="PauseContent2"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+[center][font_size=32]Paused[/font_size]
+
+[color=#0ff][P] Continue[/color][/center]"
+
+[node name="MainMenuContent" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MainMenuContent"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+
+
+
+
+[font_size=48]Bot Loop[/font_size]
+A GMTK Game Jam 2025 entry by gheja
+
+[color=#ccc]
+[b]Gabor Heja[/b]
+Code, graphics, models
+
+[b]Someone[/b]
+Music
+
+[b]Someone[/b]
+Sound
+[/color]
+
+"
