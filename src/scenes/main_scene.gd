@@ -318,7 +318,7 @@ func _on_update_timer(time: float):
 		return
 	
 	if floor(time) != floor(_last_time):
-		print(time)
+		# print(time)
 		if int(floor(time)) in [2,1,0]:
 			AudioManager.play_sound(3)
 			main_interface.warn_blink()
