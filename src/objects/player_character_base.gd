@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 		current_recording.append(inputs.duplicate())
 	else:
 		if GameState.player_recordings[recording_index].size() <= frame_number:
-			print("No recording for frame, skipping physics frame")
+			# print("No recording for frame, skipping physics frame")
 			return
 		
 		inputs = GameState.player_recordings[recording_index][frame_number]
