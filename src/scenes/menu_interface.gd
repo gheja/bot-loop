@@ -14,7 +14,6 @@ func show2(is_main_menu: bool):
 	self.show()
 
 func _process(delta: float) -> void:
-	# TODO: lots of stuffs here could be avoided by handling state in one place...
 	if self.visible:
 		if GameState.state == GameState.STATE_INTRO:
 			if Input.is_action_just_pressed("ui_action_start"):
