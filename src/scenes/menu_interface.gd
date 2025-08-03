@@ -5,6 +5,7 @@ var first_unpause = true
 
 func _ready():
 	self.hide()
+	$AnimationPlayer.play("main_menu")
 
 func show2(is_main_menu: bool):
 	$PauseContent2.visible = not is_main_menu
@@ -15,20 +16,20 @@ func show2(is_main_menu: bool):
 func _process(delta: float) -> void:
 	# TODO: lots of stuffs here could be avoided by handling state in one place...
 	if self.visible:
-		if Input.is_action_just_pressed("ui_action_start"):
-			# don't start the main music when leaving the main menu
-			if first_unpause:
-				first_unpause = false
-			else:
+		if GameState.state == GameState.STATE_INTRO:
+			if Input.is_action_just_pressed("ui_action_start"):
+				print("play")
+				AudioManager.play_sound(2)
+				Signals.unpause.emit()
+		else:
+			if Input.is_action_just_pressed("ui_action_pause"):
+				print("unpause")
 				AudioManager.start_main_music()
-			AudioManager.play_sound(2)
-			Signals.unpause.emit()
-		elif Input.is_action_just_pressed("ui_action_pause"):
-			first_unpause = false
-			AudioManager.start_main_music()
-			AudioManager.play_sound(2)
-			Signals.unpause.emit()
+				AudioManager.play_sound(2)
+				Signals.unpause.emit()
 	else:
 		if Input.is_action_just_pressed("ui_action_pause"):
+			print("pause")
+			AudioManager.start_menu_music()
 			AudioManager.play_sound(2)
 			Signals.pause.emit()

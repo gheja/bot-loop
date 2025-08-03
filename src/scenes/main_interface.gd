@@ -18,3 +18,6 @@ func pop_up_big_message(s: String):
 
 func update(time_left: float):
 	timer_label.text = str(time_left).pad_decimals(2)
+
+func warn_blink():
+	$WarnBlinkAnimationPlayer.play("warn_blink")

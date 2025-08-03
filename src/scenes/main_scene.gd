@@ -34,6 +34,7 @@ func _ready() -> void:
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
 	Signals.pause.connect(_on_pause)
 	Signals.unpause.connect(_on_unpause)
+	Signals.update_timer.connect(_on_update_timer)
 
 	timer.wait_time = current_level.time_limit
 	timer.timeout.connect(_on_timer_timeout)
@@ -310,3 +311,16 @@ func show_main_menu_if_needed():
 func intro_finished():
 	AudioManager.start_main_music()
 	start_player_selection()
+
+var _last_time = -1
+func _on_update_timer(time: float):
+	if GameState.state != GameState.STATE_RUNNING:
+		return
+	
+	if floor(time) != floor(_last_time):
+		print(time)
+		if int(floor(time)) in [2,1,0]:
+			AudioManager.play_sound(3)
+			main_interface.warn_blink()
+	
+	_last_time = time

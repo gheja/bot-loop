@@ -1,6 +1,92 @@
-[gd_scene load_steps=2 format=3 uid="uid://de1cg28dx0mlf"]
+[gd_scene load_steps=5 format=3 uid="uid://de1cg28dx0mlf"]
 
 [ext_resource type="Script" uid="uid://c52bsj84hnb4a" path="res://scenes/menu_interface.gd" id="1_11g51"]
+
+[sub_resource type="Animation" id="Animation_11g51"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainMenuContent/StartText:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hs1cg"]
+resource_name = "main_menu"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainMenuContent/StartText:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hs1cg"]
+_data = {
+&"RESET": SubResource("Animation_11g51"),
+&"main_menu": SubResource("Animation_hs1cg")
+}
 
 [node name="MenuInterface" type="CanvasLayer"]
 process_mode = 3
@@ -14,6 +100,44 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label1" type="RichTextLabel" parent="Control"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 170.0
+offset_right = 1056.0
+offset_bottom = 718.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font_size=48]Bot Loop[/font_size]
+A GMTK Game Jam 2025 entry by gheja"
+
+[node name="Label2" type="RichTextLabel" parent="Control"]
+offset_left = 32.0
+offset_top = 262.0
+offset_right = 1056.0
+offset_bottom = 549.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+[color=#ccc][b]Gabor Heja[/b]
+Code, graphics, models
+
+[b]Someone[/b]
+Music
+
+[b]Someone[/b]
+Sound
+[/color]
+
+"
+
 [node name="PauseContent2" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,32 +149,6 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="PauseContent2"]
-layout_mode = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "
-
-
-
-
-
-[font_size=48]Bot Loop[/font_size]
-A GMTK Game Jam 2025 entry by gheja
-
-[color=#ccc]
-[b]Gabor Heja[/b]
-Code, graphics, models
-
-[b]Someone[/b]
-Music
-
-[b]Someone[/b]
-Sound
-[/color]
-
-"
-
 [node name="PauseText" type="RichTextLabel" parent="PauseContent2"]
 layout_mode = 2
 mouse_filter = 2
@@ -60,40 +158,24 @@ text = "
 
 [color=#0ff][P] Continue[/color][/center]"
 
-[node name="MainMenuContent" type="MarginContainer" parent="."]
-visible = false
+[node name="MainMenuContent" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MainMenuContent"]
-layout_mode = 2
+[node name="StartText" type="RichTextLabel" parent="MainMenuContent"]
+offset_left = 32.0
+offset_top = 531.0
+offset_right = 347.0
+offset_bottom = 571.0
 mouse_filter = 2
 bbcode_enabled = true
-text = "
+text = "[color=#0ff][SPACE] or [Click] to start the game[/color]"
 
-
-
-
-
-[font_size=48]Bot Loop[/font_size]
-A GMTK Game Jam 2025 entry by gheja
-
-[color=#ccc]
-[b]Gabor Heja[/b]
-Code, graphics, models
-
-[b]Someone[/b]
-Music
-
-[b]Someone[/b]
-Sound
-[/color]
-
-"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hs1cg")
+}
