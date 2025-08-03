@@ -281,6 +281,8 @@ func _on_timer_failed():
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
 	
+	AudioManager.play_sound(4)
+	
 	# TODO: this looks a bit weird, but ok
 	activate_level_camera(false)
 	clear_controls_help_text()

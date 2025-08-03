@@ -7,9 +7,11 @@ var music_tween: Tween
 var sound_effects: Array[AudioStreamPlayer]
 
 const SOUNDS = [
-	preload("res://assets/sounds/opengameart_-yd_-_cogs_edit_2.ogg"),
+	preload("res://assets/sounds/opengameart_-_yd_-_cogs_edit_2.ogg"),
 	preload("res://assets/sounds/opengameart_-_Cough-E_-_MachinePowerOff_edit.ogg"),
 	preload("res://assets/sounds/kenney.nl_-_toggle_002_edit.ogg"),
+	preload("res://assets/sounds/opengameart_-_yd_-_alarm.ogg"),
+	preload("res://assets/sounds/opengameart_-_yd_-_alarm_edit_2.ogg"),
 ]
 
 func _ready():
