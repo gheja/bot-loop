@@ -52,7 +52,6 @@ func _ready() -> void:
 func make_active():
 	recording = true
 	is_actively_controlled = true
-	GameState.player_recordings[recording_index] = []
 	
 	# a good starting angle
 	camera_pivot.rotation.x = -0.6
