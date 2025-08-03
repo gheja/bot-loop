@@ -94,6 +94,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="Label" type="Label" parent="MarginContainer"]
+visible = false
 modulate = Color(1, 1, 1, 0.313726)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -120,6 +121,7 @@ text = "[Arrow keys] [W-A-S-D] Move
 [Space] Jump[/color]"
 
 [node name="TimerLabel" type="Label" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
