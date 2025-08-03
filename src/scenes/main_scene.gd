@@ -10,6 +10,8 @@ extends Node3D
 @onready var intro_camera: Camera3D = $IntroStuffs/IntroCamera
 @onready var menu_interface: MenuInterface = $MenuInterface
 
+var completed_interface_scene = preload("res://scenes/completed_interface.tscn")
+
 @export var level_list: Array[PackedScene]
 
 var current_level: LevelClass
@@ -250,8 +252,16 @@ func prepare_for_next_level():
 func _on_timer_timeout():
 	Signals.timer_failed.emit()
 
+func show_game_completed():
+	GameState.state = GameState.STATE_GAME_COMPLETED
+	var obj = completed_interface_scene.instantiate()
+	get_tree().root.add_child(obj)
+
 func _on_stop_pressed():
-	prepare_for_next_level()
+	if level_list.size() == GameState.current_level_index + 1:
+		show_game_completed()
+	else:
+		prepare_for_next_level()
 	
 	clear_controls_help_text()
 	timer.stop()
@@ -273,8 +283,12 @@ func _on_timer_stopped():
 	# TODO: this looks a bit weird, but ok
 	activate_level_camera(false)
 	clear_controls_help_text()
-	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
+	
+	if GameState.state == GameState.STATE_GAME_COMPLETED:
+		return
+	
+	GameState.state = GameState.STATE_FINISHED
 	restart_level_with_wait(true)
 
 func _on_timer_failed():
