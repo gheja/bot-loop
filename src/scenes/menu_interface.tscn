@@ -128,14 +128,16 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "
 
-[color=#ccc][b]Gabor Heja[/b]
-Code, graphics, models
+[color=#ccc][b]Code, graphics, models[/b]
+Gabor Heja
 
-[b]Someone[/b]
-Music
+[b]Music[/b]
+Kevin MacLeod - incompetech.com
 
-[b]Someone[/b]
-Sound
+[b]Sounds[/b]
+Kenney - kenney.nl
+yd - opengameart.org
+
 [/color]
 
 "
@@ -172,9 +174,9 @@ mouse_filter = 2
 
 [node name="StartText" type="RichTextLabel" parent="MainMenuContent"]
 offset_left = 32.0
-offset_top = 531.0
+offset_top = 549.0
 offset_right = 347.0
-offset_bottom = 571.0
+offset_bottom = 589.0
 mouse_filter = 2
 bbcode_enabled = true
 text = "[color=#0ff][SPACE] or [Click] to start the game[/color]"
