@@ -49,6 +49,12 @@ func _ready() -> void:
 	
 	# NOTE: the intro will trigger the main menu
 
+func activate_level_camera(snap: bool):
+	var level_camera = level_container.get_child(0).find_child("LevelCamera3D")
+	print(level_camera.get_path())
+	assert(level_camera, "Could not locate level camera")
+	follow_camera(level_camera, snap)
+
 func show_main_menu():
 	# menu_interface.show()
 	menu_interface.show2(true)
@@ -79,6 +85,9 @@ func get_available_player_indexes():
 
 func start_player_selection():
 	GameState.state = GameState.STATE_PLAYER_SELECTION
+	Signals.set_display_text.emit("Push the STOP\nbutton if you're\nthere...")
+	
+	activate_level_camera(true)
 	
 	# this one has the highest priority
 	if GameState.auto_select_player_index != -1:
@@ -261,6 +270,8 @@ func reset_colors():
 func _on_timer_stopped():
 	reset_colors()
 	
+	# TODO: this looks a bit weird, but ok
+	activate_level_camera(false)
 	clear_controls_help_text()
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)
@@ -271,6 +282,8 @@ func _on_timer_failed():
 	world_environment.environment.ambient_light_color = Color("#ff0088")
 	world_environment.environment.ambient_light_energy = 0.1
 	
+	# TODO: this looks a bit weird, but ok
+	activate_level_camera(false)
 	clear_controls_help_text()
 	GameState.state = GameState.STATE_FINISHED
 	Signals.set_controls_lock.emit(false)

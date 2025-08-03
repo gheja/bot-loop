@@ -147,4 +147,7 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.82544,
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
 player_index = 1
 
+[node name="LevelCamera3D" parent="LevelBase" index="2"]
+transform = Transform3D(0.998213, 0, 0, 0, 0.705843, 0.705843, 0, -0.705843, 0.705843, 1.855, 4.382, 6.733)
+
 [editable path="LevelBase"]

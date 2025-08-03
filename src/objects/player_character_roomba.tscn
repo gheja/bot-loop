@@ -9,12 +9,12 @@ albedo_color = Color(0.252028, 0.252028, 0.252028, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dx07"]
 albedo_color = Color(0.0430392, 0.0430391, 0.0430392, 1)
 
+[sub_resource type="Animation" id="Animation_t5a1n"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_mxwbm"]
 resource_name = "primary_action"
 step = 0.1
-
-[sub_resource type="Animation" id="Animation_t5a1n"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eaipk"]
 _data = {
