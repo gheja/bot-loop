@@ -51,7 +51,6 @@ func _ready() -> void:
 
 func activate_level_camera(snap: bool):
 	var level_camera = level_container.get_child(0).find_child("LevelCamera3D")
-	print(level_camera.get_path())
 	assert(level_camera, "Could not locate level camera")
 	follow_camera(level_camera, snap)
 
@@ -290,13 +289,11 @@ func _on_timer_failed():
 	restart_level_with_wait(false)
 
 func _on_pause():
-	print("pause")
 	menu_interface.show2(false)
 	get_tree().paused = true
 	Signals.set_controls_lock.emit(false)
 
 func _on_unpause():
-	print("unpause")
 	menu_interface.hide()
 	get_tree().paused = false
 	
