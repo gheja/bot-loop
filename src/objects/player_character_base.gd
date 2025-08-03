@@ -148,6 +148,7 @@ func _on_timer_started():
 	player_index_label.hide()
 
 func break_down():
+	AudioManager.play_sound(1)
 	self.add_child(effect_scene.instantiate())
 	is_broken_down = true
 

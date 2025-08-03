@@ -306,4 +306,5 @@ func show_main_menu_if_needed():
 		show_main_menu()
 
 func intro_finished():
+	AudioManager.start_main_music()
 	start_player_selection()
