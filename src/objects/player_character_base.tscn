@@ -11,7 +11,7 @@ height = 0.081543
 radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t5a1n"]
-radius = 1.0
+radius = 0.7
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mxwbm"]
 height = 0.400269
