@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqfv168hkiq2f"]
+[gd_scene load_steps=11 format=3 uid="uid://dqfv168hkiq2f"]
 
 [ext_resource type="Script" uid="uid://ckte632k8mgqs" path="res://scenes/main_interface.gd" id="1_7qx7d"]
 
@@ -40,6 +40,21 @@ _data = {
 &"big_text": SubResource("Animation_7qx7d")
 }
 
+[sub_resource type="Animation" id="Animation_rgrph"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_efbr5"]
 resource_name = "warn_blink"
 length = 0.3
@@ -57,76 +72,52 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0.196078), Color(1, 1, 1, 0.117647), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_rgrph"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_grylp"]
 _data = {
 &"RESET": SubResource("Animation_rgrph"),
 &"warn_blink": SubResource("Animation_efbr5")
 }
 
+[sub_resource type="Animation" id="Animation_grylp"]
+resource_name = "show_hint"
+length = 1.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HintText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.7, 1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jarby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HintText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vejak"]
+_data = {
+&"RESET": SubResource("Animation_jarby"),
+&"show_hint": SubResource("Animation_grylp")
+}
+
 [node name="MainInterface" type="CanvasLayer"]
 script = ExtResource("1_7qx7d")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Label" type="Label" parent="MarginContainer"]
-visible = false
-modulate = Color(1, 1, 1, 0.313726)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "gheja, 2025"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="Control" type="Control" parent="MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ControlsLabel" type="RichTextLabel" parent="MarginContainer/Control"]
-layout_mode = 0
-offset_right = 1011.0
-offset_bottom = 232.0
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/outline_size = 10
-bbcode_enabled = true
-text = "[Arrow keys] [W-A-S-D] Move
-[Mouse] Look around
-[color=#ff0][E] Use
-[Space] Jump[/color]"
-
-[node name="TimerLabel" type="Label" parent="MarginContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "30.0"
-horizontal_alignment = 2
 
 [node name="BigMessageLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -142,11 +133,6 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 48
 text = "Loop 1234"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_efbr5")
-}
-
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -156,8 +142,57 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="HintText" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -536.0
+offset_top = -190.0
+offset_right = 536.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+bbcode_enabled = true
+text = "[center][b]Hint[/b]: You can select a Bot for every loop. Now there is only one, but more will be available later.[/center]"
+scroll_active = false
+
+[node name="ControlsLabel" type="RichTextLabel" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -261.0
+offset_right = 472.0
+offset_bottom = -8.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.784314)
+theme_override_constants/outline_size = 6
+bbcode_enabled = true
+text = "[Arrow keys] [W-A-S-D] Move
+[Mouse] Look around
+[color=#ff0][E] Use
+[Space] Jump[/color]"
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_efbr5")
+}
 
 [node name="WarnBlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_grylp")
+}
+
+[node name="HintAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vejak")
 }

@@ -123,6 +123,10 @@ func start_player_selection():
 		s += "[" + str(i) + "] "
 	
 	main_interface.set_controls_label_text("[color=#0ff]Select your robot:\n" + s + "[/color]")
+	
+	# show the hint for this level
+	var level_obj: LevelClass = level_container.get_child(0).find_child("LevelBase")
+	main_interface.set_hint(level_obj.hint_text)
 
 func set_active_player(index: int):
 	var player_obj: ObjectPlayerCharacter = null
@@ -257,7 +261,6 @@ func _process(delta: float) -> void:
 				set_active_player(i)
 	
 	follow_camera_step(delta)
-	main_interface.update(timer.time_left)
 	Signals.update_timer.emit(timer.time_left)
 
 func prepare_for_next_level():

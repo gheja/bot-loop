@@ -15,6 +15,7 @@
 
 [node name="LevelBase" parent="." instance=ExtResource("1_ne2mo")]
 transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
+hint_text = "[b]Hint:[/b] After completing a Loop you can select a different Bot, the other Bot will repeat your most recent  moves with it."
 
 [node name="ObjectFloor" parent="LevelBase/LevelObjectContainer" index="0" instance=ExtResource("2_6cvei")]
 transform = Transform3D(15.6864, 0, 0, 0, 15.6864, 0, 0, 0, 15.6864, 0, 0, 0)
