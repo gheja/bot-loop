@@ -18,13 +18,14 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("ui_action_start"):
 				AudioManager.play_sound(2)
 				Signals.unpause.emit()
+				Signals.update_music.emit()
 		else:
 			if Input.is_action_just_pressed("ui_action_pause"):
-				AudioManager.start_main_music()
 				AudioManager.play_sound(2)
 				Signals.unpause.emit()
+				Signals.update_music.emit()
 	else:
 		if Input.is_action_just_pressed("ui_action_pause"):
-			AudioManager.start_menu_music()
 			AudioManager.play_sound(2)
 			Signals.pause.emit()
+			Signals.update_music.emit()

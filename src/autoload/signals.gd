@@ -10,6 +10,7 @@ signal timer_stopped
 
 signal set_display_text
 signal update_timer
+signal update_music
 
 signal trigger_activation_changed
 

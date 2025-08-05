@@ -37,6 +37,7 @@ func _ready() -> void:
 	Signals.pause.connect(_on_pause)
 	Signals.unpause.connect(_on_unpause)
 	Signals.update_timer.connect(_on_update_timer)
+	Signals.update_music.connect(_on_update_music)
 
 	timer.wait_time = current_level.time_limit
 	timer.timeout.connect(_on_timer_timeout)
@@ -355,3 +356,6 @@ func _on_update_timer(time: float):
 			main_interface.warn_blink()
 	
 	_last_time = time
+
+func _on_update_music():
+	update_music()
