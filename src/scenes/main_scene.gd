@@ -110,10 +110,12 @@ func start_player_selection():
 	
 	var player_indexes = get_available_player_indexes()
 	
-	# if we only have one palyer, select that
-	if player_indexes.size() == 1:
-		set_active_player(player_indexes[0])
-		return
+	# show the palyer selection even if there is only one bot
+	
+	# # if we only have one palyer, select that
+	# if player_indexes.size() == 1:
+	# 	set_active_player(player_indexes[0])
+	# 	return
 	
 	var s = ""
 	
