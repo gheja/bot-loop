@@ -10,7 +10,6 @@ func _ready():
 func show2(is_main_menu: bool):
 	$PauseContent2.visible = not is_main_menu
 	$MainMenuContent.visible = is_main_menu
-	AudioManager.start_menu_music()
 	self.show()
 
 func _process(delta: float) -> void:

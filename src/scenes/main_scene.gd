@@ -49,8 +49,17 @@ func _ready() -> void:
 	Signals.set_controls_lock.emit(false)
 	
 	start_level()
+	update_music()
 	
 	# NOTE: the intro will trigger the main menu
+
+func update_music():
+	if get_tree().paused:
+		AudioManager.start_menu_music()
+	elif GameState.state == GameState.STATE_RUNNING:
+		AudioManager.start_main_music()
+	else:
+		AudioManager.start_menu_music()
 
 func activate_level_camera(snap: bool):
 	var level_camera = level_container.get_child(0).find_child("LevelCamera3D")
@@ -194,6 +203,7 @@ func start_main_timer():
 	Signals.set_controls_lock.emit(true)
 	Signals.update_timer.emit(timer.time_left)
 	Signals.timer_started.emit()
+	update_music()
 
 func restart_level_with_wait(success: bool):
 	# wait with setting the state because the player can still interact now
@@ -323,7 +333,6 @@ func show_main_menu_if_needed():
 		show_main_menu()
 
 func intro_finished():
-	AudioManager.start_main_music()
 	start_player_selection()
 
 var _last_time = -1
