@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Boot Loop - gheja, 2025"
+config/name="Bot Loop - gheja, 2025"
 run/main_scene="uid://bie2uwadt7uwm"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
