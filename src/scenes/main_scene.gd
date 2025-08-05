@@ -249,12 +249,13 @@ func restart_pressed():
 	Signals.start_transition.emit("#330066")
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_action_restart"):
-		GameState.auto_select_player_index = current_player_index
-		restart_pressed()
-	
-	if Input.is_action_just_pressed("ui_action_back"):
-		restart_pressed()
+	if GameState.state in [GameState.STATE_RUNNING, GameState.STATE_FINISHED]:
+		if Input.is_action_just_pressed("ui_action_restart"):
+			GameState.auto_select_player_index = current_player_index
+			restart_pressed()
+		
+		if Input.is_action_just_pressed("ui_action_back"):
+			restart_pressed()
 	
 	if GameState.state == GameState.STATE_PLAYER_SELECTION:
 		for i in get_available_player_indexes():
