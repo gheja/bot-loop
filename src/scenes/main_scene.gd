@@ -92,6 +92,9 @@ func get_available_player_indexes():
 	for obj in get_tree().get_nodes_in_group("player_objects"):
 		result.append((obj as ObjectPlayerCharacter).player_index)
 	
+	# bots' player_indexes might not be gathered in ascending order
+	result.sort()
+	
 	return result
 
 func start_player_selection():
