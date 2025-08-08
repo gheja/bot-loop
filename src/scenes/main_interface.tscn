@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqfv168hkiq2f"]
+[gd_scene load_steps=12 format=3 uid="uid://dqfv168hkiq2f"]
 
 [ext_resource type="Script" uid="uid://ckte632k8mgqs" path="res://scenes/main_interface.gd" id="1_7qx7d"]
+[ext_resource type="PackedScene" uid="uid://vitlshr4vcut" path="res://scenes/recording_indicator.tscn" id="2_51bk3"]
 
 [sub_resource type="Animation" id="Animation_51bk3"]
 length = 0.001
@@ -196,3 +197,9 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_vejak")
 }
+
+[node name="RecordingIndicator" parent="." instance=ExtResource("2_51bk3")]
+offset_left = 949.0
+offset_top = 463.0
+offset_right = -20.0
+offset_bottom = -39.0

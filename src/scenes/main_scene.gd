@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var main_interface: MainInterface = $MainInterface
 @onready var timer: Timer = $Timer
+@onready var restart_timer: Timer = $RestartTimer
 @onready var main_camera: Camera3D = $MainCamera
 @onready var main_light: DirectionalLight3D = $MainLight
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
@@ -13,6 +14,7 @@ extends Node3D
 var completed_interface_scene = preload("res://scenes/completed_interface.tscn")
 
 @export var level_list: Array[PackedScene]
+var recording_indicator: RecordingIndicator
 
 var current_level: LevelClass
 var current_player_index: int = -1
@@ -28,6 +30,7 @@ func _ready() -> void:
 	level_container.add_child(level)
 	
 	current_level = get_tree().get_nodes_in_group("level_root_object")[0]
+	recording_indicator = get_tree().get_nodes_in_group("recording_indicators")[0]
 	
 	Signals.stop_pressed.connect(_on_stop_pressed)
 	Signals.timer_started.connect(_on_timer_started)
@@ -71,6 +74,7 @@ func show_main_menu():
 	# menu_interface.show()
 	menu_interface.show2(true)
 	get_tree().paused = true
+	recording_indicator.hide()
 
 func start_level():
 	if GameState.play_intro:
@@ -218,7 +222,8 @@ func start_main_timer():
 func restart_level_with_wait(success: bool):
 	# wait with setting the state because the player can still interact now
 	
-	await get_tree().create_timer(2.0).timeout
+	restart_timer.start()
+	await restart_timer.timeout
 	
 	GameState.state = GameState.STATE_RESTARTING
 	
@@ -256,6 +261,13 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("ui_action_back"):
 			restart_pressed()
+		
+		recording_indicator.set_record_progress(timer.wait_time - timer.time_left, timer.wait_time)
+		
+		if restart_timer.is_stopped():
+			recording_indicator.set_save_progress(0.0, 1.0)
+		else:
+			recording_indicator.set_save_progress(restart_timer.wait_time - restart_timer.time_left, restart_timer.wait_time)
 	
 	if GameState.state == GameState.STATE_PLAYER_SELECTION:
 		for i in get_available_player_indexes():
@@ -343,6 +355,7 @@ func show_main_menu_if_needed():
 		show_main_menu()
 
 func intro_finished():
+	recording_indicator.show()
 	start_player_selection()
 
 var _last_time = -1

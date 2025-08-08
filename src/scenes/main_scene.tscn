@@ -162,10 +162,6 @@ shadow_enabled = true
 
 [node name="MainInterface" parent="." instance=ExtResource("1_w2twt")]
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
 [node name="LevelContainer" type="Node3D" parent="."]
 
 [node name="IntroStuffs" type="Node3D" parent="."]
@@ -179,5 +175,13 @@ libraries = {
 }
 
 [node name="MenuInterface" parent="." instance=ExtResource("8_18nlu")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
