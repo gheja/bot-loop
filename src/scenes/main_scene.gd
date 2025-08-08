@@ -122,6 +122,9 @@ func start_player_selection():
 	# 	set_active_player(player_indexes[0])
 	# 	return
 	
+	if player_indexes.size() == 1:
+		recording_indicator.hide()
+	
 	var s = ""
 	
 	for i in get_available_player_indexes():
