@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://yqqd361obmhf"]
+
+[ext_resource type="Script" uid="uid://cqlw0x5ovn8m2" path="res://objects/player_character_subclass.gd" id="1_bwbrp"]
+[ext_resource type="PackedScene" uid="uid://cbv1iy11bd6x1" path="res://objects/player_character_base.tscn" id="2_dctle"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwbrp"]
+albedo_color = Color(0.472385, 0, 0.245187, 1)
+
+[sub_resource type="Animation" id="Animation_t5a1n"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_mxwbm"]
+resource_name = "primary_action"
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eaipk"]
+_data = {
+&"RESET": SubResource("Animation_t5a1n"),
+&"primary_action": SubResource("Animation_mxwbm")
+}
+
+[node name="PlayerCharacterMini" type="Node3D"]
+script = ExtResource("1_bwbrp")
+
+[node name="PlayerCharacterBase" parent="." instance=ExtResource("2_dctle")]
+controls_help_text = "[E] [Click] Select Bot"
+bot_class = "mini"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="0"]
+transform = Transform3D(0.734258, 0, 0, 0, 0.663067, 0, 0, 0, 0.734258, 0, 0.166422, 0)
+radius = 0.337402
+height = 0.464783
+sides = 19
+material = SubResource("StandardMaterial3D_bwbrp")
+
+[node name="CollisionShapeUpper" parent="PlayerCharacterBase" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540771, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
+libraries = {
+&"": SubResource("AnimationLibrary_eaipk")
+}
+
+[editable path="PlayerCharacterBase"]

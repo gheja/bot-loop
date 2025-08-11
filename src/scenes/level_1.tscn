@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tedcrjvwtdhi"]
+[gd_scene load_steps=10 format=3 uid="uid://tedcrjvwtdhi"]
 
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_2y5yt"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_2os1m"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dnnjjb6md5gvt" path="res://objects/object_stop_button.tscn" id="6_6dial"]
 [ext_resource type="PackedScene" uid="uid://b82gg0yds1jf3" path="res://objects/object_display.tscn" id="7_7nomh"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="7_15mv3"]
+[ext_resource type="PackedScene" uid="uid://yqqd361obmhf" path="res://objects/player_character_mini.tscn" id="9_e3sih"]
 [ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="10_2cbcq"]
 
 [node name="Level1" type="Node3D"]
@@ -149,6 +150,10 @@ transform = Transform3D(0.881088, 0, -0.472951, 0, 0.999998, 0, 0.472951, 0, 0.8
 [node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("10_2cbcq")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
 player_index = 1
+
+[node name="PlayerCharacterMini" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("9_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99464, 0, 1.99643)
+player_index = 3
 
 [node name="LevelCamera3D" parent="LevelBase" index="2"]
 transform = Transform3D(0.998213, 0, 0, 0, 0.705843, 0.705843, 0, -0.705843, 0.705843, 1.855, 4.382, 6.733)

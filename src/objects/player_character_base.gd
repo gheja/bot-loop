@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
 
-@export_enum("hammer", "roomba") var bot_class = "hammer"
+@export_enum("hammer", "roomba", "mini") var bot_class = "hammer"
 
 @onready var camera_pivot = $Node3D/CameraPivot
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
@@ -15,6 +15,8 @@ extends CharacterBody3D
 @onready var upper_body = $Visuals/UpperBody
 @onready var player_index_label: Label3D = $Visuals/PlayerIndexLabel
 @onready var moving_platform_raycast: RayCast3D = $MovingPlatformRaycast
+@onready var ghost_indicator: CSGSphere3D = $Visuals/Indicators/GhostIndicator
+@onready var selection_indicator: CSGSphere3D = $Visuals/Indicators/SelectionIndicator
 
 @onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
 
@@ -34,6 +36,14 @@ var inputs = {
 }
 
 func _ready() -> void:
+	if bot_class == "mini":
+		$PlayerSelectionArea.monitoring = true
+	else:
+		$PlayerSelectionHitbox.monitorable = true
+	
+	ghost_indicator.hide()
+	selection_indicator.hide()
+	
 	if player_index == -1:
 		# this is hackis but at least this way we don't need to edit the children
 		var parent = get_parent()
@@ -161,3 +171,31 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 			return
 	
 	break_down()
+
+func get_parent_of_type(obj: Node3D, class_to_search: String):
+	var parent: Node3D
+	parent = obj
+	while true:
+		if parent.is_class(class_to_search):
+			return parent
+		
+		parent = parent.get_parent()
+		assert(parent)
+
+var highlighted_character: ObjectPlayerCharacter = null
+
+func set_highlight(value: bool):
+	selection_indicator.visible = value
+
+func _on_player_selection_area_area_entered(area: Area3D) -> void:
+	if highlighted_character:
+		highlighted_character.set_highlight(false)
+		highlighted_character = null
+
+	highlighted_character = get_parent_of_type(area, "CharacterBody3D")
+	highlighted_character.set_highlight(true)
+
+func _on_player_selection_area_area_exited(area: Area3D) -> void:
+	if highlighted_character:
+		highlighted_character.set_highlight(false)
+		highlighted_character = null
