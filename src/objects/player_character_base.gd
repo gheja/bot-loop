@@ -27,6 +27,8 @@ var is_broken_down = false
 
 var current_recording = []
 
+var start_position: Vector3 = Vector3.ZERO
+
 # NOTE: maybe we should handle all of these in _physics_process()
 var inputs = {
 	"vec": Vector2.ZERO,
@@ -36,6 +38,8 @@ var inputs = {
 }
 
 func _ready() -> void:
+	start_position = self.global_position
+	
 	if bot_class == "mini":
 		$PlayerSelectionArea.monitoring = true
 	else:
@@ -68,9 +72,17 @@ func make_active():
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
+	# BUG, TODO: _process() is only handled on each displayed frame, but
+	# _physics_proces() might happen multiple times, so the
+	# inputs.action_pressed might not get processed properly, leading to
+	# missed inputs
+	
 	if has_primary_action:
 		if inputs.action_pressed:
-			$AnimationPlayer.play("primary_action")
+			if bot_class == "mini":
+				bot_class_mini_action()
+			else:
+				$AnimationPlayer.play("primary_action")
 
 # thanks Nermit!
 # https://forum.godotengine.org/t/rotation-wrap-around-issue/16014/2
@@ -168,6 +180,8 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 		if parent is ObjectTrap:
 			parent.queue_free()
 			return
+	elif bot_class == "mini":
+		return
 	
 	break_down()
 
@@ -198,3 +212,17 @@ func _on_player_selection_area_area_exited(area: Area3D) -> void:
 	if highlighted_character:
 		highlighted_character.set_highlight(false)
 		highlighted_character = null
+
+func reset_and_activate():
+	print("!!")
+
+func swap_player_for(obj: ObjectPlayerCharacter):
+	print(obj)
+	obj.reset_and_activate()
+	self.queue_free()
+
+func bot_class_mini_action():
+	if not highlighted_character:
+		return
+	
+	swap_player_for(highlighted_character)
