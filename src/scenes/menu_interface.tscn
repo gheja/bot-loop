@@ -120,6 +120,7 @@ text = "[font_size=48]Bot Loop[/font_size]
 A GMTK Game Jam 2025 entry by gheja"
 
 [node name="Label2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 262.0
 offset_right = 1056.0
@@ -173,6 +174,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="StartText" type="RichTextLabel" parent="MainMenuContent"]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 549.0
 offset_right = 347.0

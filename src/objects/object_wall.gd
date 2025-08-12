@@ -5,9 +5,7 @@ extends StaticBody3D
 @onready var material_failed = preload("res://materials/light_strip_failed.tres")
 
 func _ready() -> void:
-	Signals.timer_started.connect(_on_timer_started)
-	Signals.timer_stopped.connect(_on_timer_stopped)
-	Signals.timer_failed.connect(_on_timer_failed)
+	pass
 
 func set_material_on_obj(name, material):
 	var obj = get_node_or_null(name)
@@ -20,11 +18,5 @@ func set_material(material):
 	set_material_on_obj("Color2", material)
 	set_material_on_obj("Color3", material)
 
-func _on_timer_started():
-	set_material(material_running)
-
-func _on_timer_failed():
-	set_material(material_failed)
-
-func _on_timer_stopped():
+func _on_success():
 	set_material(material_stopped)

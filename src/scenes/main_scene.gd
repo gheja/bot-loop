@@ -1,8 +1,6 @@
 extends Node3D
 
 @onready var main_interface: MainInterface = $MainInterface
-@onready var timer: Timer = $Timer
-@onready var restart_timer: Timer = $RestartTimer
 @onready var main_camera: Camera3D = $MainCamera
 @onready var main_light: DirectionalLight3D = $MainLight
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
@@ -14,7 +12,6 @@ extends Node3D
 var completed_interface_scene = preload("res://scenes/completed_interface.tscn")
 
 @export var level_list: Array[PackedScene]
-var recording_indicator: RecordingIndicator
 
 var current_level: LevelClass
 var current_player_index: int = -1
@@ -30,20 +27,12 @@ func _ready() -> void:
 	level_container.add_child(level)
 	
 	current_level = get_tree().get_nodes_in_group("level_root_object")[0]
-	recording_indicator = get_tree().get_nodes_in_group("recording_indicators")[0]
 	
 	Signals.stop_pressed.connect(_on_stop_pressed)
-	Signals.timer_started.connect(_on_timer_started)
-	Signals.timer_stopped.connect(_on_timer_stopped)
-	Signals.timer_failed.connect(_on_timer_failed)
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
 	Signals.pause.connect(_on_pause)
 	Signals.unpause.connect(_on_unpause)
-	Signals.update_timer.connect(_on_update_timer)
 	Signals.update_music.connect(_on_update_music)
-
-	timer.wait_time = current_level.time_limit
-	timer.timeout.connect(_on_timer_timeout)
 	
 	GameState.loops += 1
 	
@@ -74,7 +63,6 @@ func show_main_menu():
 	# menu_interface.show()
 	menu_interface.show2(true)
 	get_tree().paused = true
-	recording_indicator.hide()
 
 func start_level():
 	if GameState.play_intro:
@@ -121,9 +109,6 @@ func start_player_selection():
 	# if player_indexes.size() == 1:
 	# 	set_active_player(player_indexes[0])
 	# 	return
-	
-	if player_indexes.size() == 1:
-		recording_indicator.hide()
 	
 	var s = ""
 	
@@ -215,18 +200,12 @@ func start_main_timer():
 	if GameState.loops > 1:
 		main_interface.pop_up_big_message("Loop " + str(GameState.loops))
 	
-	timer.start()
 	GameState.state = GameState.STATE_RUNNING
 	Signals.set_controls_lock.emit(true)
-	Signals.update_timer.emit(timer.time_left)
-	Signals.timer_started.emit()
 	update_music()
 
 func restart_level_with_wait(success: bool):
 	# wait with setting the state because the player can still interact now
-	
-	restart_timer.start()
-	await restart_timer.timeout
 	
 	GameState.state = GameState.STATE_RESTARTING
 	
@@ -264,13 +243,6 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("ui_action_back"):
 			restart_pressed()
-		
-		recording_indicator.set_record_progress(timer.wait_time - timer.time_left, timer.wait_time)
-		
-		if restart_timer.is_stopped():
-			recording_indicator.set_save_progress(0.0, 1.0)
-		else:
-			recording_indicator.set_save_progress(restart_timer.wait_time - restart_timer.time_left, restart_timer.wait_time)
 	
 	if GameState.state == GameState.STATE_PLAYER_SELECTION:
 		for i in get_available_player_indexes():
@@ -278,14 +250,10 @@ func _process(delta: float) -> void:
 				set_active_player(i)
 	
 	follow_camera_step(delta)
-	Signals.update_timer.emit(timer.time_left)
 
 func prepare_for_next_level():
 	GameState.reset_recordings_on_start = true
 	GameState.current_level_index += 1
-
-func _on_timer_timeout():
-	Signals.timer_failed.emit()
 
 func show_game_completed():
 	GameState.state = GameState.STATE_GAME_COMPLETED
@@ -299,13 +267,6 @@ func _on_stop_pressed():
 		prepare_for_next_level()
 	
 	clear_controls_help_text()
-	timer.stop()
-	Signals.timer_stopped.emit()
-
-func _on_timer_started():
-	main_light.light_color = Color("#ffcbb5")
-	world_environment.environment.ambient_light_color = Color("#dce9ec")
-	world_environment.environment.ambient_light_energy = 0.25
 
 func reset_colors():
 	main_light.light_color = Color("#ffffff")
@@ -326,6 +287,7 @@ func _on_timer_stopped():
 	GameState.state = GameState.STATE_FINISHED
 	restart_level_with_wait(true)
 
+### TODO: delete this
 func _on_timer_failed():
 	main_light.light_color = Color("#ff0000")
 	world_environment.environment.ambient_light_color = Color("#ff0088")
@@ -358,7 +320,6 @@ func show_main_menu_if_needed():
 		show_main_menu()
 
 func intro_finished():
-	recording_indicator.show()
 	start_player_selection()
 
 var _last_time = -1

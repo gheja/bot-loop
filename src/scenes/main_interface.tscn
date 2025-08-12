@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqfv168hkiq2f"]
+[gd_scene load_steps=11 format=3 uid="uid://dqfv168hkiq2f"]
 
 [ext_resource type="Script" uid="uid://ckte632k8mgqs" path="res://scenes/main_interface.gd" id="1_7qx7d"]
-[ext_resource type="PackedScene" uid="uid://vitlshr4vcut" path="res://scenes/recording_indicator.tscn" id="2_51bk3"]
 
 [sub_resource type="Animation" id="Animation_51bk3"]
 length = 0.001
@@ -79,6 +78,21 @@ _data = {
 &"warn_blink": SubResource("Animation_efbr5")
 }
 
+[sub_resource type="Animation" id="Animation_jarby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HintText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_grylp"]
 resource_name = "show_hint"
 length = 1.6
@@ -94,21 +108,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 0, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_jarby"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HintText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vejak"]
@@ -197,9 +196,3 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_vejak")
 }
-
-[node name="RecordingIndicator" parent="." instance=ExtResource("2_51bk3")]
-offset_left = 949.0
-offset_top = 463.0
-offset_right = -20.0
-offset_bottom = -39.0

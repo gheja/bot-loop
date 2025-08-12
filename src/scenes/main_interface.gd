@@ -8,7 +8,6 @@ extends CanvasLayer
 @onready var hint_animation_player: AnimationPlayer = $HintAnimationPlayer
 
 func _ready() -> void:
-	Signals.timer_started.connect(_on_timer_started)
 	big_message_label.modulate = Color(0, 0, 0, 0)
 	hint_text.text = ""
 

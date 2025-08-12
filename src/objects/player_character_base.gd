@@ -53,7 +53,6 @@ func _ready() -> void:
 	assert(player_index != -1, "Player object is not set up correctly")
 	
 	Signals.save_player_recording.connect(_on_save_player_recording)
-	Signals.timer_started.connect(_on_timer_started)
 	
 	player_index_label.text = str(player_index)
 	
