@@ -6,6 +6,7 @@ signal start_transition
 
 signal set_display_text
 signal update_music
+signal set_active_camera
 
 signal trigger_activation_changed
 

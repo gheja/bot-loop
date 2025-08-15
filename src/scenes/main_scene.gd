@@ -33,6 +33,7 @@ func _ready() -> void:
 	Signals.pause.connect(_on_pause)
 	Signals.unpause.connect(_on_unpause)
 	Signals.update_music.connect(_on_update_music)
+	Signals.set_active_camera.connect(_on_set_active_camera)
 	
 	GameState.loops += 1
 	
@@ -41,7 +42,7 @@ func _ready() -> void:
 	
 	Signals.set_controls_lock.emit(false)
 	
-	start_level()
+	init_level()
 	update_music()
 	
 	BotManager.setup_bots()
@@ -59,14 +60,14 @@ func update_music():
 func activate_level_camera(snap: bool):
 	var level_camera = level_container.get_child(0).find_child("LevelCamera3D")
 	assert(level_camera, "Could not locate level camera")
-	follow_camera(level_camera, snap)
+	Signals.set_active_camera.emit(level_camera, snap)
 
 func show_main_menu():
 	# menu_interface.show()
 	menu_interface.show2(true)
 	get_tree().paused = true
 
-func start_level():
+func init_level():
 	if GameState.play_intro:
 		GameState.play_intro = false
 		
@@ -74,83 +75,21 @@ func start_level():
 			# this should really be part of the level, not the main script...
 			start_intro()
 		else:
-			start_player_selection()
+			start_current_level()
 	else:
-		start_player_selection()
+		start_current_level()
 	
 	# forget player auto-selection
 	GameState.auto_select_player_index = -1
 
-func get_available_player_indexes():
-	var result = []
+func start_current_level():
+	GameState.state = GameState.STATE_RUNNING
 	
-	for obj in get_tree().get_nodes_in_group("player_objects"):
-		result.append((obj as ObjectPlayerCharacter).player_index)
-	
-	# bots' player_indexes might not be gathered in ascending order
-	result.sort()
-	
-	return result
-
-func start_player_selection():
-	GameState.state = GameState.STATE_PLAYER_SELECTION
-	Signals.set_display_text.emit("Push the STOP\nbutton if you're\nthere...")
-	
-	activate_level_camera(true)
-	
-	# this one has the highest priority
-	if GameState.auto_select_player_index != -1:
-		set_active_player(GameState.auto_select_player_index)
-		return
-	
-	var player_indexes = get_available_player_indexes()
-	
-	# show the palyer selection even if there is only one bot
-	
-	# # if we only have one palyer, select that
-	# if player_indexes.size() == 1:
-	# 	set_active_player(player_indexes[0])
-	# 	return
-	
-	var s = ""
-	
-	for i in get_available_player_indexes():
-		s += "[" + str(i) + "] "
-	
-	main_interface.set_controls_label_text("[color=#0ff]Select your robot:\n" + s + "[/color]")
+	Signals.set_controls_lock.emit(true)
 	
 	# show the hint for this level
 	var level_obj: LevelClass = level_container.get_child(0).find_child("LevelBase")
 	main_interface.set_hint(level_obj.hint_text)
-
-func set_active_player(index: int):
-	var player_obj: ObjectPlayerCharacter = null
-	
-	for obj in get_tree().get_nodes_in_group("player_objects"):
-		obj = obj as ObjectPlayerCharacter
-		if obj.player_index == index:
-			player_obj = obj
-			break
-	
-	if not player_obj:
-		print("Could not find player object by index")
-		return
-	
-	player_obj.make_active()
-	current_player_index = index
-	main_interface.set_controls_label_text(
-		"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
-		"[color=#ff0]" +
-		player_obj.controls_help_text +
-		"[/color]\n" +
-		"\n" +
-		"[color=#0ff][R] Restart loop\n[Q] Back to selection\n[P] Pause[/color]"
-	)
-	var player_camera = player_obj.find_child("Camera3D")
-	assert(player_camera, "Could not locate player camera")
-	follow_camera(player_camera, false)
-	
-	start_main_timer()
 
 var _camera_to_follow: Camera3D
 var _camera_follow_progress = 1.0
@@ -194,7 +133,7 @@ func start_intro_text():
 		await get_tree().create_timer(0.05).timeout
 
 func start_intro():
-	follow_camera(intro_camera, true)
+	Signals.set_active_camera.emit(intro_camera, true)
 	intro_animation_player.play("intro")
 	Signals.intro_started.emit()
 
@@ -238,18 +177,18 @@ func restart_pressed():
 	Signals.start_transition.emit("#330066")
 
 func _process(delta: float) -> void:
-	if GameState.state in [GameState.STATE_RUNNING, GameState.STATE_FINISHED]:
-		if Input.is_action_just_pressed("ui_action_restart"):
-			GameState.auto_select_player_index = current_player_index
-			restart_pressed()
-		
-		if Input.is_action_just_pressed("ui_action_back"):
-			restart_pressed()
-	
-	if GameState.state == GameState.STATE_PLAYER_SELECTION:
-		for i in get_available_player_indexes():
-			if Input.is_action_just_pressed("ui_action_select_" + str(i)):
-				set_active_player(i)
+	# if GameState.state in [GameState.STATE_RUNNING, GameState.STATE_FINISHED]:
+	# 	if Input.is_action_just_pressed("ui_action_restart"):
+	# 		GameState.auto_select_player_index = current_player_index
+	# 		restart_pressed()
+	#
+	# 	if Input.is_action_just_pressed("ui_action_back"):
+	# 		restart_pressed()
+	#
+	# if GameState.state == GameState.STATE_PLAYER_SELECTION:
+	# 	for i in get_available_player_indexes():
+	# 		if Input.is_action_just_pressed("ui_action_select_" + str(i)):
+	# 			set_active_player(i)
 	
 	follow_camera_step(delta)
 
@@ -322,7 +261,7 @@ func show_main_menu_if_needed():
 		show_main_menu()
 
 func intro_finished():
-	start_player_selection()
+	start_current_level()
 
 var _last_time = -1
 func _on_update_timer(time: float):
@@ -339,3 +278,6 @@ func _on_update_timer(time: float):
 
 func _on_update_music():
 	update_music()
+
+func _on_set_active_camera(camera: Camera3D, snap: bool):
+	follow_camera(camera, snap)

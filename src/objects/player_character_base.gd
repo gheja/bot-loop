@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @export var max_speed = 5
 @export var is_actively_controlled = false
+# TODO: deprecate and remove this
 @export var player_index = -1
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
@@ -69,6 +70,17 @@ func make_active():
 	# a good starting angle
 	camera_pivot.rotation.x = -0.6
 	camera_pivot.rotation.y = 0.0
+	
+	Signals.set_active_camera.emit(camera, false)
+	
+	#main_interface.set_controls_label_text(
+		#"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
+		#"[color=#ff0]" +
+		#self.controls_help_text +
+		#"[/color]\n" +
+		#"\n" +
+		#"[color=#0ff][R] Restart loop\n[Q] Back to selection\n[P] Pause[/color]"
+	#)
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
