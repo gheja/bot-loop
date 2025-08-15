@@ -23,6 +23,7 @@ GameState="*res://autoload/game_state.gd"
 Constants="*res://autoload/constants.gd"
 AudioManager="*res://autoload/audio_manager.tscn"
 BotManager="*res://autoload/bot_manager.gd"
+Lib="*res://autoload/lib.gd"
 
 [display]
 

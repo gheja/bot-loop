@@ -213,8 +213,12 @@ func _on_player_selection_area_area_exited(area: Area3D) -> void:
 		highlighted_character.set_highlight(false)
 		highlighted_character = null
 
+func reset_bot():
+	self.global_position = start_position
+
 func reset_and_activate():
-	print("!!")
+	reset_bot()
+	make_active()
 
 func swap_player_for(obj: ObjectPlayerCharacter):
 	print(obj)
