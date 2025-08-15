@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bllg1w5to8gfg"]
+
+[ext_resource type="Script" uid="uid://g4yyuba0ogs8" path="res://scenes/bot_starting_marker.gd" id="1_ag7hw"]
+
+[node name="BotStartingMarker" type="Marker3D"]
+script = ExtResource("1_ag7hw")
