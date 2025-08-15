@@ -185,16 +185,6 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 	
 	break_down()
 
-func get_parent_of_type(obj: Node3D, class_to_search: String):
-	var parent: Node3D
-	parent = obj
-	while true:
-		if parent.is_class(class_to_search):
-			return parent
-		
-		parent = parent.get_parent()
-		assert(parent)
-
 var highlighted_character: ObjectPlayerCharacter = null
 
 func set_highlight(value: bool):
@@ -205,7 +195,7 @@ func _on_player_selection_area_area_entered(area: Area3D) -> void:
 		highlighted_character.set_highlight(false)
 		highlighted_character = null
 
-	highlighted_character = get_parent_of_type(area, "CharacterBody3D")
+	highlighted_character = Lib.get_parent_of_type(area, "CharacterBody3D")
 	highlighted_character.set_highlight(true)
 
 func _on_player_selection_area_area_exited(area: Area3D) -> void:

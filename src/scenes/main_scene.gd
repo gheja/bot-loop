@@ -26,7 +26,7 @@ func _ready() -> void:
 	var level = level_list[GameState.current_level_index].instantiate()
 	level_container.add_child(level)
 	
-	current_level = get_tree().get_nodes_in_group("level_root_object")[0]
+	current_level = Lib.get_first_node_in_group("level_root_object")
 	
 	Signals.stop_pressed.connect(_on_stop_pressed)
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
@@ -43,6 +43,8 @@ func _ready() -> void:
 	
 	start_level()
 	update_music()
+	
+	BotManager.setup_bots()
 	
 	# NOTE: the intro will trigger the main menu
 

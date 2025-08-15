@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://g4yyuba0ogs8" path="res://scenes/bot_starting_marker.gd" id="1_ag7hw"]
 
-[node name="BotStartingMarker" type="Marker3D"]
+[node name="BotStartingMarker" type="Marker3D" groups=["bot_starting_markers"]]
 script = ExtResource("1_ag7hw")
