@@ -104,8 +104,8 @@ func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bo
 	
 	if was_actively_controlled:
 		starter_bot.global_position = last_position
+		set_bot_timer_indicator_visibility(false)
 		activate_starter_bot()
 
 func deactivate_and_restart_bot(bot: ObjectPlayerCharacter, was_actively_controlled: bool):
 	deactivate_and_restart_bot_by_index(get_bot_index_by_bot_object(bot), was_actively_controlled)
-	set_bot_timer_indicator_visibility(false)
