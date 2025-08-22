@@ -117,7 +117,7 @@ _data = {
 &"show_hint": SubResource("Animation_grylp")
 }
 
-[node name="MainInterface" type="CanvasLayer"]
+[node name="MainInterface" type="CanvasLayer" groups=["main_interfaces"]]
 script = ExtResource("1_7qx7d")
 
 [node name="BigMessageLabel" type="Label" parent="."]

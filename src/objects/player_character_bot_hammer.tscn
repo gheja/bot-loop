@@ -78,7 +78,7 @@ shape = SubResource("BoxShape3D_eaipk")
 [node name="cage_1" parent="PlayerCharacterBase/Visuals/UpperBody" index="2" instance=ExtResource("3_mxwbm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.313417, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
+[node name="ActionAnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
 libraries = {
 &"": SubResource("AnimationLibrary_eaipk")
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbv1iy11bd6x1"]
+[gd_scene load_steps=13 format=3 uid="uid://cbv1iy11bd6x1"]
 
 [ext_resource type="Script" uid="uid://c8ry4ey5mq5yc" path="res://objects/player_character_base.gd" id="1_w4qtm"]
 
@@ -25,6 +25,69 @@ radius = 0.581543
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5jmjx"]
 radius = 0.8
+
+[sub_resource type="Animation" id="Animation_nhemo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Indicators:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Indicators:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5jmjx"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Indicators:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Indicators:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4qtm"]
+_data = {
+&"RESET": SubResource("Animation_nhemo"),
+&"default": SubResource("Animation_5jmjx")
+}
 
 [node name="PlayerCharacterBase" type="CharacterBody3D" groups=["player_objects"]]
 script = ExtResource("1_w4qtm")
@@ -117,6 +180,12 @@ shape = SubResource("SphereShape3D_5jmjx")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="IndicatorAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w4qtm")
+}
+autoplay = "default"
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="PlayerSelectionArea" to="." method="_on_player_selection_area_area_entered"]

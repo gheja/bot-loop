@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
 @onready var upper_body = $Visuals/UpperBody
+@onready var action_animation_player: AnimationPlayer = $ActionAnimationPlayer
 @onready var moving_platform_raycast: RayCast3D = $MovingPlatformRaycast
 @onready var ghost_indicator: CSGSphere3D = $Visuals/Indicators/GhostIndicator
 @onready var selection_indicator: CSGSphere3D = $Visuals/Indicators/SelectionIndicator
@@ -125,7 +126,7 @@ func _process(delta: float) -> void:
 			if bot_class == "mini":
 				bot_class_mini_action()
 			else:
-				$AnimationPlayer.play("primary_action")
+				action_animation_player.play("primary_action")
 
 # thanks Nermit!
 # https://forum.godotengine.org/t/rotation-wrap-around-issue/16014/2

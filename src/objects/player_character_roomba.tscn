@@ -47,7 +47,7 @@ material = SubResource("StandardMaterial3D_1dx07")
 [node name="CollisionShapeUpper" parent="PlayerCharacterBase" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540771, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
+[node name="ActionAnimationPlayer" type="AnimationPlayer" parent="PlayerCharacterBase"]
 libraries = {
 &"": SubResource("AnimationLibrary_eaipk")
 }
