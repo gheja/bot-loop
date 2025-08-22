@@ -16,7 +16,8 @@
 transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 time_limit = 15.0
 has_intro = true
-hint_text = "[b]Hint[/b]: You can select a Bot for every loop. Now there is only one, but more will be available later.
+hint_text = "[b]Hint[/b]: You can select a Bot for every loop. Now there is only one,
+but more will be available later.
 [b]Hint[/b]: See the available controls in the lower left corner.
 "
 

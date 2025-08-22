@@ -16,7 +16,8 @@
 transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 time_limit = 15.0
 hint_text = "[b]Hint:[/b] Now you can select another Bot.
-[b]Hint:[/b] Your moves are being recorded, you can select a differetn bot in next Loop and the other one will repeat your last moves.
+[b]Hint:[/b] Your moves are being recorded, you can select a different bot
+in next Loop and the other one will repeat your last moves.
 "
 
 [node name="ObjectFloor" parent="LevelBase/LevelObjectContainer" index="0" instance=ExtResource("2_5baeu")]

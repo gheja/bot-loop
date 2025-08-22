@@ -16,7 +16,7 @@
 [node name="LevelBase" parent="." instance=ExtResource("1_ny4ll")]
 transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 time_limit = 15.0
-hint_text = "[b]Hint[/b]: Beware of the hazardous junk left around the floor.
+hint_text = "[b]Hint[/b]: Beware of the hazardous junk left around on the floor.
 "
 
 [node name="ObjectFloor" parent="LevelBase/LevelObjectContainer" index="0" instance=ExtResource("2_j4ut0")]
