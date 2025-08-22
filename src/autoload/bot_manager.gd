@@ -14,9 +14,12 @@ func set_bot_timer_indicator_visibility(value: bool):
 	Lib.get_first_node_in_group("bot_timer_indicators").visible = value
 
 func activate_bot_by_index(index: int):
+	var bot = bot_definitions[index]["bot"] as ObjectPlayerCharacter
+	
 	bot_definitions[index]["active"] = true
-	(bot_definitions[index]["bot"] as ObjectPlayerCharacter).make_active()
-	(bot_definitions[index]["bot"] as ObjectPlayerCharacter).visible = true
+	bot.make_active()
+	bot.visible = true
+	bot.process_mode = Node.PROCESS_MODE_INHERIT
 
 func activate_starter_bot():
 	assert(starter_bot)
@@ -42,6 +45,7 @@ func swap_to_bot(current_bot: ObjectPlayerCharacter, new_bot: ObjectPlayerCharac
 		# current_bot.queue_free()
 		# TODO: it is not enough to hide, this will still collide, etc.
 		current_bot.visible = false
+		current_bot.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	set_bot_timer_indicator_visibility(true)
 
