@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_b1bug"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_5baeu"]
 [ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="4_qs5ve"]
-[ext_resource type="PackedScene" uid="uid://dnnjjb6md5gvt" path="res://objects/object_stop_button.tscn" id="5_gvbi0"]
+[ext_resource type="PackedScene" uid="uid://88li13rnxc6b" path="res://objects/object_goal_button.tscn" id="5_1vrgl"]
 [ext_resource type="PackedScene" uid="uid://b82gg0yds1jf3" path="res://objects/object_display.tscn" id="6_mpoqg"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="7_wnv7o"]
+[ext_resource type="PackedScene" uid="uid://cjfapgitdqnvr" path="res://objects/object_goal_block.tscn" id="8_e67c1"]
 [ext_resource type="PackedScene" uid="uid://cuexic5juyqd2" path="res://objects/object_wall_triple.tscn" id="9_nc34x"]
-[ext_resource type="PackedScene" uid="uid://fbuqkwk1smo1" path="res://objects/player_character_roomba.tscn" id="10_5d8vj"]
-[ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="11_xvqgb"]
+[ext_resource type="PackedScene" uid="uid://bllg1w5to8gfg" path="res://scenes/bot_starting_marker.tscn" id="10_nfmpb"]
 
 [node name="Level1C" type="Node3D"]
 
@@ -119,7 +119,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.989
 [node name="ObjectDisplay" parent="LevelBase/LevelObjectContainer" index="32" instance=ExtResource("6_mpoqg")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.644897, 1.4565, -6.87961)
 
-[node name="ObjectStopButton2" parent="LevelBase/LevelObjectContainer" index="33" instance=ExtResource("5_gvbi0")]
+[node name="ObjectGoalButton" parent="LevelBase/LevelObjectContainer" index="33" instance=ExtResource("5_1vrgl")]
 transform = Transform3D(-4.37113e-08, 0, 0.999999, 0, 0.999999, 0, -0.999999, 0, -4.37113e-08, -10.8775, 1.75, -2.82822)
 
 [node name="ObjectDisplay2" parent="LevelBase/LevelObjectContainer" index="34" instance=ExtResource("6_mpoqg")]
@@ -149,13 +149,25 @@ transform = Transform3D(0.88008, 0, 0.474825, 0, 0.999999, 0, -0.474825, 0, 0.88
 [node name="ObjectWallTriple" parent="LevelBase/LevelObjectContainer" index="42" instance=ExtResource("9_nc34x")]
 transform = Transform3D(-0.998213, 0, -8.72666e-08, 0, 0.998213, 0, 8.72666e-08, 0, -0.998213, -3.99285, 0, 0)
 
-[node name="PlayerCharacterRoomba" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("10_5d8vj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99643, 0, 3.99285)
-player_index = 2
+[node name="ObjectGoalBlock" parent="LevelBase/LevelObjectContainer" index="43" instance=ExtResource("8_e67c1")]
+transform = Transform3D(-0.998213, 0, -8.72666e-08, 0, 0.998213, 0, 8.72666e-08, 0, -0.998213, -7.9857, 0, -4.99107)
 
-[node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("11_xvqgb")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -0.998209, 0.1, 3.99285)
-player_index = 1
+[node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("10_nfmpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99285, 0, 3.99285)
+bot_index = 3
+bot_class = "mini"
+activate_on_start = true
+
+[node name="BotStartingMarker" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("10_nfmpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.998212, 0, 3.99286)
+bot_index = 1
+recording_length = 10.0
+
+[node name="BotStartingMarker3" parent="LevelBase/PlayerObjectContainer" index="2" instance=ExtResource("10_nfmpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99643, 0, 3.99286)
+bot_index = 1
+bot_class = "roomba"
+recording_length = 10.0
 
 [node name="LevelCamera3D" parent="LevelBase" index="2"]
 transform = Transform3D(0.998213, 0, 0, 0, 0.581975, 0.811008, 0, -0.811008, 0.581975, 0, 6, 4.996)

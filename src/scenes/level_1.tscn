@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_2os1m"]
 [ext_resource type="PackedScene" uid="uid://2l7r5ndv1t6j" path="res://objects/object_wall_corner.tscn" id="3_go7sj"]
 [ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="4_7gny6"]
-[ext_resource type="PackedScene" uid="uid://dnnjjb6md5gvt" path="res://objects/object_stop_button.tscn" id="6_6dial"]
+[ext_resource type="PackedScene" uid="uid://88li13rnxc6b" path="res://objects/object_goal_button.tscn" id="5_15mv3"]
 [ext_resource type="PackedScene" uid="uid://b82gg0yds1jf3" path="res://objects/object_display.tscn" id="7_7nomh"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="7_15mv3"]
-[ext_resource type="PackedScene" uid="uid://yqqd361obmhf" path="res://objects/player_character_mini.tscn" id="9_e3sih"]
-[ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="10_2cbcq"]
+[ext_resource type="PackedScene" uid="uid://bllg1w5to8gfg" path="res://scenes/bot_starting_marker.tscn" id="8_15mv3"]
+[ext_resource type="PackedScene" uid="uid://cjfapgitdqnvr" path="res://objects/object_goal_block.tscn" id="8_e3sih"]
 
 [node name="Level1" type="Node3D"]
 
@@ -105,7 +105,7 @@ transform = Transform3D(1.31134e-07, 0, -0.999998, 0, 0.999998, 0, 0.999998, 0, 
 [node name="ObjectWall5" parent="LevelBase/LevelObjectContainer" index="27" instance=ExtResource("4_7gny6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.99999, 0, 7.9857)
 
-[node name="ObjectStopButton" parent="LevelBase/LevelObjectContainer" index="28" instance=ExtResource("6_6dial")]
+[node name="ObjectGoalButton" parent="LevelBase/LevelObjectContainer" index="28" instance=ExtResource("5_15mv3")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -2.75, 1.75, -6.87122)
 
 [node name="ObjectDisplay" parent="LevelBase/LevelObjectContainer" index="29" instance=ExtResource("7_7nomh")]
@@ -147,13 +147,19 @@ transform = Transform3D(0.394422, 0, -0.918929, 0, 0.999996, 0, 0.918929, 0, 0.3
 [node name="ObjectBox4" parent="LevelBase/LevelObjectContainer" index="41" instance=ExtResource("7_15mv3")]
 transform = Transform3D(0.881088, 0, -0.472951, 0, 0.999998, 0, 0.472951, 0, 0.881088, 1.66693, 0, -2.04617)
 
-[node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("10_2cbcq")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.99643, 0.1, 3.99285)
-player_index = 1
+[node name="ObjectGoalBlock" parent="LevelBase/LevelObjectContainer" index="42" instance=ExtResource("8_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99643, 0, -4.99107)
 
-[node name="PlayerCharacterMini" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("9_e3sih")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99464, 0, 1.99643)
-player_index = 3
+[node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("8_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99643, 0, 3.99285)
+bot_index = 3
+bot_class = "mini"
+activate_on_start = true
+
+[node name="BotStartingMarker" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("8_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99464, 0, 3.99286)
+bot_index = 1
+recording_length = 10.0
 
 [node name="LevelCamera3D" parent="LevelBase" index="2"]
 transform = Transform3D(0.998213, 0, 0, 0, 0.705843, 0.705843, 0, -0.705843, 0.705843, 1.855, 4.382, 6.733)

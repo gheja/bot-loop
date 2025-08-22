@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://k70jahq1mbag"]
+[gd_scene load_steps=11 format=3 uid="uid://k70jahq1mbag"]
 
 [ext_resource type="PackedScene" uid="uid://cpmkcymc6dshv" path="res://scenes/level_base.tscn" id="1_ny4ll"]
 [ext_resource type="PackedScene" uid="uid://cdv8qqvqawyeh" path="res://objects/object_floor.tscn" id="2_j4ut0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b82gg0yds1jf3" path="res://objects/object_display.tscn" id="6_puhow"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="7_k1n66"]
 [ext_resource type="PackedScene" uid="uid://camdrurfym6xn" path="res://objects/object_trap.tscn" id="8_0n2fi"]
+[ext_resource type="PackedScene" uid="uid://cjfapgitdqnvr" path="res://objects/object_goal_block.tscn" id="9_j4ut0"]
 [ext_resource type="PackedScene" uid="uid://bllg1w5to8gfg" path="res://scenes/bot_starting_marker.tscn" id="9_ny4ll"]
 
 [node name="Level1B" type="Node3D"]
@@ -163,7 +164,10 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.82544,
 [node name="ObjectTrap9" parent="LevelBase/LevelObjectContainer" index="47" instance=ExtResource("8_0n2fi")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.350292, 0, -2.03808)
 
-[node name="ObjectWallCorner" parent="LevelBase/LevelObjectContainer" index="48" instance=ExtResource("3_w04p7")]
+[node name="ObjectGoalBlock" parent="LevelBase/LevelObjectContainer" index="48" instance=ExtResource("9_j4ut0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98749, 0, -4.99107)
+
+[node name="ObjectWallCorner" parent="LevelBase/LevelObjectContainer" index="49" instance=ExtResource("3_w04p7")]
 transform = Transform3D(0.998213, 0, 0, 0, 0.998213, 0, 0, 0, 0.998213, 0, 0, -7.9857)
 
 [node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("9_ny4ll")]

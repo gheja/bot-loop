@@ -5,14 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://b0j66nromh6k6" path="res://objects/object_water.tscn" id="3_i670b"]
 [ext_resource type="PackedScene" uid="uid://2l7r5ndv1t6j" path="res://objects/object_wall_corner.tscn" id="4_csif5"]
 [ext_resource type="PackedScene" uid="uid://cyh8e8m3vwrml" path="res://objects/object_wall.tscn" id="5_vds1t"]
-[ext_resource type="PackedScene" uid="uid://dnnjjb6md5gvt" path="res://objects/object_stop_button.tscn" id="6_5bvhu"]
 [ext_resource type="PackedScene" uid="uid://b82gg0yds1jf3" path="res://objects/object_display.tscn" id="7_ishhe"]
+[ext_resource type="PackedScene" uid="uid://88li13rnxc6b" path="res://objects/object_goal_button.tscn" id="7_ls1u8"]
 [ext_resource type="PackedScene" uid="uid://3wl85awysc5m" path="res://objects/object_interactive_button.tscn" id="8_gnwwf"]
 [ext_resource type="PackedScene" uid="uid://tnxcmgvwwnw7" path="res://objects/object_door.tscn" id="9_vorqn"]
 [ext_resource type="PackedScene" uid="uid://b7uql7ksjs0rd" path="res://objects/object_box.tscn" id="10_5kbkd"]
 [ext_resource type="PackedScene" uid="uid://cxs1llio4hg3y" path="res://objects/object_block.tscn" id="11_u1mn7"]
-[ext_resource type="PackedScene" uid="uid://fbuqkwk1smo1" path="res://objects/player_character_roomba.tscn" id="13_mnrma"]
-[ext_resource type="PackedScene" uid="uid://vtcyr4a4c47f" path="res://objects/player_character_bot_hammer.tscn" id="14_j5pwc"]
+[ext_resource type="PackedScene" uid="uid://cjfapgitdqnvr" path="res://objects/object_goal_block.tscn" id="12_i670b"]
+[ext_resource type="PackedScene" uid="uid://bllg1w5to8gfg" path="res://scenes/bot_starting_marker.tscn" id="13_csif5"]
 [ext_resource type="PackedScene" uid="uid://cuexic5juyqd2" path="res://objects/object_wall_triple.tscn" id="15_ls1u8"]
 [ext_resource type="PackedScene" uid="uid://b37h2avn4etba" path="res://objects/object_block_ramp.tscn" id="15_nrec3"]
 [ext_resource type="PackedScene" uid="uid://slrmkmjxe0mo" path="res://objects/object_wall_double.tscn" id="16_i670b"]
@@ -24,6 +24,7 @@ transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 
 [node name="ObjectFloor" parent="LevelBase/LevelObjectContainer" index="0" instance=ExtResource("2_ls1u8")]
 transform = Transform3D(22.055, 0, 0, 0, 22.055, 0, 0, 0, 22.055, 14.9732, 0, 9.98213)
+metadata/_edit_lock_ = true
 
 [node name="ObjectFloor3" parent="LevelBase/LevelObjectContainer" index="1" instance=ExtResource("2_ls1u8")]
 transform = Transform3D(22.055, 0, 0, 0, 22.055, 0, 0, 0, 22.055, 2.71312e-05, 0, -11.9786)
@@ -31,12 +32,15 @@ metadata/_edit_lock_ = true
 
 [node name="ObjectFloor2" parent="LevelBase/LevelObjectContainer" index="2" instance=ExtResource("2_ls1u8")]
 transform = Transform3D(22.055, 0, 0, 0, 22.055, 0, 0, 0, 22.055, -12.9768, 0, 0.998213)
+metadata/_edit_lock_ = true
 
 [node name="ObjectWater" parent="LevelBase/LevelObjectContainer" index="3" instance=ExtResource("3_i670b")]
 transform = Transform3D(22, 0, 0, 0, 22, 0, 0, 0, 22, 6.51816, -0.998213, 0.616546)
+metadata/_edit_lock_ = true
 
 [node name="ObjectWater2" parent="LevelBase/LevelObjectContainer" index="4" instance=ExtResource("3_i670b")]
 transform = Transform3D(22, 0, 0, 0, 22, 0, 0, 0, 22, 19.4949, -0.998213, -11.362)
+metadata/_edit_lock_ = true
 
 [node name="ObjectWallCorner2" parent="LevelBase/LevelObjectContainer" index="5" instance=ExtResource("4_csif5")]
 transform = Transform3D(-4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -1.99642, 0, -0.0035709)
@@ -155,7 +159,7 @@ transform = Transform3D(1.31134e-07, 0, -0.999998, 0, 0.999998, 0, 0.999998, 0, 
 [node name="ObjectDisplay" parent="LevelBase/LevelObjectContainer" index="43" instance=ExtResource("7_ishhe")]
 transform = Transform3D(-4.37113e-08, 0, 0.999998, 0, 0.999998, 0, -0.999998, 0, -4.37113e-08, -8.77441, 1.4565, -3.25078)
 
-[node name="ObjectStopButton2" parent="LevelBase/LevelObjectContainer" index="44" instance=ExtResource("6_5bvhu")]
+[node name="ObjectGoalButton" parent="LevelBase/LevelObjectContainer" index="44" instance=ExtResource("7_ls1u8")]
 transform = Transform3D(0.999998, 0, 0, 0, 0.999998, 0, 0, 0, 0.999998, 5.2357, 1.75, -16.8534)
 
 [node name="ObjectDisplay3" parent="LevelBase/LevelObjectContainer" index="45" instance=ExtResource("7_ishhe")]
@@ -229,13 +233,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.941, 0, 2.99464)
 [node name="ObjectBlock3" parent="LevelBase/LevelObjectContainer" index="67" instance=ExtResource("11_u1mn7")]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, -32.941, 0, 4.99107)
 
-[node name="PlayerCharacterRoomba" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("13_mnrma")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 8.98392, -2.37993e-07, 3.99285)
-player_index = 2
+[node name="ObjectGoalBlock" parent="LevelBase/LevelObjectContainer" index="68" instance=ExtResource("12_i670b")]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, 0, 0, 0, 0.999998, 9.98216, 0, -14.9732)
 
-[node name="PlayerCharacterBotHammer" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("14_j5pwc")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 6.9875, 0.1, 3.99285)
-player_index = 1
+[node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("13_csif5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99106, 0, 5.98927)
+bot_index = 3
+bot_class = "mini"
+activate_on_start = true
+
+[node name="BotStartingMarker" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("13_csif5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.98749, 0, 3.99286)
+bot_index = 1
+recording_length = 10.0
+
+[node name="BotStartingMarker3" parent="LevelBase/PlayerObjectContainer" index="2" instance=ExtResource("13_csif5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.98392, 0, 3.99286)
+bot_index = 1
+bot_class = "roomba"
+recording_length = 10.0
 
 [node name="LevelCamera3D" parent="LevelBase" index="2"]
 transform = Transform3D(0.998213, 0, 0, 0, 0.502422, 0.862555, 0, -0.862555, 0.502422, 3.27383, 11.5762, 5.47142)

@@ -50,6 +50,8 @@ func swap_to_bot(current_bot: ObjectPlayerCharacter, new_bot: ObjectPlayerCharac
 	set_bot_timer_indicator_visibility(true)
 
 func setup_bots():
+	bot_definitions = []
+	
 	root = Lib.get_first_node_in_group("player_object_containers")
 	for marker in get_tree().get_nodes_in_group("bot_starting_markers"):
 		bot_definitions.append({

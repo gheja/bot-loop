@@ -34,6 +34,7 @@ func _ready() -> void:
 	Signals.set_active_camera.connect(_on_set_active_camera)
 	Signals.check_win_lose_conditions.connect(_on_check_win_lose_conditions)
 	Signals.level_completed.connect(_on_level_completed)
+	Signals.goal_block_reached.connect(_on_goal_block_reached)
 	
 	GameState.loops += 1
 	
@@ -259,3 +260,8 @@ func _on_level_completed():
 	world_environment.environment.ambient_light_energy = 0.25
 	
 	GameState.state = GameState.STATE_FINISHED
+
+func _on_goal_block_reached():
+	# prepare_for_next_level()
+	level_completed()
+	restart_level_with_wait(true)

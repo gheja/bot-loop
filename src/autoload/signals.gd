@@ -5,6 +5,7 @@ signal start_transition
 signal check_win_lose_conditions
 
 signal level_completed
+signal goal_block_reached
 
 signal set_display_text
 signal update_music
