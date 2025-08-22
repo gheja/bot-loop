@@ -5,7 +5,7 @@
 [node name="LevelBase" type="Node3D" groups=["level_root_object"]]
 script = ExtResource("1_548ah")
 
-[node name="LevelObjectContainer" type="Node3D" parent="."]
+[node name="LevelObjectContainer" type="Node3D" parent="." groups=["level_object_containers"]]
 
 [node name="PlayerObjectContainer" type="Node3D" parent="." groups=["player_object_containers"]]
 

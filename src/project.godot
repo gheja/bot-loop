@@ -41,6 +41,7 @@ moving_platform_static_bodies=""
 recording_indicators=""
 bot_starting_markers=""
 player_object_containers=""
+level_object_containers=""
 
 [input]
 

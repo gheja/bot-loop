@@ -22,6 +22,7 @@ extends CharacterBody3D
 @onready var timer: Timer = $Timer
 
 @onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
+@onready var effect_light_beam_scene = preload("res://effects/effect_light_beam.tscn")
 
 var recording = false
 var starter_bot = false
@@ -33,6 +34,9 @@ var break_down_effect: Node3D = null
 var current_recording = []
 
 var start_position: Vector3 = Vector3.ZERO
+
+# just to ensure the light beam effect is not played on start
+var first_reset = true
 
 # NOTE: maybe we should handle all of these in _physics_process()
 var inputs = {
@@ -70,6 +74,10 @@ func _ready() -> void:
 	# recording_index = player_index - 1
 
 func reset_bot():
+	if not first_reset:
+		create_light_beam_effect()
+	
+	first_reset = false
 	recording = false
 	is_actively_controlled = false
 	
@@ -255,6 +263,11 @@ func bot_class_mini_action():
 	
 	BotManager.swap_to_bot(self, highlighted_character, true)
 	# swap_player_for(highlighted_character)
+
+func create_light_beam_effect():
+	var effect = effect_light_beam_scene.instantiate() as Node3D
+	effect.global_position = self.global_position
+	Lib.get_first_node_in_group("level_object_containers").add_child(effect)
 
 func _on_timer_timeout() -> void:
 	BotManager.deactivate_and_restart_bot(self, is_actively_controlled)
