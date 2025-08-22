@@ -170,10 +170,10 @@ func _on_set_controls_lock(state: bool):
 	if state:
 		# BUG: there is a bug with handling mouse events over Remote Desktop,
 		# see: https://github.com/godotengine/godot/issues/95501
-		# for the time I use it, I will just remove this capture
+		# tldr: use MOUSE_MODE_CONFINED over Remote Desktop
 		
-		# Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		# Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
