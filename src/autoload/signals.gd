@@ -1,8 +1,10 @@
 extends Node
 
 signal intro_started
-signal stop_pressed
 signal start_transition
+signal check_win_lose_conditions
+
+signal level_completed
 
 signal set_display_text
 signal update_music

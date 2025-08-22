@@ -1,11 +1,15 @@
 extends StaticBody3D
 
+# @onready var material_running = preload("res://materials/light_strip_running.tres")
+# @onready var material_stopped = preload("res://materials/light_strip_stopped.tres")
+# @onready var material_failed = preload("res://materials/light_strip_failed.tres")
+
 @onready var material_running = preload("res://materials/light_strip_running.tres")
-@onready var material_stopped = preload("res://materials/light_strip_stopped.tres")
-@onready var material_failed = preload("res://materials/light_strip_failed.tres")
+@onready var material_completed = preload("res://materials/light_strip_completed.tres")
 
 func _ready() -> void:
-	pass
+	Signals.level_completed.connect(_on_level_completed)
+	set_material(material_running)
 
 func set_material_on_obj(name, material):
 	var obj = get_node_or_null(name)
@@ -18,5 +22,5 @@ func set_material(material):
 	set_material_on_obj("Color2", material)
 	set_material_on_obj("Color3", material)
 
-func _on_success():
-	set_material(material_stopped)
+func _on_level_completed():
+	set_material(material_completed)

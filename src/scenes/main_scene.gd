@@ -27,12 +27,13 @@ func _ready() -> void:
 	
 	current_level = Lib.get_first_node_in_group("level_root_object")
 	
-	Signals.stop_pressed.connect(_on_stop_pressed)
 	Signals.set_controls_lock.connect(_on_set_controls_lock)
 	Signals.pause.connect(_on_pause)
 	Signals.unpause.connect(_on_unpause)
 	Signals.update_music.connect(_on_update_music)
 	Signals.set_active_camera.connect(_on_set_active_camera)
+	Signals.check_win_lose_conditions.connect(_on_check_win_lose_conditions)
+	Signals.level_completed.connect(_on_level_completed)
 	
 	GameState.loops += 1
 	
@@ -189,7 +190,7 @@ func show_game_completed():
 	var obj = completed_interface_scene.instantiate()
 	get_tree().root.add_child(obj)
 
-func _on_stop_pressed():
+func level_completed():
 	if level_list.size() == GameState.current_level_index + 1:
 		show_game_completed()
 	else:
@@ -240,3 +241,21 @@ func _on_update_music():
 
 func _on_set_active_camera(camera: Camera3D, snap: bool):
 	follow_camera(camera, snap)
+
+func _on_check_win_lose_conditions():
+	var win = true
+	
+	for button: ObjectGoalButton in get_tree().get_nodes_in_group("goal_buttons"):
+		if button.state != true:
+			win = false
+			break
+	
+	if win:
+		Signals.level_completed.emit()
+
+func _on_level_completed():
+	main_light.light_color = Color("#ddffdd")
+	world_environment.environment.ambient_light_color = Color("#ddeeff")
+	world_environment.environment.ambient_light_energy = 0.25
+	
+	GameState.state = GameState.STATE_FINISHED
