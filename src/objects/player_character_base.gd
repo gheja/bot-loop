@@ -3,8 +3,6 @@ extends CharacterBody3D
 
 @export var max_speed = 5
 @export var is_actively_controlled = false
-# TODO: deprecate and remove this
-@export var player_index = -1
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
 @export var recording_length: float = 10.0
@@ -15,7 +13,6 @@ extends CharacterBody3D
 @onready var camera = $Node3D/CameraPivot/SpringArm3D/Camera3D
 @onready var lower_body = $Visuals/LowerBody
 @onready var upper_body = $Visuals/UpperBody
-@onready var player_index_label: Label3D = $Visuals/PlayerIndexLabel
 @onready var moving_platform_raycast: RayCast3D = $MovingPlatformRaycast
 @onready var ghost_indicator: CSGSphere3D = $Visuals/Indicators/GhostIndicator
 @onready var selection_indicator: CSGSphere3D = $Visuals/Indicators/SelectionIndicator
@@ -59,19 +56,7 @@ func _ready() -> void:
 	ghost_indicator.hide()
 	selection_indicator.hide()
 	
-	if player_index == -1:
-		# this is hackis but at least this way we don't need to edit the children
-		var parent = get_parent()
-		if parent is PlayerCharacterSubclass:
-			player_index = parent.player_index
-	
-	assert(player_index != -1, "Player object is not set up correctly")
-	
 	Signals.save_player_recording.connect(_on_save_player_recording)
-	
-	player_index_label.text = str(player_index)
-	
-	# recording_index = player_index - 1
 
 func reset_bot():
 	if not first_reset:
@@ -206,9 +191,6 @@ func _on_save_player_recording():
 		return
 	
 	GameState.player_recordings[recording_index] = current_recording.duplicate()
-
-func _on_timer_started():
-	player_index_label.hide()
 
 func break_down():
 	AudioManager.play_sound(1)

@@ -14,7 +14,6 @@ var completed_interface_scene = preload("res://scenes/completed_interface.tscn")
 @export var level_list: Array[PackedScene]
 
 var current_level: LevelClass
-var current_player_index: int = -1
 
 func _ready() -> void:
 	# first thing to do, even before the robots exist
@@ -78,9 +77,6 @@ func init_level():
 			start_current_level()
 	else:
 		start_current_level()
-	
-	# forget player auto-selection
-	GameState.auto_select_player_index = -1
 
 func start_current_level():
 	GameState.state = GameState.STATE_RUNNING
@@ -182,19 +178,6 @@ func restart_pressed():
 	Signals.start_transition.emit("#330066")
 
 func _process(delta: float) -> void:
-	# if GameState.state in [GameState.STATE_RUNNING, GameState.STATE_FINISHED]:
-	# 	if Input.is_action_just_pressed("ui_action_restart"):
-	# 		GameState.auto_select_player_index = current_player_index
-	# 		restart_pressed()
-	#
-	# 	if Input.is_action_just_pressed("ui_action_back"):
-	# 		restart_pressed()
-	#
-	# if GameState.state == GameState.STATE_PLAYER_SELECTION:
-	# 	for i in get_available_player_indexes():
-	# 		if Input.is_action_just_pressed("ui_action_select_" + str(i)):
-	# 			set_active_player(i)
-	
 	follow_camera_step(delta)
 
 func prepare_for_next_level():
@@ -218,35 +201,6 @@ func reset_colors():
 	main_light.light_color = Color("#ffffff")
 	world_environment.environment.ambient_light_color = Color("#e7ffff")
 	world_environment.environment.ambient_light_energy = 0.25
-
-func _on_timer_stopped():
-	reset_colors()
-	
-	# TODO: this looks a bit weird, but ok
-	activate_level_camera(false)
-	clear_controls_help_text()
-	Signals.set_controls_lock.emit(false)
-	
-	if GameState.state == GameState.STATE_GAME_COMPLETED:
-		return
-	
-	GameState.state = GameState.STATE_FINISHED
-	restart_level_with_wait(true)
-
-### TODO: delete this
-func _on_timer_failed():
-	main_light.light_color = Color("#ff0000")
-	world_environment.environment.ambient_light_color = Color("#ff0088")
-	world_environment.environment.ambient_light_energy = 0.1
-	
-	AudioManager.play_sound(4)
-	
-	# TODO: this looks a bit weird, but ok
-	activate_level_camera(false)
-	clear_controls_help_text()
-	GameState.state = GameState.STATE_FINISHED
-	Signals.set_controls_lock.emit(false)
-	restart_level_with_wait(false)
 
 func _on_pause():
 	menu_interface.show2(false)

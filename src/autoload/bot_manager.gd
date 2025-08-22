@@ -57,7 +57,6 @@ func setup_bots():
 		
 		var obj: PlayerCharacterSubclass = (bot_scenes[marker.bot_class] as PackedScene).instantiate()
 		obj.global_position = marker.global_position
-		obj.player_index = marker.bot_index
 		
 		var bot: ObjectPlayerCharacter = obj.find_child("PlayerCharacterBase")
 		a["bot"] = bot

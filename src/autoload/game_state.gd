@@ -9,7 +9,6 @@ const STATE_GAME_COMPLETED = 6
 
 var loops = 0
 var current_level_index = 0
-var auto_select_player_index = -1
 var first_loop = true
 var play_intro = true
 var state = GameState.STATE_INTRO

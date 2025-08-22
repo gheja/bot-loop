@@ -14,9 +14,6 @@ func _ready() -> void:
 	set_status_text("Standby")
 	
 	Signals.stop_pressed.connect(_on_stop_pressed)
-	Signals.timer_started.connect(_on_timer_started)
-	Signals.timer_stopped.connect(_on_timer_stopped)
-	Signals.timer_failed.connect(_on_timer_failed)
 
 func set_status_text(message: String):
 	rich_text_label.text = "[center]" + message + "[/center]"
