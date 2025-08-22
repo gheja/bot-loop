@@ -68,6 +68,8 @@ func reset_bot():
 	if not first_reset:
 		create_light_beam_effect()
 	
+	Signals.bot_was_reset.emit(self)
+	
 	first_reset = false
 	recording = false
 	is_actively_controlled = false

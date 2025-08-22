@@ -12,6 +12,7 @@ signal trigger_activation_changed
 
 signal set_controls_lock
 signal save_player_recording
+signal bot_was_reset
 
 signal pause
 signal unpause
