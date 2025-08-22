@@ -43,10 +43,10 @@ func _ready() -> void:
 	
 	Signals.set_controls_lock.emit(false)
 	
+	BotManager.setup_bots()
+	
 	init_level()
 	update_music()
-	
-	BotManager.setup_bots()
 	
 	# NOTE: the intro will trigger the main menu
 
@@ -88,6 +88,8 @@ func start_current_level():
 	# show the hint for this level
 	var level_obj: LevelClass = level_container.get_child(0).find_child("LevelBase")
 	main_interface.set_hint(level_obj.hint_text)
+	
+	BotManager.activate_starter_bot()
 
 var _camera_to_follow: Camera3D
 var _camera_follow_progress = 1.0

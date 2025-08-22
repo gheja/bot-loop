@@ -84,7 +84,7 @@ func setup_bots():
 		index += 1
 	
 	set_bot_timer_indicator_visibility(false)
-	activate_starter_bot()
+	# activate_starter_bot()
 
 func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bool):
 	var bot = bot_definitions[index]['bot'] as ObjectPlayerCharacter
