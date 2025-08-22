@@ -24,6 +24,7 @@ func warn_blink():
 func set_hint(s: String):
 	hint_text.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	hint_text.text = "[center]" + s + "[/center]"
+	hint_animation_player.stop()
 	hint_animation_player.play("show_hint")
 
 func _on_timer_started():
