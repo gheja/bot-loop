@@ -113,14 +113,6 @@ radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_nhemo")
 
-[node name="PlayerIndexLabel" type="Label3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-pixel_size = 0.0025
-billboard = 1
-fixed_size = true
-text = "1"
-font_size = 64
-
 [node name="CollisionShapeLower" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_h5vi8")
