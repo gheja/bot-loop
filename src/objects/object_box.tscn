@@ -8,6 +8,8 @@ disable_receive_shadows = true
 size = Vector3(1.5, 1.5, 1.5)
 
 [node name="ObjectBox" type="StaticBody3D"]
+collision_layer = 32
+collision_mask = 32
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

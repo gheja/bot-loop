@@ -125,11 +125,13 @@ ui_action_pause={
 
 [layer_names]
 
-3d_physics/layer_1="Collision"
+3d_physics/layer_1="old collision delete later"
 3d_physics/layer_2="Interaction"
 3d_physics/layer_3="Hurt"
 3d_physics/layer_4="Platform"
 3d_physics/layer_5="PlayerSelection"
+3d_physics/layer_6="Terrain"
+3d_physics/layer_7="PlayerCollision"
 
 [physics]
 
