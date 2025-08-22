@@ -183,6 +183,35 @@ libraries = {
 }
 autoplay = "default"
 
+[node name="HoverRoot" type="Node3D" parent="."]
+
+[node name="HoverRayCasts" type="Node3D" parent="HoverRoot"]
+
+[node name="RayCast3D" type="RayCast3D" parent="HoverRoot/HoverRayCasts"]
+collision_mask = 32
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast3D2" type="RayCast3D" parent="HoverRoot/HoverRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+collision_mask = 32
+hit_from_inside = true
+
+[node name="RayCast3D3" type="RayCast3D" parent="HoverRoot/HoverRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+collision_mask = 32
+hit_from_inside = true
+
+[node name="RayCast3D4" type="RayCast3D" parent="HoverRoot/HoverRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+collision_mask = 32
+hit_from_inside = true
+
+[node name="RayCast3D5" type="RayCast3D" parent="HoverRoot/HoverRayCasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+collision_mask = 32
+hit_from_inside = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="PlayerSelectionArea" to="." method="_on_player_selection_area_area_entered"]
 [connection signal="area_exited" from="PlayerSelectionArea" to="." method="_on_player_selection_area_area_exited"]

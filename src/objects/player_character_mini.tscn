@@ -24,6 +24,7 @@ script = ExtResource("1_bwbrp")
 
 [node name="PlayerCharacterBase" parent="." instance=ExtResource("2_dctle")]
 controls_help_text = "[E] [Click] Switch to the Bot nearby"
+hovering = true
 bot_class = "mini"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="0"]

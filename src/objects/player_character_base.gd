@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
 @export var recording_length: float = 10.0
+@export var hovering = false
 
 @export_enum("hammer", "roomba", "mini") var bot_class = "hammer"
 
@@ -56,6 +57,10 @@ func _ready() -> void:
 	if bot_class == "mini":
 		starter_bot = true
 		$PlayerSelectionArea.monitoring = true
+		
+		# do not press down buttons please
+		$InteractionArea.monitoring = false
+		$InteractionArea.monitorable = false
 	else:
 		$PlayerSelectionHitbox.monitorable = true
 	
@@ -193,6 +198,8 @@ func _physics_process(delta: float) -> void:
 			self.global_position += platform.current_velocity
 	
 	upper_body.rotation.y = inputs.upper_body_rotation
+	update_hover()
+	
 	self.move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -273,3 +280,17 @@ func _on_timer_timeout() -> void:
 	
 	if was_actively_controlled:
 		Signals.bot_was_deactivated.emit(self)
+
+
+@onready var hover_ray_casts: Node3D = $HoverRoot/HoverRayCasts
+var hover_height = 0.0
+
+# NOTE: this is really hacky but works
+func update_hover():
+	if not hovering:
+		return
+	
+	for raycast: RayCast3D in hover_ray_casts.get_children():
+		if raycast.is_colliding():
+			self.global_position.y = (raycast.get_collider() as Node3D).global_position.y - raycast.target_position.y
+			break
