@@ -35,6 +35,8 @@ func _ready() -> void:
 	Signals.check_win_lose_conditions.connect(_on_check_win_lose_conditions)
 	Signals.level_completed.connect(_on_level_completed)
 	Signals.goal_block_reached.connect(_on_goal_block_reached)
+	Signals.bot_was_activated.connect(_on_bot_was_activated)
+	Signals.bot_was_deactivated.connect(_on_bot_was_deactivated)
 	
 	GameState.loops += 1
 	
@@ -106,8 +108,8 @@ func follow_camera_step(delta: float):
 	if not _camera_to_follow:
 		return
 	
-	# fixed 1 second transition
-	_camera_follow_progress = min(_camera_follow_progress + delta, 1.0)
+	# some ease with the transition (might be still too fast)
+	_camera_follow_progress = min(_camera_follow_progress + delta * 0.25, 1.0)
 	
 	# this is wildly inaccurate
 	main_camera.global_position = main_camera.global_position + (_camera_to_follow.global_position - main_camera.position) * _camera_follow_progress
@@ -263,7 +265,20 @@ func _on_level_completed():
 	
 	GameState.state = GameState.STATE_FINISHED
 
+	if GameState.current_level_index < 3:
+		main_interface.set_hint("[b]Hint[/b]: Nice job! Now go to the green portal.")
+
 func _on_goal_block_reached():
 	# prepare_for_next_level()
 	level_completed()
 	restart_level_with_wait(true)
+
+func _on_bot_was_activated(bot: ObjectPlayerCharacter):
+	# for tutorial purposes
+	if GameState.current_level_index == 0 and bot.bot_class == "hammer":
+		main_interface.set_hint("[b]Hint[/b]: All Bots have limited time to operate, after that\nthey will replay your moves.")
+
+func _on_bot_was_deactivated(bot: ObjectPlayerCharacter):
+	# for tutorial purposes
+	if GameState.current_level_index == 0 and bot.bot_class == "hammer":
+		main_interface.set_hint("[b]Hint[/b]: You can use them again anytime.")

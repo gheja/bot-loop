@@ -16,8 +16,8 @@
 transform = Transform3D(1.00179, 0, 0, 0, 1.00179, 0, 0, 0, 1.00179, 0, 0, 0)
 time_limit = 15.0
 has_intro = true
-hint_text = "[b]Hint[/b]: You can select a Bot for every loop. Now there is only one,
-but more will be available later.
+hint_text = "[b]Hint[/b]: You might need a bigger Bot to press the button. Move closer
+to it and activate it by pressing [E] or [Click].
 [b]Hint[/b]: See the available controls in the lower left corner.
 "
 
@@ -149,7 +149,7 @@ transform = Transform3D(0.394422, 0, -0.918929, 0, 0.999996, 0, 0.918929, 0, 0.3
 transform = Transform3D(0.881088, 0, -0.472951, 0, 0.999998, 0, 0.472951, 0, 0.881088, 1.66693, 0, -2.04617)
 
 [node name="ObjectGoalBlock" parent="LevelBase/LevelObjectContainer" index="42" instance=ExtResource("8_e3sih")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99643, 0, -4.99107)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18996e-07, 0, -5.98928)
 
 [node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("8_15mv3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99643, 0, 3.99285)

@@ -112,6 +112,8 @@ func make_active():
 		("[R] Restart loop\n[Q] Back to Mini\n" if self.bot_class != "mini" else "") +
 		"[P] Pause[/color]"
 	)
+	
+	Signals.bot_was_activated.emit(self)
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
@@ -265,4 +267,9 @@ func create_light_beam_effect():
 	Lib.get_first_node_in_group("level_object_containers").add_child(effect)
 
 func _on_timer_timeout() -> void:
+	var was_actively_controlled = is_actively_controlled
+	
 	BotManager.deactivate_and_restart_bot(self, is_actively_controlled)
+	
+	if was_actively_controlled:
+		Signals.bot_was_deactivated.emit(self)
