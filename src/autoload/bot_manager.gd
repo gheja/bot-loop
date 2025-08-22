@@ -10,6 +10,9 @@ var root: Node3D
 var bot_definitions = []
 var starter_bot = null
 
+func set_bot_timer_indicator_visibility(value: bool):
+	Lib.get_first_node_in_group("bot_timer_indicators").visible = value
+
 func activate_bot_by_index(index: int):
 	bot_definitions[index]["active"] = true
 	(bot_definitions[index]["bot"] as ObjectPlayerCharacter).make_active()
@@ -39,6 +42,8 @@ func swap_to_bot(current_bot: ObjectPlayerCharacter, new_bot: ObjectPlayerCharac
 		# current_bot.queue_free()
 		# TODO: it is not enough to hide, this will still collide, etc.
 		current_bot.visible = false
+	
+	set_bot_timer_indicator_visibility(true)
 
 func setup_bots():
 	root = Lib.get_first_node_in_group("player_object_containers")
@@ -72,6 +77,7 @@ func setup_bots():
 		
 		index += 1
 	
+	set_bot_timer_indicator_visibility(false)
 	activate_starter_bot()
 
 func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bool):
@@ -96,3 +102,4 @@ func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bo
 
 func deactivate_and_restart_bot(bot: ObjectPlayerCharacter, was_actively_controlled: bool):
 	deactivate_and_restart_bot_by_index(get_bot_index_by_bot_object(bot), was_actively_controlled)
+	set_bot_timer_indicator_visibility(false)

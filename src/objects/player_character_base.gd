@@ -17,6 +17,7 @@ extends CharacterBody3D
 @onready var ghost_indicator: CSGSphere3D = $Visuals/Indicators/GhostIndicator
 @onready var selection_indicator: CSGSphere3D = $Visuals/Indicators/SelectionIndicator
 @onready var timer: Timer = $Timer
+var bot_timer_indicator: BotTimerIndicator = null
 
 @onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
 @onready var effect_light_beam_scene = preload("res://effects/effect_light_beam.tscn")
@@ -44,6 +45,7 @@ var inputs = {
 }
 
 func _ready() -> void:
+	bot_timer_indicator = Lib.get_first_node_in_group("bot_timer_indicators")
 	start_position = self.global_position
 	timer.wait_time = recording_length
 	
@@ -105,6 +107,9 @@ func make_active():
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
+	
+	if is_actively_controlled:
+		bot_timer_indicator.update_progress_bar(timer.time_left, timer.wait_time)
 	# BUG, TODO: _process() is only handled on each displayed frame, but
 	# _physics_proces() might happen multiple times, so the
 	# inputs.action_pressed might not get processed properly, leading to

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqfv168hkiq2f"]
+[gd_scene load_steps=12 format=3 uid="uid://dqfv168hkiq2f"]
 
 [ext_resource type="Script" uid="uid://ckte632k8mgqs" path="res://scenes/main_interface.gd" id="1_7qx7d"]
+[ext_resource type="PackedScene" uid="uid://c08mbsiosuxgw" path="res://scenes/bot_timer_indicator.tscn" id="2_51bk3"]
 
 [sub_resource type="Animation" id="Animation_51bk3"]
 length = 0.001
@@ -196,3 +197,14 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_vejak")
 }
+
+[node name="BotTimerIndicator" parent="." groups=["bot_timer_indicators"] instance=ExtResource("2_51bk3")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 484.0
+offset_top = 462.0
+offset_right = 484.0
+offset_bottom = 462.0
+grow_horizontal = 1
+grow_vertical = 1
