@@ -184,6 +184,12 @@ func restart_pressed():
 	Signals.start_transition.emit("#330066")
 
 func _process(delta: float) -> void:
+	if GameState.state == GameState.STATE_RUNNING:
+		if Input.is_action_just_pressed("ui_action_back"):
+			BotManager.deactivate_and_restart_bot_by_index(BotManager.get_active_bot_index(), true)
+		if Input.is_action_just_pressed("ui_action_restart"):
+			BotManager.restart_active_bot()
+	
 	follow_camera_step(delta)
 
 func prepare_for_next_level():

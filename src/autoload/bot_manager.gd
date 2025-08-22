@@ -10,6 +10,9 @@ var root: Node3D
 var bot_definitions = []
 var starter_bot = null
 
+var _last_active_bot = null
+var _last_active_bot_index = -1
+
 func set_bot_timer_indicator_visibility(value: bool):
 	Lib.get_first_node_in_group("bot_timer_indicators").visible = value
 
@@ -20,6 +23,9 @@ func activate_bot_by_index(index: int):
 	bot.make_active()
 	bot.visible = true
 	bot.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	_last_active_bot = bot
+	_last_active_bot_index = index
 
 func activate_starter_bot():
 	assert(starter_bot)
@@ -35,11 +41,15 @@ func get_bot_index_by_bot_object(bot: ObjectPlayerCharacter):
 	
 	assert(false, "Could not find the bot by index?!")
 
+func activate_bot(bot: ObjectPlayerCharacter, reset: bool = true):
+	if reset:
+		bot.reset_bot()
+	
+	activate_bot_by_index(get_bot_index_by_bot_object(bot))
+
 func swap_to_bot(current_bot: ObjectPlayerCharacter, new_bot: ObjectPlayerCharacter, destroy_current: bool):
 	# TODO: idea: continue the recording from the current position without restarting?
-	
-	new_bot.reset_bot()
-	new_bot.make_active()
+	activate_bot(new_bot)
 	
 	if destroy_current:
 		# current_bot.queue_free()
@@ -109,3 +119,12 @@ func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bo
 
 func deactivate_and_restart_bot(bot: ObjectPlayerCharacter, was_actively_controlled: bool):
 	deactivate_and_restart_bot_by_index(get_bot_index_by_bot_object(bot), was_actively_controlled)
+
+func get_active_bot_index():
+	return _last_active_bot_index
+
+func restart_active_bot():
+	activate_bot(_last_active_bot)
+
+func leave_active_bot():
+	pass

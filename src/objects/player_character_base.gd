@@ -114,7 +114,7 @@ func make_active():
 		"[/color]\n" +
 		"\n" +
 		"[color=#0ff]" +
-		("[R] Restart loop\n[Q] Back to Mini\n" if self.bot_class != "mini" else "") +
+		("[R] Restart this Bot\n[Q] Back to Mini\n" if self.bot_class != "mini" else "") +
 		"[P] Pause[/color]"
 	)
 	
