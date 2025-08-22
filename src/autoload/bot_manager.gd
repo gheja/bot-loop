@@ -37,6 +37,7 @@ func swap_to_bot(current_bot: ObjectPlayerCharacter, new_bot: ObjectPlayerCharac
 	
 	if destroy_current:
 		# current_bot.queue_free()
+		# TODO: it is not enough to hide, this will still collide, etc.
 		current_bot.visible = false
 
 func setup_bots():
@@ -93,7 +94,6 @@ func deactivate_and_restart_bot_by_index(index: int, was_actively_controlled: bo
 	if was_actively_controlled:
 		starter_bot.global_position = last_position
 		activate_starter_bot()
-	
 
 func deactivate_and_restart_bot(bot: ObjectPlayerCharacter, was_actively_controlled: bool):
 	deactivate_and_restart_bot_by_index(get_bot_index_by_bot_object(bot), was_actively_controlled)
