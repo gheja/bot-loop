@@ -27,6 +27,7 @@ script = ExtResource("1_1dx07")
 
 [node name="PlayerCharacterBase" parent="." instance=ExtResource("1_tx1vf")]
 has_primary_action = false
+controls_help_text = ""
 bot_class = "roomba"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="PlayerCharacterBase/Visuals/LowerBody" index="0"]

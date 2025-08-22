@@ -43,6 +43,7 @@ bot_starting_markers=""
 player_object_containers=""
 level_object_containers=""
 bot_timer_indicators=""
+main_interfaces=""
 
 [input]
 

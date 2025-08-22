@@ -28,6 +28,7 @@ var recording_index = 0
 var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
 var is_broken_down = false
 var break_down_effect: Node3D = null
+var main_interface: MainInterface = null
 
 var current_recording = []
 
@@ -46,6 +47,8 @@ var inputs = {
 
 func _ready() -> void:
 	bot_timer_indicator = Lib.get_first_node_in_group("bot_timer_indicators")
+	main_interface = Lib.get_first_node_in_group("main_interfaces")
+	
 	start_position = self.global_position
 	timer.wait_time = recording_length
 	
@@ -96,14 +99,16 @@ func make_active():
 	
 	Signals.set_active_camera.emit(camera, false)
 	
-	#main_interface.set_controls_label_text(
-		#"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
-		#"[color=#ff0]" +
-		#self.controls_help_text +
-		#"[/color]\n" +
-		#"\n" +
-		#"[color=#0ff][R] Restart loop\n[Q] Back to selection\n[P] Pause[/color]"
-	#)
+	main_interface.set_controls_label_text(
+		"[Arrow keys] [W-A-S-D] Move\n[Mouse] Look around\n" +
+		"[color=#ff0]" +
+		self.controls_help_text +
+		"[/color]\n" +
+		"\n" +
+		"[color=#0ff]" +
+		("[R] Restart loop\n[Q] Back to Mini\n" if self.bot_class != "mini" else "") +
+		"[P] Pause[/color]"
+	)
 
 func _process(delta: float) -> void:
 	update_body_visual_rotation()
