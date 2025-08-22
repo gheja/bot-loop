@@ -4,3 +4,4 @@
 
 [node name="BotStartingMarker" type="Marker3D" groups=["bot_starting_markers"]]
 script = ExtResource("1_ag7hw")
+recording_length = 3.0

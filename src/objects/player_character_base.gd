@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var player_index = -1
 @export var has_primary_action = true
 @export var controls_help_text = "[E] [Click] Use hammer"
+@export var recording_length: float = 10.0
 
 @export_enum("hammer", "roomba", "mini") var bot_class = "hammer"
 
@@ -18,13 +19,16 @@ extends CharacterBody3D
 @onready var moving_platform_raycast: RayCast3D = $MovingPlatformRaycast
 @onready var ghost_indicator: CSGSphere3D = $Visuals/Indicators/GhostIndicator
 @onready var selection_indicator: CSGSphere3D = $Visuals/Indicators/SelectionIndicator
+@onready var timer: Timer = $Timer
 
 @onready var effect_scene = preload("res://effects/effect_broken_down.tscn")
 
 var recording = false
+var starter_bot = false
 var recording_index = 0
 var frame_number = -1 # we will increase it right at the beginning of the physics frame handling
 var is_broken_down = false
+var break_down_effect: Node3D = null
 
 var current_recording = []
 
@@ -40,8 +44,10 @@ var inputs = {
 
 func _ready() -> void:
 	start_position = self.global_position
+	timer.wait_time = recording_length
 	
 	if bot_class == "mini":
+		starter_bot = true
 		$PlayerSelectionArea.monitoring = true
 	else:
 		$PlayerSelectionHitbox.monitorable = true
@@ -61,11 +67,33 @@ func _ready() -> void:
 	
 	player_index_label.text = str(player_index)
 	
-	recording_index = player_index - 1
+	# recording_index = player_index - 1
+
+func reset_bot():
+	recording = false
+	is_actively_controlled = false
+	
+	# _physics_process() starts with adding one
+	frame_number = -1
+	
+	self.global_position = start_position
+	is_broken_down = false
+	
+	if break_down_effect != null and is_instance_valid(break_down_effect):
+		break_down_effect.queue_free()
+	
+	timer.stop()
+	
+	if not starter_bot:
+		timer.start()
 
 func make_active():
 	recording = true
 	is_actively_controlled = true
+	
+	# if we wanted to continue recording we might just need to trim the extra frames?
+	# start a new recording
+	current_recording = []
 	
 	# a good starting angle
 	camera_pivot.rotation.x = -0.6
@@ -112,12 +140,6 @@ func update_body_visual_rotation():
 		lower_body.rotation.y = lerp(lower_body.rotation.y, target_rotation, 0.15)
 
 func _physics_process(delta: float) -> void:
-	if not GameState.controls_locked:
-		return
-	
-	if not GameState.state == GameState.STATE_RUNNING:
-		return
-	
 	frame_number += 1
 	
 	if recording:
@@ -130,14 +152,15 @@ func _physics_process(delta: float) -> void:
 		inputs.action_pressed = Input.is_action_just_pressed("action_primary")
 		inputs.jump_pressed = false
 		inputs.upper_body_rotation = lerp(upper_body.rotation.y, camera_pivot.rotation.y + PI, 0.15)
-
-		current_recording.append(inputs.duplicate())
+		
+		if not starter_bot:
+			current_recording.append(inputs.duplicate())
 	else:
-		if GameState.player_recordings[recording_index].size() <= frame_number:
+		if current_recording.size() <= frame_number:
 			# print("No recording for frame, skipping physics frame")
 			return
 		
-		inputs = GameState.player_recordings[recording_index][frame_number]
+		inputs = current_recording[frame_number]
 	
 	# we need to handle breakdown even when playing back a recording
 	# TODO: should we just stop all processing here? probably... let's see
@@ -181,7 +204,8 @@ func _on_timer_started():
 
 func break_down():
 	AudioManager.play_sound(1)
-	self.add_child(effect_scene.instantiate())
+	break_down_effect = effect_scene.instantiate()
+	self.add_child(break_down_effect)
 	is_broken_down = true
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
@@ -215,20 +239,22 @@ func _on_player_selection_area_area_exited(area: Area3D) -> void:
 		highlighted_character.set_highlight(false)
 		highlighted_character = null
 
-func reset_bot():
-	self.global_position = start_position
+func start_playback():
+	pass
 
 func reset_and_activate():
 	reset_bot()
 	make_active()
 
 func swap_player_for(obj: ObjectPlayerCharacter):
-	print(obj)
 	obj.reset_and_activate()
-	self.queue_free()
 
 func bot_class_mini_action():
 	if not highlighted_character:
 		return
 	
-	swap_player_for(highlighted_character)
+	BotManager.swap_to_bot(self, highlighted_character, true)
+	# swap_player_for(highlighted_character)
+
+func _on_timer_timeout() -> void:
+	BotManager.deactivate_and_restart_bot(self, is_actively_controlled)

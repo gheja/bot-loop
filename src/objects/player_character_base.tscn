@@ -115,6 +115,10 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSelectionArea"]
 shape = SubResource("SphereShape3D_5jmjx")
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="PlayerSelectionArea" to="." method="_on_player_selection_area_area_entered"]
 [connection signal="area_exited" from="PlayerSelectionArea" to="." method="_on_player_selection_area_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

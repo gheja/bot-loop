@@ -166,15 +166,16 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.350292
 [node name="ObjectWallCorner" parent="LevelBase/LevelObjectContainer" index="48" instance=ExtResource("3_w04p7")]
 transform = Transform3D(0.998213, 0, 0, 0, 0.998213, 0, 0, 0, 0.998213, 0, 0, -7.9857)
 
-[node name="BotStartingMarker" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("9_ny4ll")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99464, 0, 4.99107)
-bot_index = 1
-
-[node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("9_ny4ll")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99464, 0, 4.99106)
+[node name="BotStartingMarker2" parent="LevelBase/PlayerObjectContainer" index="0" instance=ExtResource("9_ny4ll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.42796e-06, 0, 4.99106)
 bot_index = 3
 bot_class = "mini"
 activate_on_start = true
+
+[node name="BotStartingMarker" parent="LevelBase/PlayerObjectContainer" index="1" instance=ExtResource("9_ny4ll")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99464, 0, 4.99107)
+bot_index = 1
+recording_length = 10.0
 
 [node name="LevelCamera3D" parent="LevelBase" index="2"]
 transform = Transform3D(0.998213, 0, 0, 0, 0.705843, 0.705843, 0, -0.705843, 0.705843, 1.855, 4.382, 6.733)
