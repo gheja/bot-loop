@@ -56,6 +56,10 @@ func _ready() -> void:
 	
 	if bot_class == "mini":
 		starter_bot = true
+		
+		# "PlayerCollision" layer
+		self.set_collision_layer_value(7, false)
+		
 		$PlayerSelectionArea.monitoring = true
 		
 		# do not press down buttons please
